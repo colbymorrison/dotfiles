@@ -82,7 +82,7 @@ nmap <leader>s :so ~/.vimrc<cr>
 nmap <leader>p :set invpaste<CR>
 nmap <leader>r :set invrelativenumber<CR> 
 imap <leader>f {<Esc>o}<Esc>O
-nnoremap <leader>y :call system('xclip -selection primary', @0)<CR>
+nmap <leader>y :call system('xclip -selection clipboard', @0)<CR>
 " Go no next/prev method name in python
 nmap [w [mw
 nmap ]w ]mw

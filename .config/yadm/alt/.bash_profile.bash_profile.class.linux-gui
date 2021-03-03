@@ -1,0 +1,18 @@
+# ~/.bash_profile
+# Run for login shells (after /etc/profile)
+
+[[ -f ~/.bashrc ]] && source ~/.bashrc
+
+export TERMINAL=st
+export PATH=$PATH:~/bin:/home/colby/.gem/ruby/2.7.0/bin 
+export GOPATH=$(go env GOPATH)
+export GOROOT=$(go env GOROOT)
+export EDITOR=nvim
+export VISUAL=$EDITOR
+export CLICOLOR=1
+export QT_STYLE_OVERRIDE=adwaita
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+export FZF_DEFAULT_COMMAND='fd -H -t f -t d'
+export FZF_DEFAULT_OPTS='--preview="~/scripts/preview.sh {}"'

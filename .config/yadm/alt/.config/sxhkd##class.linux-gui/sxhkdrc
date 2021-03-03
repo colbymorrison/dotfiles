@@ -4,8 +4,7 @@ alt + i
 
 # program launcher
 alt + Return
-	rofi -show drun -modi
-    drun,window,files:~/scripts/rofi-scripts/search.sh,power:~/scripts/rofi-scripts/power.sh -drun-match-fields name,exec -no-sort
+	rofi -show combi -combi-modi window,drun,files:~/scripts/rofi-scripts/search.sh,power:~/scripts/rofi-scripts/power.sh -drun-match-fields name,exec -no-sort
 
 # make sxhkd reload its configuration files:
 alt + Escape
