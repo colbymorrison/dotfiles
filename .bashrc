@@ -22,31 +22,6 @@ if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
 fi
 
-if [[ OS == "Linux" ]] ; then
-    ## Arch specific aliases ##
-    # ~/.config files #
-    alias ebsp="$EDITOR ~/.config/bspwm/bspwmrc"
-    alias esxh="$EDITOR ~/.config/sxhkd/sxhkdrc"
-    alias epb="$EDITOR '+set syntax=dosini' ~/.config/polybar/config"
-    alias exr="$EDITOR ~/.Xresources"
-
-
-    # Zathura #
-    alias zth='zathura'
-    alias ztf='zathura --fork'
-
-    # Custom #
-    alias polyrs='~/.config/polybar/launch.sh'
-
-    if [[ DISTRO == "Arch Linux" ]]; then
-        # Pacman #
-        alias pmin='yay -S'
-        alias pmup='yay -Syu'
-        alias pmrm='sudo pacman -Rns'
-        alias spm='sudo pacman'
-    fi
-fi
-
 # --History--#
 HISTFILESIZE=-1
 HISTSIZE=1000000
@@ -64,13 +39,6 @@ mkcd() {
 difo(){
   last_command=$(history | tail -2 | head -1 | sed s/[0-9]//g)
   $last_command $1
-}
-
-theme(){
-    theme=$(wal --theme | fzf --preview="~/scripts/preview-colorsheme.py {}" | cut -d ' ' -f 3)
-    theme_basename=$(echo $theme | sed s/base16-//)
-    echo $theme_basename > ~/.colorscheme
-    wpg --theme $theme
 }
 
 open_if_exists(){

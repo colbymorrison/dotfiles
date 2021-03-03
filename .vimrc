@@ -163,6 +163,7 @@ nmap <silent> <leader>n :ALERename<cr>
 " FZF
 nmap <silent> <leader>z :History<cr>
 nmap <silent> <leader>b :Buffers<cr>
+nmap <C-p> :Files<CR>
 
 if ($IS_FB == "0")
   " Deoplete
@@ -173,14 +174,14 @@ if ($IS_FB == "0")
 
   " FZF or MYC depending on dir (stolen P75711758)
   if getcwd() =~ '/fbsource[1-9]*/fbcode$'
-    nnoremap <leader>a :Fbgs<Space>
-    nnoremap <C-p> :MYC<CR>
+    nmap <leader>a :Fbgs<Space>
+    nmap <C-p> :MYC<CR>
   elseif getcwd() =~ '/configerator'
-    nnoremap <leader>a :CBGS<Space>
-    nnoremap <C-p> :Files<CR>
+    nmap <leader>a :CBGS<Space>
+    nmap <C-p> :Files<CR>
   else
-    nnoremap <Leader>a :Rg<CR>
-    nnoremap <C-p> :Files<CR>
+    nmap <Leader>a :Rg<CR>
+    nmap <C-p> :Files<CR>
   endif
 
   " Dispatch
