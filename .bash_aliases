@@ -1,5 +1,6 @@
 ## Common Commands ## 
 alias c='clear'
+alias d='et -r 8377:8377 dev:8080'
 alias e='exit'
 alias g='grep'
 alias l='ls -lah'
@@ -23,7 +24,7 @@ alias qemuvm='qemu-system-x86_64 -enable-kvm -vga std -m 2048 -cpu host -smp 4 -
 alias python='python3'
 
 ## config files ##
-alias not="$EDITOR ~/Notes/notes.md"
+alias not="$EDITOR ~/Documents/notes.md"
 alias evi="$EDITOR ~/.vimrc"
 alias ebh="$EDITOR ~/.bashrc"
 alias etm="$EDITOR ~/.tmux.conf"

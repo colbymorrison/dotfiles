@@ -6,3 +6,4 @@ keycode 108 = Control_L Control_R
 ! Remap Caps Lock to Escape
 clear Lock
 keycode 0x42=Escape
+

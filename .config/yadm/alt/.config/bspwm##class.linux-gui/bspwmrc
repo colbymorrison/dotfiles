@@ -1,9 +1,10 @@
 #! /bin/sh
 
 # sxhkd started in .xprofile
-# sxhkd & 
+# pgrep -x sxhkd > /dev/null || sxhkd & 
 
-bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+bspc monitor HDMI-2 -d 1 2 3 4 5 6 7 8 9 0
+# bspc monitor eDP-1 -n 1 -d 7 8 9 0
 
 bspc config border_width 0
 bspc config window_gap 8
@@ -15,8 +16,10 @@ bspc config borderless_monocle true
 
 # Per-application preferences
 bspc rule -a "firefox" desktop=^2
+bspc rule -a "Google-chrome" desktop=^2
+bspc rule -a "vs code @ fb" desktop=^3
+bspc rule -a "Vs code @ fb" desktop=^3
 bspc rule -a "qemu" desktop=^3
-bspc rule -a "Slack" desktop=^4
 bspc rule -a "Files" state=floating rectangle="900x500"
 bspc rule -a "nemo" state=floating rectangle="900x500"
 bspc rule -a "Wpg" state=floating
@@ -26,11 +29,14 @@ bspc rule -a "Gnome-control-center" state=floating
 bspc config external_rules_command "$XDG_CONFIG_HOME/bspwm/spotify-rules";
 
 # Colors
-source $HOME/.cache/wal/colors.sh
+[[ -f "$HOME/.cache/wal/colors.sh" ]] && source $HOME/.cache/wal/colors.sh
 
 bspc config normal_border_color "$color0"
 bspc config active_border_color "$color0"
 bspc config focused_border_color "$color0"
 
 # Polybar
-$HOME/.config/polybar/launch.sh
+[[ -f "$HOME/.config/polybar/launch.sh" ]] && source $HOME/.config/polybar/launch.sh
+
+# A bit hacky
+pgrep -x picom > /dev/null || $HOME/.xinitrc

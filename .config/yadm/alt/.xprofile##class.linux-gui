@@ -6,12 +6,13 @@
 setxkbmap -layout us -option ctrl:nocaps
 
 # Startup programs
+gnome-flashback &
 wal -R
 feh --bg-scale ~/backgrounds/forest_trees_winter_132797_3840x2160.jpg 
 sxhkd & 
 numlockx &
 unclutter &
-redshift &
 picom --xrender-sync-fence &
-xss-lock -- betterlockscreen -l dim &
 nm-applet &
+xsetroot -cursor_name left_ptr
+xss-lock -- betterlockscreen -l dim &

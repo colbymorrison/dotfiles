@@ -8,8 +8,7 @@ if [[ "$#" -eq 0 ]]; then
     SUSPEND="\tSuspend"
     HIBERNATE="\tHibernate"
     LOCK="\tLock Screen"
-    echo "$POWER_OFF\n$REBOOT\n$LOG_OUT\n$SUSPEND\n$HIBERNATE\n$LOCK"
-fi
+    printf "$POWER_OFF\n$REBOOT\n$LOG_OUT\n$SUSPEND\n$HIBERNATE\n$LOCK"
 else
     case $1 in
         *"Power Off")

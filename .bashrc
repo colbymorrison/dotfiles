@@ -5,8 +5,6 @@
 # only source in interactive shell
 [[ $- != *i* ]] && return
 
-OS=$(uname -s)
-DISTRO=$(cat /etc/os-release | head -n1 | grep NAME= | sed s/NAME=// | sed s/\"//g)
 
 if [[ $IS_FB == 0 ]]; then
   # Load CentOS stuff and Facebook stuff (don't remove these lines).
@@ -115,3 +113,4 @@ fi
 # --Auto Connect tmux-- #
 tmux_connect
 
+[[ -f $HOME/.cache/wal/sequences ]] && (cat ~/.cache/wal/sequences &)

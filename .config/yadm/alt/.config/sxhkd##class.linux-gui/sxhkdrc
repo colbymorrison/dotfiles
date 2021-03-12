@@ -1,6 +1,6 @@
 # terminal emulator
 alt + i
-    st
+  $TERMINAL 
 
 # program launcher
 alt + Return
@@ -12,7 +12,7 @@ alt + Escape
 
 # Program hotkeys
 alt + shift + {f, x, p}
-    {firefox, betterlockscreen -l dim, rofi -show power -modi power:~/scripts/rofi-scripts/power.sh}
+    {chrome, ~/scripts/lock.sh, rofi -show power -modi power:~/scripts/rofi-scripts/power.sh}
 
 # Audio
 {F12, F11}
@@ -62,6 +62,14 @@ alt + ctrl + {m,x,y,z}
 #
 # focus/swap
 #
+
+# focus next monitor
+alt + shift + bracket{left,right}
+    bspc monitor -f {prev,next}
+
+# send to next monitor
+alt + ctrl + shift + bracket{left,right}
+    bspc -m {prev,next}
 
 # focus the node in the given direction
 alt + {_,shift + }{h,j,k,l}
