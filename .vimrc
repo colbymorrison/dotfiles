@@ -1,15 +1,16 @@
 let g:polyglot_disabled = ['autoindent', 'sensible']
 call plug#begin('~/.vim/plugged')
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'mhinz/vim-signify'
+Plug 'vim-scripts/a.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'dense-analysis/ale'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-dispatch'
-Plug 'vim-scripts/a.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
+Plug 'mhinz/vim-signify'
+Plug 'christoomey/vim-tmux-navigator'
+
 " Colorscheme
 Plug 'morhetz/gruvbox'
 Plug 'kaicataldo/material.vim'
@@ -37,9 +38,10 @@ set nocompatible              " be iMproved
 filetype off                  
 filetype indent plugin on           
 syntax enable
-let mapleader=','
-set number                    ",line numbers
+let mapleader=","
+set number                    " line numbers
 set nolist                    " hide EOL chars
+set path+=**                  " goto fbcode files
 set shellslash                " fileslash by OS
 set nofixendofline            " add EOL at end of file
 set noerrorbells              " no terminal bells
@@ -50,12 +52,19 @@ set modelines=0               " no modelines
 set scrolloff=8               " show 8 lines below cursor
 set linebreak                 " break on words
 set autoindent
+set textwidth=80              " 80 chars per line
 set mouse=a
 set spelllang=en              
 set spellfile=$HOME/.vim/spell/en.utf-8.add
 
 if (is_fb == "0")
   set path+=**,~/fbcode,~/configerator,~/fbcode2        " goto fbcode files
+else
+    " Indents
+    set tabstop=4
+    set shiftwidth=4
+    "replace all tabs with tabstop spaces
+    set expandtab 
 endif
 
 " Search
@@ -65,7 +74,6 @@ set hlsearch                  " hilight all searches
 " Scrolling
 set scrolljump=5              " scroll five lines at a time vertically when at bottom
 set sidescroll=10             " minumum columns to scroll horizontally
-
 " Mappings
 nmap <Enter> O<Esc>
 nmap <silent> <leader>c :noh<cr>
@@ -81,6 +89,7 @@ nmap [w [mw
 nmap ]w ]mw
 " arc lint current file
 nnoremap <leader>l :exec '!arc lint -a %'<cr>
+" Tabs
 nmap <leader>tj :tabp<cr>
 nmap <leader>tk :tabn<cr>
 nmap <leader>tt :tabnew<cr>
@@ -92,6 +101,9 @@ nnoremap <silent> <leader>y :call system('nc localhost 8377', @0)<CR>
 
 " Autocmds
 if (is_fb == "0")
+  " go to nearest TARGETS
+  nmap <leader>w :tabnew !~/bin/tgt.sh<cr>
+  nnoremap <silent> <leader>y :call system('nc localhost 8377', @0)<CR>
   " Arc lint current file on write 
   "autocmd BufWritePost *.py,*.cpp,*.rs,TARGETS,*.thrift silent! exec '!arc lint -a %' | :e 
   " Format TARGETS on save, stolen from P75711758, lots of good stuff here
@@ -122,30 +134,25 @@ let g:signify_sign_delete = '-'
 " Airline
 let g:airline#extensions#hunks#enabled=0
 
-if (is_fb == "0")
-  " MYC
-  set rtp+=/usr/local/share/myc/vim
-
-  " FZF or MYC depending on dir (stolen P75711758)
-  if getcwd() =~ '/fbsource[1-9]*/fbcode$'
-    nnoremap <leader>a :Fbgs<Space>
-    nnoremap <C-p> :MYC<CR>
-  elseif getcwd() =~ '/configerator'
-    nnoremap <leader>a :CBGS<Space>
-    nnoremap <C-p> :Files<CR>
-  else
-    nnoremap <Leader>a :Rg<CR>
-    nnoremap <C-p> :Files<CR>
-  endif
-endif
-
 " Deoplete
 let g:deoplete#enable_at_startup = 1
 if (is_fb == "0")
   let g:python3_host_prog = "/home/cmorrison/venv/bin/python3"
+  inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 endif
 " Use <tab> to continue completion 
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+"
+" Vim-latex-suite
+set grepprg=grep\ -nH\ $* 
+let g:tex_flavor='latex'
+let g:tex_no_error=1
+let g:Tex_DefaultTargetFormat='pdf'
+let g:Tex_ViewRule_pdf = 'zathura'
+imap <C-g> <Plug>IMAP_JumpForward
+nmap <C-g> <Plug>IMAP_JumpForward
+let g:Tex_PromptedEnvironments='equation,equation*,align,align*,enumerate,itemize,figure,table,theorem,lemma,tikzpicture'
+let g:Tex_GotoError=0 
+
 
 " ALE
 let g:ale_disable_lsp = 1
@@ -165,8 +172,27 @@ nmap <leader>f :ALEFix<cr>
 " FZF
 nmap <silent> <leader>z :History<cr>
 nmap <silent> <leader>b :Buffers<cr>
+nmap <C-p> :Files<CR>
 
 if (is_fb == "0")
+  " Deoplete
+  let g:python3_host_prog = "/home/cmorrison/venv/bin/python3"
+
+  " MYC
+  set rtp+=/usr/local/share/myc/vim
+
+  " FZF or MYC depending on dir (stolen P75711758)
+  if getcwd() =~ '/fbsource[1-9]*/fbcode$'
+    nmap <leader>a :Fbgs<Space>
+    nmap <C-p> :MYC<CR>
+  elseif getcwd() =~ '/configerator'
+    nmap <leader>a :CBGS<Space>
+    nmap <C-p> :Files<CR>
+  else
+    nmap <Leader>a :Rg<CR>
+    nmap <C-p> :Files<CR>
+  endif
+
   " Dispatch
   nmap <leader>d :Dispatch buck 
 

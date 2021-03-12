@@ -49,14 +49,20 @@ opf() {
   open_if_exists $(fzf)
 }
 
-# Fzf system files, use myc to fuzzy search repo files
-ops(){
-  open_if_exists $(fd . -t f -t d -H -E 'fbsource' '/home/cmorrison' | fzf -m --preview="less {}")
-}
+# Fzf all files
+if [[ $IS_FB == 0 ]];then
+    ops(){
+      open_if_exists $(fd . -t f -t d -H -E 'fbsource' '/home/cmorrison' | fzf -m --preview="less {}")
+    }
+else
+    ops(){
+      open_if_exists $(fd . -t f -t d -H $HOME | fzf)
+    }
+fi
 
-# Fzf fbcode directories
+# Fzf all directories under ~
 cdf() {
-  cd "$(fd  . -t d '/home/cmorrison/fbcode' | fzf)"
+  cd "$(fd  . -t d $HOME | fzf)"
 }
 
 # Autoconnect to tmux
@@ -98,10 +104,12 @@ fi
 [[ -f /usr/share/bash-completion/bash_completion ]] && \
   . /usr/share/bash-completion/bash_completion
 
-[[ -d $HOME/.fzf/ ]] && \
-  . $HOME/scripts/fzf/completion.bash ; \
+if [[ -d $HOME/.fzf/ ]]; then 
+  . $HOME/scripts/fzf/completion.bash
   . $HOME/scripts/fzf/key-bindings.bash
+fi
 
 # --Auto Connect tmux-- #
 tmux_connect
 
+[[ -f $HOME/.cache/wal/sequences ]] && (cat ~/.cache/wal/sequences &)

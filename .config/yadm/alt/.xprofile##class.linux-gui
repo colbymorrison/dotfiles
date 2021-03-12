@@ -1,0 +1,18 @@
+# Xsession environment vars & startup programs
+# Ran by .xinitrc (when starting X from command line)
+# and by lightdm
+
+# Remap CapsLock to Control
+setxkbmap -layout us -option ctrl:nocaps
+
+# Startup programs
+gnome-flashback &
+wal -R
+feh --bg-scale ~/backgrounds/forest_trees_winter_132797_3840x2160.jpg 
+sxhkd & 
+numlockx &
+unclutter &
+picom --xrender-sync-fence &
+nm-applet &
+xsetroot -cursor_name left_ptr
+xss-lock -- betterlockscreen -l dim &
