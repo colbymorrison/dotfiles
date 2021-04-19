@@ -15,6 +15,7 @@ Plug 'mhinz/vim-signify'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'morhetz/gruvbox'
 Plug 'kaicataldo/material.vim'
+Plug 'sickill/vim-monokai'
 Plug 'arcticicestudio/nord-vim'
 Plug 'sainnhe/sonokai'
 Plug 'jsit/toast.vim'
@@ -115,7 +116,7 @@ let g:netrw_winsize = 25
 
 " Colors
 set background=dark
-colo sonokai
+colo material
 
 
 "--- Plugins ----

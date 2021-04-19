@@ -18,7 +18,9 @@
 ;==========================================================
 
 [colors]
-background = ${xrdb:color0:#000000}
+background = ${env:COLOR0:#000000}
+; background = #26323855
+
 ; make foreground white by default
 foreground = #ffffff
 ; foreground as per theme
@@ -28,7 +30,7 @@ secondary = ${xrdb:color2:#222}
 alert = ${xrdb:color3:#222}
 
 [bar/top]
-monitor = ${env:DEFAULT_MONITOR:HDMI2} 
+monitor = ${env:MONITOR:eDP-1} 
 width = 100%
 height = 2.9% 
 
@@ -56,6 +58,7 @@ modules-right = pulseaudio battery cpu memory
 
 tray-position = right 
 tray-padding = 2 
+tray-maxsize = 45 
 
 enable-ipc = true
 
@@ -252,7 +255,7 @@ exec = python ~/scripts/polybar-scripts/spotify_status.py -t 10 -f '{artist}  - 
 [module/menu]
 type = custom/script
 exec = echo 
-click-left = rofi -show drun
+click-left = rofi-default
 
 [module/battery]
 type = internal/battery

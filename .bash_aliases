@@ -27,6 +27,7 @@ alias python='python3'
 alias not="$EDITOR ~/Documents/notes.md"
 alias evi="$EDITOR ~/.vimrc"
 alias ebh="$EDITOR ~/.bashrc"
+alias epb="$EDITOR ~/.bash_profile"
 alias etm="$EDITOR ~/.tmux.conf"
 alias eba="$EDITOR ~/.bash_aliases"
 
@@ -90,13 +91,12 @@ if [[ $OS == "Linux" ]] ; then
     alias epb="$EDITOR '+set syntax=dosini' ~/.config/polybar/config"
     alias exr="$EDITOR ~/.Xresources"
 
-
     # Zathura #
     alias zth='zathura'
     alias ztf='zathura --fork'
 
-    # Custom #
     alias polyrs='~/.config/polybar/launch.sh'
+    alias chrome='/opt/google/chrome'
 
     if [[ $DISTRO == "Arch Linux" ]]; then
         # Pacman #
