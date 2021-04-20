@@ -119,5 +119,7 @@ if [[ $IS_FB == 0 ]]; then
 
     #### Fb tools ###
     alias hs='hostselect'
+    alias sm='smcc'
+    alias smt='smcc tree'
 fi
 

@@ -4,7 +4,7 @@
 [[ -f ~/.bashrc ]] && source ~/.bashrc
 
 export TERMINAL=alacritty
-export PATH=$PATH:~/bin:/home/colby/.gem/ruby/2.7.0/bin:${HOME}/.local/bin
+export PATH=$PATH:${HOME}/bin:${HOME}/.gem/ruby/2.7.0/bin:${HOME}/.local/bin
 export GOPATH=$(go env GOPATH)
 export GOROOT=$(go env GOROOT)
 export EDITOR=nvim

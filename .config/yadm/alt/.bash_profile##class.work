@@ -1,18 +1,24 @@
-# ~/.bash_profile
-# Run for login shells (after /etc/profile)
+# .bash_profile
+# bash_profile is for setting environment variables and anything else that
+# should happen at login.  bash_profile is sourced only in login shells (e.g.,
+# the shell started when you log in via SSH).  The main things that make sense
+# to put in bash_profile are environment variable exports and startup programs.
+# See https://fburl.com/bash for more information.
 
+# Source bashrc to pull in configuration for interactive shell use (the bashrc
+# will just return if the shell is not interactive).
 [[ -f ~/.bashrc ]] && source ~/.bashrc
 
-export TERMINAL=st
-export PATH=$PATH:~/bin:/home/colby/.gem/ruby/2.7.0/bin 
-export GOPATH=$(go env GOPATH)
-export GOROOT=$(go env GOROOT)
+export TERM=xterm
+export CLICOLOR=1
 export EDITOR=nvim
 export VISUAL=$EDITOR
-export CLICOLOR=1
-export QT_STYLE_OVERRIDE=adwaita
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_CACHE_HOME=$HOME/.cache
-export XDG_DATA_HOME=$HOME/.local/share
 export FZF_DEFAULT_COMMAND='fd -H -t f -t d'
 export FZF_DEFAULT_OPTS='--preview="~/scripts/preview.sh {}"'
+export DEFAULT_TMUX_SESSION='fbc'
+export DEFAULT_TMUX_DIR='~/fbc'
+export IS_FB=$(echo $HOSTNAME | grep facebook.com > /dev/null; echo $?)
+export PATH="$HOME/bin:$PATH"
+export CPY_PRG="nc localhost 8377"
+export OS=$(uname -s)
+export DISTRO=$(cat /etc/os-release | head -n1 | grep NAME= | sed s/NAME=// | sed s/\"//g)

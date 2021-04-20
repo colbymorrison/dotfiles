@@ -138,10 +138,10 @@ let g:airline#extensions#hunks#enabled=0
 let g:deoplete#enable_at_startup = 1
 if (is_fb == "0")
   let g:python3_host_prog = "/home/cmorrison/venv/bin/python3"
+  " Use <tab> to continue completion 
   inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 endif
-" Use <tab> to continue completion 
-"
+
 " Vim-latex-suite
 set grepprg=grep\ -nH\ $* 
 let g:tex_flavor='latex'

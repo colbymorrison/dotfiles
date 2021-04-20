@@ -12,7 +12,12 @@ if [[ $IS_FB == 0 ]]; then
 fi
 
 # ---Env vars--- #
-export PS1="\[\033[0;93m\]\u@\h\[\033[01;34m\] \W \[\033[00m\][\D{%T}] \[\033[32m\]\$(~/scripts/parse_git_branch.sh)\[\033[00m\]$ "
+if [[ $IS_FB == 0 ]]; then
+  source $LOCAL_ADMIN_SCRIPTS/scm-prompt
+  export PS1="\[\033[0;93m\]\u@\h\[\033[01;34m\] \W \[\033[00m\][\D{%T}]\[\033[32m\]\$(_scm_prompt)\[\033[00m\]$ "
+else
+  export PS1="\[\033[0;93m\]\u@\h\[\033[01;34m\] \W \[\033[00m\][\D{%T}]\[\033[32m\]\$(~/scripts/parse_git_branch.sh)\[\033[00m\]$ "
+fi
 
 # ---Alias--- #
 if [ -f ~/.bash_aliases ]; then
