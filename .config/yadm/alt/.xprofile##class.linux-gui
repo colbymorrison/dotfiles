@@ -8,10 +8,9 @@ setxkbmap -layout us -option ctrl:nocaps
 # Startup programs
 gnome-flashback &
 wal -R
-feh --bg-scale ~/backgrounds/forest_trees_winter_132797_3840x2160.jpg 
 sxhkd & 
 numlockx &
-unclutter &
+hhpc &
 picom --xrender-sync-fence &
 nm-applet &
 xsetroot -cursor_name left_ptr

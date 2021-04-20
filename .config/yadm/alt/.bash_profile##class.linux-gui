@@ -19,4 +19,5 @@ export FZF_DEFAULT_OPTS='--preview="~/scripts/preview.sh {}"'
 export DEFAULT_TMUX_SESSION='home'
 export OS=$(uname -s)
 export DISTRO=$(cat /etc/os-release | head -n1 | grep NAME= | sed s/NAME=// | sed s/\"//g)
-export DEFAULT_MONITOR='HDMI-2'
+export PRIMARY_MONITOR='eDP-1'
+export SECONDARY_MONITOR='HDMI-2'

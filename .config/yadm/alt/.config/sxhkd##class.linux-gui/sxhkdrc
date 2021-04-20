@@ -1,10 +1,10 @@
 # terminal emulator
-alt + i
+alt + shift +  i
   $TERMINAL 
 
 # program launcher
 alt + Return
-	rofi -show combi -combi-modi window,drun,files:~/scripts/rofi-scripts/search.sh,power:~/scripts/rofi-scripts/power.sh -drun-match-fields name,exec -no-sort
+	rofi-default
 
 # make sxhkd reload its configuration files:
 alt + Escape
@@ -12,13 +12,13 @@ alt + Escape
 
 # Program hotkeys
 alt + shift + {f, x, p}
-    {chrome, ~/scripts/lock.sh, rofi -show power -modi power:~/scripts/rofi-scripts/power.sh}
+    {/opt/google/chrome/chrome, ~/scripts/lock.sh, rofi -show power -modi power:~/scripts/rofi-scripts/power.sh}
 
 # Audio
-{F12, F11}
+{F2, F3}
     pactl set-sink-volume @DEFAULT_SINK@ {+,-}1000
 
-F10
+F1
     pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 {Print, Scroll_Lock, Pause}
@@ -99,7 +99,7 @@ alt + {o,i}
 
 # focus or send to the given desktop
 alt + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} '^{1-9,10}'
+	bspc {desktop -f,node -d} {1-9,10}
 
 #
 # preselect
@@ -136,3 +136,11 @@ alt + control+ shift + {Left,Down,Up,Right}
 # move a floating window
 alt + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+
+#
+# multi desktop
+#
+
+alt + ctrl + d
+    bspc monitor $PRIMARY_MONITOR -d 1 2 3 4 5 ; bspc monitor $SECONDARY_MOINTOR -d 6 7 8 9 0 

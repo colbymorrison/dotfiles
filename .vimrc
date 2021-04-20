@@ -15,9 +15,10 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'morhetz/gruvbox'
 Plug 'kaicataldo/material.vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'sickill/vim-monokai'
+Plug 'arcticicestudio/nord-vim'
 Plug 'sainnhe/sonokai'
 Plug 'jsit/toast.vim'
-Plug 'arcticicestudio/nord-vim'
 call plug#end()
 
 let is_fb=substitute(system('echo $HOSTNAME | grep facebook.com > /dev/null; echo $?'),"\n","","")
@@ -121,7 +122,7 @@ let g:netrw_winsize = 25
 
 " Colors
 set background=dark
-colo sonokai
+colo material
 
 
 "--- Plugins ----

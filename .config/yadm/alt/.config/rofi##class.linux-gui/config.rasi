@@ -1,7 +1,7 @@
 configuration {
     lines: 10;
     fixed-num-lines: true;
-	font: "Noto Sans Bold 25";
+	font: "Noto Sans Bold 20";
 	bw: 0;
 	location: 0;
 	fixed-num-lines: true;
@@ -10,6 +10,9 @@ configuration {
 	drun-match-fields: "name,generic,exec,categories";
 	drun-display-format: "{name}";
     theme: ".cache/wal/colors-rofi-dark.rasi";
+	separator-style: "dash";
+	hide-scrollbar: true;
+    icon-theme: "Papirus";
 /*	disable-history: false;*/
 /*	ignored-prefixes: "";*/
 /*	sort: false;*/
@@ -28,8 +31,6 @@ configuration {
 /*	line-margin: 2;*/
 /* line-padding: 90; */
 /*	filter: ;*/
-	separator-style: "dash";
-	hide-scrollbar: true;
 /*	fullscreen: false;*/
 /*	fake-transparency: false;*/
 /*	dpi: -1;*/

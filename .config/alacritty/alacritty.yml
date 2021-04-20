@@ -1,0 +1,26 @@
+font:
+  # The normal (roman) font face to use.
+  normal:
+    family: Source Code Pro
+    style: Regular
+
+  # The bold font face
+  bold:
+    family: Source Code Pro
+    style: Bold
+
+  # The italic font face
+  italic:
+    family: Source Code Pro
+    style: Italic
+
+  # Point size of the font
+  size: 13.0
+
+mouse:
+  url:
+    launcher:
+      program: xdg-open
+      args: []
+
+background_opacity: 1

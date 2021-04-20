@@ -109,12 +109,14 @@ fi
 [[ -f /usr/share/bash-completion/bash_completion ]] && \
   . /usr/share/bash-completion/bash_completion
 
-if [[ -d $HOME/.fzf/ ]]; then 
-  . $HOME/scripts/fzf/completion.bash
+if [[ -d /usr/share/fzf/shell ]]; then
+    . /usr/share/fzf/shell/key-bindings.bash
+elif [[ -d $HOME/.fzf/ ]]; then 
   . $HOME/scripts/fzf/key-bindings.bash
 fi
 
-# --Auto Connect tmux-- #
-tmux_connect
-
 [[ -f $HOME/.cache/wal/sequences ]] && (cat ~/.cache/wal/sequences &)
+
+# --Auto Connect tmux-- #
+# tmux_connect
+
