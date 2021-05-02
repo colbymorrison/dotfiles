@@ -20,3 +20,4 @@ export DISTRO=$(cat /etc/os-release | head -n1 | grep NAME= | sed s/NAME=// | se
 export PRIMARY_MONITOR='eDP-1'
 export SECONDARY_MONITOR='HDMI-2'
 export CM_LAUNCHER=rofi
+
