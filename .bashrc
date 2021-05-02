@@ -45,7 +45,7 @@ difo(){
 
 open_if_exists(){
   if [[ -e $1  ]]; then
-    [[ -f $1 ]] && $EDITOR $1 || cd $1
+    [[ -f $1 ]] && $EDITOR $1 || pushd $1
   fi
 }
 

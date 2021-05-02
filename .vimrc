@@ -122,7 +122,7 @@ let g:netrw_winsize = 25
 
 " Colors
 set background=dark
-colo material
+colo sonokai
 
 
 "--- Plugins ----
