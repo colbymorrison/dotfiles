@@ -1,10 +1,9 @@
-# ~/.bashrc
+# .bashrc
 
 # Run by interactive shells (after /etc/bash.bashrc)
 
 # only source in interactive shell
 [[ $- != *i* ]] && return
-
 
 if [[ $IS_FB == 0 ]]; then
   # Load CentOS stuff and Facebook stuff (don't remove these lines).
@@ -13,7 +12,12 @@ if [[ $IS_FB == 0 ]]; then
 fi
 
 # ---Env vars--- #
-export PS1="\[\033[0;93m\]\u@\h\[\033[01;34m\] \W \[\033[00m\][\D{%T}] \[\033[32m\]\$(~/scripts/parse_git_branch.sh)\[\033[00m\]$ "
+if [[ $IS_FB == 0 ]]; then
+  source $LOCAL_ADMIN_SCRIPTS/scm-prompt
+  export PS1="\[\033[0;93m\]\u@\h\[\033[01;34m\] \W \[\033[00m\][\D{%T}]\[\033[32m\]\$(_scm_prompt)\[\033[00m\]$ "
+else
+  export PS1="\[\033[0;93m\]\u@\h\[\033[01;34m\] \W \[\033[00m\][\D{%T}]\[\033[32m\]\$(~/scripts/parse_git_branch.sh)\[\033[00m\]$ "
+fi
 
 # ---Alias--- #
 if [ -f ~/.bash_aliases ]; then
@@ -35,13 +39,13 @@ mkcd() {
 
 # Run prev command w/ different options
 difo(){
-  last_command=$(history | tail -2 | head -1 | sed s/[0-9]//g)
+  last_command=$(history | tail -2 | head -1 | cut -d ' ' -f 5)
   $last_command $1
 }
 
 open_if_exists(){
   if [[ -e $1  ]]; then
-    [[ -f $1 ]] && $EDITOR $1 || cd $1
+    [[ -f $1 ]] && $EDITOR $1 || pushd $1
   fi
 }
 
@@ -53,7 +57,7 @@ tmux_connect(){
     if [[ $session_exists ]]; then
       tmux $TMUX_OPTIONS attach-session -t $DEFAULT_TMUX_SESSION
     else
-      cd
+      cd $DEFAULT_TMUX_DIR
       tmux $TMUX_OPTIONS new-session -s $DEFAULT_TMUX_SESSION
     fi
   fi
@@ -99,7 +103,7 @@ if [[ "$HAS_FZF_COMPLETION" ]]; then
     # Ctrl+T: Open or cd all files under ~
     bind -x '"\et": open_if_exists $(__fzf_select__)'
     if [[ $IS_FB == 0 ]]; then
-        bind -x '"\C-t": open_if_exists $(fd . -t f -t d -t l -H -E "fbsource*" "configerator*" $HOME | fzf)'
+        bind -x '"\C-t": open_if_exists $(fd . -t f -t d -t l -H -E "fbsource*" -E"configerator*" $HOME | fzf)'
     else
         bind -x '"\C-t": open_if_exists $(fd . -t f -t d -t l -H $HOME | fzf)'
     fi
