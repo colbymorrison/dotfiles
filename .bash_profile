@@ -1,1 +1,0 @@
-.config/yadm/alt/.bash_profile##class.work
