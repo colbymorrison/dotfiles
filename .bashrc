@@ -87,11 +87,24 @@ fi
 
 if [[ -d /usr/share/fzf/shell ]]; then
     . /usr/share/fzf/shell/key-bindings.bash
-    bind -x '"\et": open_if_exists $(__fzf_select__)'
+    HAS_FZF_COMPLETION=1
 elif [[ -d $HOME/.fzf/ ]]; then 
     . $HOME/scripts/fzf/key-bindings.bash
-    bind -x '"\et": open_if_exists $(__fzf_select__)'
+    HAS_FZF_COMPLETION=1
 fi
+
+if [[ "$HAS_FZF_COMPLETION" ]]; then
+    # Override fzf completions
+    # Alt+T : Open or cd files in current dir
+    # Ctrl+T: Open or cd all files under ~
+    bind -x '"\et": open_if_exists $(__fzf_select__)'
+    if [[ $IS_FB == 0 ]]; then
+        bind -x '"\C-t": open_if_exists $(fd . -t f -t d -t l -H -E "fbsource*" "configerator*" $HOME | fzf)'
+    else
+        bind -x '"\C-t": open_if_exists $(fd . -t f -t d -t l -H $HOME | fzf)'
+    fi
+fi
+
 
 [[ -f $HOME/.cache/wal/sequences ]] && (cat ~/.cache/wal/sequences &)
 

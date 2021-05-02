@@ -17,6 +17,7 @@ source  ~/.cache/wal/polybar-colors.sh
 for m in $(polybar --list-monitors | cut -d":" -f1); do
     # Can change font size by monitor here
     [[ $m == $PRIMARY_MONITOR ]] && FONT_SZ=13 || FONT_SZ=20
+    [[ $m == $SECONDARY_MONITOR ]] && export LOAD_TRAY="right" || unset LOAD_TRAY
 
     export NOTOT="NotoSans-Bold:size=$FONT_SZ;0"
     export DEJA="DejaVuSans-Bold:size=$FONT_SZ;1"
