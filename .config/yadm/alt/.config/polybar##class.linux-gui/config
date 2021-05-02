@@ -56,7 +56,7 @@ modules-right = pulseaudio battery cpu memory
 ;scroll-up = bspwm-desknext
 ;scroll-down = bspwm-deskprev
 
-tray-position = right 
+tray-position = ${env:LOAD_TRAY:""}
 tray-padding = 2 
 tray-maxsize = 45 
 

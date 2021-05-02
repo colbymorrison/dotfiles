@@ -1,17 +1,14 @@
 #! /bin/sh
 
-~/bin/update-monitors
-
 bspc config remove_disabled_monitors true
 bspc config remove_unplugged_monitors true
 
-bspc config border_width 0
-bspc config window_gap 8
+bspc config window_gap 3
+bspc config border_width 5 
 
 bspc config split_ratio          0
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
-bspc config borderless_monocle true
 
 # Per-application preferences
 bspc rule -a "firefox" desktop=^2
@@ -32,13 +29,9 @@ bspc config external_rules_command "$XDG_CONFIG_HOME/bspwm/spotify-rules";
 
 bspc config normal_border_color "$color0"
 bspc config active_border_color "$color0"
-bspc config focused_border_color "$color0"
-
-# Polybar
-pgrep -x polybar > /dev/null && $HOME/.config/polybar/launch.sh || [[ -f "$HOME/.config/polybar/launch.sh"  ]] 
+bspc config focused_border_color "$color1"
 
 # A bit hacky
 pgrep -x picom > /dev/null 2>&1 || $HOME/.xinitrc
 
-# Background
-~/.fehbg
+[[ -f "$HOME/bin/update-monitors" ]] && $HOME/bin/update-monitors
