@@ -9,7 +9,7 @@ configuration {
 	terminal: "rofi-sensible-terminal";
 	drun-match-fields: "name,generic,exec,categories";
 	drun-display-format: "{name}";
-    theme: ".cache/wal/colors-rofi-dark.rasi";
+    theme: "~/.cache/wal/colors-rofi-dark.rasi";
 	separator-style: "dash";
 	hide-scrollbar: true;
     icon-theme: "Papirus";

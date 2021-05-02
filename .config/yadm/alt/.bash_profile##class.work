@@ -5,8 +5,6 @@
 
 export TERMINAL=st
 export PATH=$PATH:~/bin:/home/colby/.gem/ruby/2.7.0/bin 
-export GOPATH=$(go env GOPATH)
-export GOROOT=$(go env GOROOT)
 export EDITOR=nvim
 export VISUAL=$EDITOR
 export CLICOLOR=1
@@ -14,5 +12,7 @@ export QT_STYLE_OVERRIDE=adwaita
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
-export FZF_DEFAULT_COMMAND='fd -H -t f -t d'
-export FZF_DEFAULT_OPTS='--preview="~/scripts/preview.sh {}"'
+export FZF_DEFAULT_COMMAND='fd -t f -t d -t l'
+export FZF_DEFAULT_OPTS='--preview="~/scripts/preview.sh {} --bind space:toggle-preview"'
+export FZF_CTRL_T_COMMAND='fd . -t f -t d -t l -H -E "fbsource*" "configerator*" $HOME'
+
