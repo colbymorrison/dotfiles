@@ -12,7 +12,7 @@ super + Escape
 
 # Program hotkeys
 super + shift + {f, p, m}
-    {/opt/google/chrome/chrome, rofi -show power -modi power:~/scripts/rofi-scripts/power.sh, export CM_LAUNCHER=rofi && clipmenu}
+    {/opt/google/chrome/chrome, rofi -show power -modi power:~/scripts/rofi/power.sh, export CM_LAUNCHER=rofi && clipmenu}
 
 # Audio
 {F2, F3}

@@ -27,7 +27,7 @@ alias python='python3'
 alias not="$EDITOR ~/Documents/notes.md"
 alias evi="$EDITOR ~/.vimrc"
 alias ebh="$EDITOR ~/.bashrc"
-alias epb="$EDITOR ~/.bash_profile"
+alias ebp="$EDITOR ~/.bash_profile"
 alias etm="$EDITOR ~/.tmux.conf"
 alias eba="$EDITOR ~/.bash_aliases"
 
