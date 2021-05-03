@@ -137,10 +137,10 @@ let g:airline#extensions#hunks#enabled=0
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
+" Use <tab> to continue completion 
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 if (is_fb == "0")
   let g:python3_host_prog = "/home/cmorrison/venv/bin/python3"
-  " Use <tab> to continue completion 
-  inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 endif
 
 " Vim-latex-suite

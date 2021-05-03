@@ -95,7 +95,7 @@ if [[ $OS == "Linux" ]] ; then
     alias zth='zathura'
     alias ztf='zathura --fork'
 
-    alias polyrs='~/.config/polybar/launch.sh'
+    alias polyrs='~/.config/polybar/launch.sh 2>&1 > /dev/null'
     alias chrome='/opt/google/chrome'
 
     if [[ $DISTRO == "Arch Linux" ]]; then

@@ -238,19 +238,19 @@ ramp-2 = " "
 [module/power]
 type = custom/script
 exec = echo  
-click-left = rofi -show power -modi power:~/scripts/rofi-scripts/power.sh
+click-left = rofi -show power -modi power:~/scripts/rofi/power.sh
 
 [module/search]
 type = custom/script
 exec = echo 
-click-left = ~/scripts/rofi-scripts/search.sh
+click-left = ~/scripts/rofi/search.sh
 
 [module/spotify]
 type = custom/script
 interval = 1
 format-prefix = "  "
 format = <label>
-exec = python ~/scripts/polybar-scripts/spotify_status.py -t 10 -f '{artist}  -  {song}'
+exec = python ~/scripts/polybar/spotify_status.py -t 10 -f '{artist}  -  {song}'
 
 [module/menu]
 type = custom/script
