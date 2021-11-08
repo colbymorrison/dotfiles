@@ -19,6 +19,7 @@ Plug 'sickill/vim-monokai'
 Plug 'arcticicestudio/nord-vim'
 Plug 'sainnhe/sonokai'
 Plug 'jsit/toast.vim'
+Plug 'vim-scripts/phd'
 call plug#end()
 
 let is_fb=substitute(system('echo $HOSTNAME | grep facebook.com > /dev/null; echo $?'),"\n","","")
@@ -139,9 +140,6 @@ let g:airline#extensions#hunks#enabled=0
 let g:deoplete#enable_at_startup = 1
 " Use <tab> to continue completion 
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-if (is_fb == "0")
-  let g:python3_host_prog = "/home/cmorrison/venv/bin/python3"
-endif
 
 " Vim-latex-suite
 set grepprg=grep\ -nH\ $* 
@@ -190,7 +188,7 @@ if (is_fb == "0")
     nmap <leader>a :CBGS<Space>
     nmap <C-p> :Files<CR>
   else
-    nmap <Leader>a :Rg<CR>
+    nmap <leader>a :Rg<CR>
     nmap <C-p> :Files<CR>
   endif
 

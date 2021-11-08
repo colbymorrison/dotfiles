@@ -123,3 +123,4 @@ if [[ $IS_FB == 0 ]]; then
     alias smt='smcc tree'
 fi
 
+alias below="podman run --privileged --cgroupns=host --pid=host -it --mount='type=bind,src=/var/log/below,dst=/var/log/below' -it below/below"

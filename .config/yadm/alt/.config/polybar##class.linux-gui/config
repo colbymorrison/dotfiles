@@ -49,16 +49,16 @@ font-2 = ${env:AWSM}
 font-3 = ${env:AWSB}
 font-4 = ${env:MATRT}
 
-modules-left = power menu bspwm spotify 
+modules-left = power menu fmenu bspwm
 modules-center = date
 modules-right = pulseaudio battery cpu memory
 
 ;scroll-up = bspwm-desknext
 ;scroll-down = bspwm-deskprev
 
-tray-position = ${env:LOAD_TRAY:""}
+tray-position = ${env:LOAD_TRAY}
 tray-padding = 2 
-tray-maxsize = 45 
+tray-maxsize = 100
 
 enable-ipc = true
 
@@ -140,7 +140,8 @@ type = internal/network
 interface = wlp0s20f3
 interval = 3.0
 
-label-connected = 
+# 
+label-connected =   %downspeed% 
 label-disconnected-foreground = #66
 
 label-disconnected = 
@@ -244,6 +245,11 @@ click-left = rofi -show power -modi power:~/scripts/rofi/power.sh
 type = custom/script
 exec = echo 
 click-left = ~/scripts/rofi/search.sh
+
+[module/fmenu]
+type = custom/script
+exec = echo 
+click-left = ~/scripts/rofi/fmenu.sh
 
 [module/spotify]
 type = custom/script

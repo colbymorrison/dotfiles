@@ -1,5 +1,8 @@
 #! /bin/bash
 
+PRIMARY_MONITOR="eDP-1"
+SECONDARY_MONITOR="HDMI-2"
+
 if xrandr | grep $SECONDARY_MONITOR | grep " connected" > /dev/null 2>&1; then
     if autorandr --current | grep multi; then
         bspc monitor $SECONDARY_MONITOR -d 1 2 3 4 5
@@ -15,6 +18,6 @@ fi
 
 # Reload polybar and background
 
-$XDG_CONFIG_HOME/polybar/launch.sh
+/home/cmorrison/.fehbg
 
-~/.fehbg
+/home/cmorrison/.config/polybar/launch.sh

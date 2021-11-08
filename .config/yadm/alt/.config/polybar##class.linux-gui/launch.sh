@@ -15,9 +15,17 @@ source  ~/.cache/wal/polybar-colors.sh
 
 # Start on all monitors with right font size
 for m in $(polybar --list-monitors | cut -d":" -f1); do
+    autorandr --detected | grep multi 2>&1 > /dev/null
+    multi=$?
+
     # Can change font size by monitor here
-    [[ $m == $PRIMARY_MONITOR ]] && FONT_SZ=13 || FONT_SZ=20
-    [[ $m == $SECONDARY_MONITOR ]] && export LOAD_TRAY="right" || unset LOAD_TRAY
+    if [[ "$m" == "$PRIMARY_MONITOR" ]]; then
+        FONT_SZ=13
+        [[ "$multi" -eq 1 ]] && export LOAD_TRAY="right" || unset LOAD_TRAY
+    else
+        FONT_SZ=20
+        [[ "$multi" ]] && export LOAD_TRAY="right" || unset LOAD_TRAY
+    fi
 
     export NOTOT="NotoSans-Bold:size=$FONT_SZ;0"
     export DEJA="DejaVuSans-Bold:size=$FONT_SZ;1"
@@ -26,6 +34,6 @@ for m in $(polybar --list-monitors | cut -d":" -f1); do
     export AWSB="FontAwesome:size=$(($FONT_SZ+2));0"
     export MATRT="MaterialIcons:size=$(($FONT_SZ+3));0"
 
-    MONITOR=$m polybar --reload top & > /dev/null 2>&1
+    MONITOR=$m polybar --reload top --config=~/.config/polybar/config & 2>&1 > /dev/null 
 done
 
