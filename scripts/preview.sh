@@ -13,4 +13,4 @@ else
     CAT_PRG="cat"
 fi
 
-[[ -f $1 ]] && $CAT_PRG $1 || tree -L 1 $1
+[[ -d $1 ]] && tree -L 1 $1 || "$CAT_PRG" $1 

@@ -16,7 +16,7 @@ if [[ $IS_FB == 0 ]]; then
   source $LOCAL_ADMIN_SCRIPTS/scm-prompt
   export PS1="\[\033[0;93m\]\u@\h\[\033[01;34m\] \W \[\033[00m\][\D{%T}]\[\033[32m\]\$(_scm_prompt)\[\033[00m\]$ "
 else
-  export PS1="\[\033[0;93m\]\u@\h\[\033[01;34m\] \W \[\033[00m\][\D{%T}]\[\033[32m\]\$(~/scripts/parse_git_branch.sh)\[\033[00m\]$ "
+  export PS1="\[\033[0;93m\]\u@\h\[\033[01;34m\] \W \[\033[00m\][\D{%T}]\[\033[32m\]\\[\033[00m\]$ "
 fi
 
 # ---Alias--- #
@@ -72,6 +72,8 @@ checkout_fzf() {
 }
 
 if [[ $IS_FB == 0 ]]; then
+  source /usr/local/share/fb_tools/fb.shell
+
   # Pastry previous command with command name as title
   p() {
     "$@" | pastry -t "$*"
@@ -81,6 +83,10 @@ if [[ $IS_FB == 0 ]]; then
   buckout() {
     local repopath="$(buck root)"
     pushd "$repopath/buck-out/gen/$(realpath . --relative-to="$repopath")"
+  }
+
+  twt() {
+    hostselect -F twtasks $1 | $CPY_PRG
   }
 fi
 

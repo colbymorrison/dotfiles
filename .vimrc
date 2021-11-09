@@ -5,11 +5,14 @@ Plug 'vim-airline/vim-airline'
 Plug 'dense-analysis/ale'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-vinegar'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'mhinz/vim-signify'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'hhvm/vim-hack'
+Plug 'preservim/nerdtree'
 
 " Colorscheme
 Plug 'morhetz/gruvbox'
@@ -53,10 +56,11 @@ set modelines=0               " no modelines
 set scrolloff=8               " show 8 lines below cursor
 set linebreak                 " break on words
 set autoindent
-set textwidth=80              " 80 chars per line
 set mouse=a
 set spelllang=en              
 set spellfile=$HOME/.vim/spell/en.utf-8.add
+set switchbuf+=usetab,newtab  " open quickfix in newtab unless already open
+
 
 if (is_fb == "0")
   set path+=**,~/fbcode,~/configerator,~/fbcode2        " goto fbcode files
@@ -80,10 +84,10 @@ nmap <Enter> O<Esc>
 nmap <silent> <leader>c :noh<cr>
 nmap <C-x> :close<cr>
 nmap <leader>s :so ~/.vimrc<cr>
-nmap <leader>p :set invpaste<CR>
+nmap <leader>pa :set invpaste<CR>
 nmap <leader>r :set invrelativenumber<CR> 
 " Fbgs word under cursor
-nmap <leader>g :Fbgs <C-R><C-W><CR>   
+nmap <leader>g :FBGS <C-R><C-W><CR>   
 imap <leader>f {<Esc>o}<Esc>O
 " Go no next/prev method name in python
 nmap [w [mw
@@ -95,15 +99,14 @@ nmap <leader>tj :tabp<cr>
 nmap <leader>tk :tabn<cr>
 nmap <leader>tt :tabnew<cr>
 nmap <leader>td :tabc<cr>
-" go to nearest TARGETS
-nmap <leader>w :tabnew !~/bin/tgt.sh<cr>
-nnoremap <silent> <leader>y :call system('nc localhost 8377', @0)<CR>
+" Copy current path
+nmap <leader>py :let @" = expand("%");call system('nc localhost 8377', @0)<cr>
 
 
 " Autocmds
 if (is_fb == "0")
   " go to nearest TARGETS
-  nmap <leader>w :tabnew !~/bin/tgt.sh<cr>
+  nmap <leader>w :tabnew `~/scripts/tgt.sh %`<cr>
   nnoremap <silent> <leader>y :call system('nc localhost 8377', @0)<CR>
   " Arc lint current file on write 
   "autocmd BufWritePost *.py,*.cpp,*.rs,TARGETS,*.thrift silent! exec '!arc lint -a %' | :e 
@@ -114,11 +117,8 @@ if (is_fb == "0")
   autocmd BufNewFile,BufRead TARGETS setlocal includeexpr=substitute(v:fname,'//\\(.*\\)','\\1/TARGETS','g')
 endif
 
-" Netrw
-nnoremap <leader>e :Lexplore<cr>
-let g:netrw_liststyle = 3
-let g:netrw_banner = 0
-let g:netrw_winsize = 25
+" NERDTree
+nnoremap <leader>e :NERDTreeToggle %<CR>
 
 " Colors
 set background=dark
@@ -156,19 +156,20 @@ let g:Tex_GotoError=0
 
 
 " ALE
-let g:ale_disable_lsp = 1
+" let g:ale_disable_lsp = 1
 "let g:ale_completion_enabled = 1
 let g:ale_lint_on_text_changed = 1
 let g:ale_set_balloons = 1
 
 nmap gd <Plug>(ale_go_to_definition)
+nmap gD <Plug>(ale_go_to_definition_in_tab)
 nmap gy <Plug>(ale_go_to_type_definition)
 nmap gr <Plug>(ale_find_references)
 
 nmap <leader>j <Plug>(ale_next_wrap)
 nmap <leader>k <Plug>(ale_previous_wrap)
 nmap <leader>v <Plug>(ale_detail)
-nmap <leader>f :ALEFix<cr>
+nmap <leader>f :ALECodeAction<cr>
 
 " FZF
 nmap <silent> <leader>z :History<cr>
@@ -176,6 +177,9 @@ nmap <silent> <leader>b :Buffers<cr>
 nmap <C-p> :Files<CR>
 
 if (is_fb == "0")
+  " Disable hh quickfix on save cuz we have lsp
+  let g:hack#enable = 0
+
   " Deoplete
   let g:python3_host_prog = "/home/cmorrison/venv/bin/python3"
 
@@ -183,12 +187,15 @@ if (is_fb == "0")
   set rtp+=/usr/local/share/myc/vim
 
   " FZF or MYC depending on dir (stolen P75711758)
-  if getcwd() =~ '/fbsource[1-9]*/fbcode$'
-    nmap <leader>a :Fbgs<Space>
+  if getcwd() =~ '/fbsource[1-9]*/fbcode$' 
+    nmap <leader>a :FBGS<Space>
     nmap <C-p> :MYC<CR>
   elseif getcwd() =~ '/configerator'
     nmap <leader>a :CBGS<Space>
-    nmap <C-p> :Files<CR>
+    nmap <C-p> :MYC<CR>
+  elseif getcwd() =~ '/www'
+    nmap <leader>a :CBGS<Space>
+    nmap <C-p> :MYC<CR>
   else
     nmap <Leader>a :Rg<CR>
     nmap <C-p> :Files<CR>
@@ -214,8 +221,47 @@ if (is_fb == "0")
   autocmd BufReadPost *.cconf let b:comment_prefix = "#"
   autocmd BufReadPost *.mcconf let b:comment_prefix = "#"
   source $LOCAL_ADMIN_SCRIPTS/vim/biggrep.vim
-  noremap <leader>m :call ToggleComment()<CR>
 endif
 
 
 
+
+function! Redir(cmd, rng, start, end)
+	for win in range(1, winnr('$'))
+		if getwinvar(win, 'scratch')
+			execute win . 'windo close'
+		endif
+	endfor
+	if a:cmd =~ '^!'
+		let cmd = a:cmd =~' %'
+			\ ? matchstr(substitute(a:cmd, ' %', ' ' . expand('%:p'), ''), '^!\zs.*')
+			\ : matchstr(a:cmd, '^!\zs.*')
+		if a:rng == 0
+			let output = systemlist(cmd)
+		else
+			let joined_lines = join(getline(a:start, a:end), '\n')
+			let cleaned_lines = substitute(shellescape(joined_lines), "'\\\\''", "\\\\'", 'g')
+			let output = systemlist(cmd . " <<< $" . cleaned_lines)
+		endif
+	else
+		redir => output
+		execute a:cmd
+		redir END
+		let output = split(output, "\n")
+	endif
+	vnew
+	let w:scratch = 1
+	setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile
+	call setline(1, output)
+endfunction
+
+command! -nargs=1 -complete=command -bar -range Redir silent call Redir(<q-args>, <range>, <line1>, <line2>)
+
+function! Hgblame()
+  execute "Redir !hgblame %"
+  execute "set nonumber"
+  execute "vertical resize 30"
+  execute "file hg blame"
+  execute "windo set cursorbind"
+endfunction
+nnoremap <leader>hb :call Hgblame()<cr>
