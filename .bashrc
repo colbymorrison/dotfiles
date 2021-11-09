@@ -16,7 +16,7 @@ if [[ $IS_FB == 0 ]]; then
   source $LOCAL_ADMIN_SCRIPTS/scm-prompt
   VCS="\$(_scm_prompt)"
 elif [ -f ~/scripts/parse_git_branch.sh ]; then
-   VCS="\$(~/scripts/parse_git_branch.sh)"
+  VCS="\$(~/scripts/parse_git_branch.sh)"
 else
   VCS=""
 fi
@@ -62,6 +62,8 @@ checkout_fzf() {
 }
 
 if [[ $IS_FB == 0 ]]; then
+  source /usr/local/share/fb_tools/fb.shell
+
   # Pastry previous command with command name as title
   p() {
     "$@" | pastry -t "$*"
@@ -71,6 +73,10 @@ if [[ $IS_FB == 0 ]]; then
   buckout() {
     local repopath="$(buck root)"
     pushd "$repopath/buck-out/gen/$(realpath . --relative-to="$repopath")"
+  }
+
+  twt() {
+    hostselect -F twtasks $1 | $CPY_PRG
   }
 fi
 

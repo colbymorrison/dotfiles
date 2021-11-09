@@ -11,6 +11,7 @@ alias ls='ls -A --color=auto'
 alias df='df -h'
 alias du='du -h'
 alias ka='killall'
+alias cdt='cd $(mktemp -d)'
 alias sbh='. ~/.bashrc'
 alias fbc='cd ~/fbcode'
 alias pbc='nc localhost 8377'
@@ -22,6 +23,7 @@ alias pag='ps aux | grep'
 alias open='xdg-open'
 alias qemuvm='qemu-system-x86_64 -enable-kvm -vga std -m 2048 -cpu host -smp 4 -net nic,model=virtio -net user,hostfwd=tcp::2222-:22'
 alias python='python3'
+alias below='below live --host $HOSTNAME'
 
 ## config files ##
 alias not="$EDITOR ~/Documents/notes.md"
@@ -70,19 +72,26 @@ alias yst="yadm status"
 alias ggrep='git grep'
 
 ## Hg ##
+# also see ~/.hgrc for more hg aliases
 alias hgst='hg status'
 alias hgd='hg diff'
 alias hgds='hg diff --since-last-submit'
 alias hgrv='hg revert'
 alias hgrva='hg revert --all'
-alias hgc='hg commit'
 alias hga='hg amend'
 alias ssl='hg ssl'
 alias sl='hg sl'
 alias hgsh='hg show'
 alias hgco='hg checkout'
 alias hgcw='hg checkout remote/fbcode/warm'
+alias hgcm='hg checkout remote/master'
 alias hgme='hg metaedit'
+alias hgrc='hg rebase --continue'
+alias hgp='hg prev'
+alias hgn='hg next'
+alias hgc='hg commit'
+# files changed by this commit
+alias hgsc='hg status --no-status --rev .^'
 
 if [[ $OS == "Linux" ]] ; then
     # ~/.config files #
@@ -116,11 +125,18 @@ if [[ $IS_FB == 0 ]]; then
     alias arcp='arc pull'
     alias arcl='arc lint'
     alias arcf='arc fix'
+    alias arcb='arc build'
 
     #### Fb tools ###
     alias hs='hostselect'
     alias sm='smcc'
     alias smt='smcc tree'
+    alias eft="nvim ~/.config/fb_tools/config"
+    alias ppc='echo get __mcrouter__.preprocessed_config | nc ::1 5000'
+    alias cls='conf canary list'
+    alias hpd='hphpd -h localhost'
+    alias ccs='conf canary start'
+    alias ccc='conf canary cancel'
 fi
 
 alias below="podman run --privileged --cgroupns=host --pid=host -it --mount='type=bind,src=/var/log/below,dst=/var/log/below' -it below/below"
