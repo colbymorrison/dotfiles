@@ -98,7 +98,7 @@ nmap <leader>tt :tabnew<cr>
 nmap <leader>td :tabc<cr>
 " go to nearest TARGETS
 nmap <leader>w :tabnew !~/bin/tgt.sh<cr>
-nnoremap <silent> <leader>y :call system('nc localhost 8377', @0)<CR>
+nnoremap <silent> <leader>y :call system('xclip -i -sel clipboard', @0)<CR>
 
 
 " Autocmds
@@ -196,22 +196,12 @@ if (is_fb == "0")
   nmap <leader>d :Dispatch buck 
 
   "--- Local Admin Scripts ---
-  function! BigGrepFzf(query, fullscreen)
-    let command_fmt = 'fbgs --ignore-case --stripdir %s || true'
-    let initial_command = printf(command_fmt, shellescape(a:query))
-    let reload_command = printf(command_fmt, '{q}')
-    let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-    call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-  endfunction
-
-  command! -nargs=* -bang Fbgs call BigGrepFzf(<q-args>, <bang>0)
-
+  source $LOCAL_ADMIN_SCRIPTS/vim/biggrep.vim
   source $LOCAL_ADMIN_SCRIPTS/vim/pyre.vim
   source $LOCAL_ADMIN_SCRIPTS/vim/toggle_comment.vim
   autocmd BufReadPost *.cinc let b:comment_prefix = "#"
   autocmd BufReadPost *.cconf let b:comment_prefix = "#"
   autocmd BufReadPost *.mcconf let b:comment_prefix = "#"
-  source $LOCAL_ADMIN_SCRIPTS/vim/biggrep.vim
   noremap <leader>m :call ToggleComment()<CR>
 endif
 
