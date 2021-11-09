@@ -44,7 +44,7 @@ difo(){
 }
 
 open_if_exists(){
-  if [[ -e $1  ]]; then
+  if [[ -e $1 ]]; then
     [[ -f $1 ]] && $EDITOR $1 || pushd $1
   fi
 }
@@ -111,7 +111,8 @@ if [[ "$HAS_FZF_COMPLETION" ]]; then
     if [[ $IS_FB == 0 ]]; then
         bind -x '"\C-t": open_if_exists $(fd . -t f -t d -t l -H -E "fbsource*" -E"configerator*" $HOME | fzf)'
     else
-        bind -x '"\C-t": open_if_exists $(fd . -t f -t d -t l -H $HOME | fzf)'
+    #    bind -x '"\C-t": open_if_exists $(fd -H -t f -t d -t l . $HOME | sed s+/home/cmorrison+~+g | fzf | sed s+~+/home/cmorrison+g)'
+        bind -x '"\C-t": open_if_exists $(fd -H -t f -t d -t l . $HOME | fzf | sed s+~+/home/cmorrison+g)'
     fi
 fi
 
@@ -120,4 +121,3 @@ fi
 
 # --Auto Connect tmux-- #
 # tmux_connect
-

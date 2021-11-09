@@ -11,8 +11,8 @@ super + Escape
 	pkill -USR1 -x sxhkd
 
 # Program hotkeys
-super + shift + {f, p, m}
-    {/opt/google/chrome/chrome, rofi -show power -modi power:~/scripts/rofi-scripts/power.sh, export CM_LAUNCHER=rofi && clipmenu}
+alt + shift + {u, c, p, m, x}
+    {~/scripts/rofi/fmenu.sh, google-chrome --profile-directory=Default, rofi -show power -modi power:~/scripts/rofi/power.sh, export CM_LAUNCHER=rofi && clipmenu, gnome-screensaver-command -l}
 
 # Audio
 {F2, F3}
@@ -24,6 +24,12 @@ F1
 {Print, Scroll_Lock, Pause}
     playerctl {previous, play-pause, next}
 
+### Facebook ###
+
+# Create a paste with current clipboard contents
+# and copy paste number to clipboard
+super + shift + p
+    xclip -sel c -o | pastry | cut -d ':' -f 1 | xclip -sel c
 
 #### bspwm hotkeys ####
 
@@ -64,14 +70,14 @@ super + ctrl + {m,x,y,z}
 #
 
 # focus next monitor
-super + shift + bracket{left,right}
+super + ctrl + bracket{left,right}
     bspc monitor -f {prev,next}
 
 # send to next monitor
-super + ctrl + shift + bracket{left,right}
+super + shift + bracket{left,right}
     bspc -m {prev,next}
 
-# focus the node in the given direction
+# focus/swap the node in the given direction
 super + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
 
@@ -143,8 +149,4 @@ super + {Left,Down,Up,Right}
 #
 
 super + ctrl + d
-    bspc monitor $PRIMARY_MONITOR -d 1 2 3 4 5 ; bspc monitor $SECONDARY_MOINTOR -d 6 7 8 9 0 
-
-
-super + shift + 1
-    ~/scripts/no-sxhkd.sh chrome super+shift+1
+    update-monitors

@@ -29,7 +29,7 @@ alias below='below live --host $HOSTNAME'
 alias not="$EDITOR ~/Documents/notes.md"
 alias evi="$EDITOR ~/.vimrc"
 alias ebh="$EDITOR ~/.bashrc"
-alias epb="$EDITOR ~/.bash_profile"
+alias ebp="$EDITOR ~/.bash_profile"
 alias etm="$EDITOR ~/.tmux.conf"
 alias eba="$EDITOR ~/.bash_aliases"
 
@@ -139,3 +139,4 @@ if [[ $IS_FB == 0 ]]; then
     alias ccc='conf canary cancel'
 fi
 
+alias below="podman run --privileged --cgroupns=host --pid=host -it --mount='type=bind,src=/var/log/below,dst=/var/log/below' -it below/below"

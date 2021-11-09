@@ -8,11 +8,12 @@ setxkbmap -layout us -option ctrl:nocaps
 # Startup programs
 gnome-flashback &
 wal -R
+feh --bg-scale /home/cmorrison/backgrounds/mountains-2.png
 sxhkd & 
 numlockx &
-hhpc &
 picom --xrender-sync-fence &
 nm-applet &
 xsetroot -cursor_name left_ptr
-xss-lock -- betterlockscreen -l dim &
-xmodmap ~/.Xmodmap 
+xmodmap /home/cmorrison/.Xmodmap 
+unclutter &
+redshift &
