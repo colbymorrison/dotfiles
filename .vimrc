@@ -222,8 +222,6 @@ if (is_fb == "0")
 endif
 
 
-
-
 function! Redir(cmd, rng, start, end)
 	for win in range(1, winnr('$'))
 		if getwinvar(win, 'scratch')
