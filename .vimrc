@@ -25,10 +25,8 @@ Plug 'jsit/toast.vim'
 Plug 'vim-scripts/phd'
 call plug#end()
 
-let is_fb=substitute(system('echo $HOSTNAME | grep facebook.com > /dev/null; echo $?'),"\n","","")
-
 " ---Vanilla vim settings---
-if (is_fb == "0")
+if ($IS_FB== "0")
   let g:fb_default_opts = 0                  " use my settings below
   " read the top of this file for info about local admin scripts
   source $LOCAL_ADMIN_SCRIPTS/master.vimrc   " sets shiftwidth, tabstop, softtabstop, expandtab
@@ -63,7 +61,7 @@ set spellfile=$HOME/.vim/spell/en.utf-8.add
 set switchbuf+=usetab,newtab  " open quickfix in newtab unless already open
 
 
-if (is_fb == "0")
+if ($IS_FB == "0")
   set path+=**,~/fbcode,~/configerator,~/fbcode2        " goto fbcode files
 else
     " Indents
@@ -102,10 +100,11 @@ nmap <leader>tt :tabnew<cr>
 nmap <leader>td :tabc<cr>
 " Copy current path
 nmap <leader>py :let @" = expand("%");call system('nc localhost 8377', @0)<cr>
+nmap <silent> <leader>y :call system($CPY_PRG, @0)<CR>
 
 
 " Autocmds
-if (is_fb == "0")
+if ($IS_FB == "0")
   " go to nearest TARGETS
   nmap <leader>w :tabnew `~/scripts/tgt.sh %`<cr>
   nnoremap <silent> <leader>y :call system('nc localhost 8377', @0)<CR>
@@ -122,8 +121,8 @@ endif
 nnoremap <leader>e :NERDTreeToggle %<CR>
 
 " Colors
-set background=dark
-colo sonokai
+set background=light
+colo toast
 
 
 "--- Plugins ----
@@ -174,7 +173,7 @@ nmap <silent> <leader>z :History<cr>
 nmap <silent> <leader>b :Buffers<cr>
 nmap <C-p> :Files<CR>
 
-if (is_fb == "0")
+if ($IS_FB == "0")
   " Disable hh quickfix on save cuz we have lsp
   let g:hack#enable = 0
 

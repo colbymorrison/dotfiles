@@ -23,4 +23,7 @@ mouse:
       program: xdg-open
       args: []
 
+window:
+  decorations: none
+  
 background_opacity: 1

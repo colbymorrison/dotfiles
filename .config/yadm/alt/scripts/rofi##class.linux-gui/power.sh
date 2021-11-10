@@ -12,13 +12,13 @@ if [[ "$#" -eq 0 ]]; then
 else
     case $1 in
         *"Power Off")
-            poweroff
+            gnome-session-quit --power-off --no-prompt
             ;;
         *"Reboot")
-            systemctl reboot
+            gnome-session-quit --reboot --no-prompt
             ;;
         *"Log Out")
-            bspc quit
+            gnome-session-quit --logout --no-prompt
             ;;
         *"Suspend")
             systemctl suspend 
@@ -27,7 +27,7 @@ else
             systemctl hibernate
             ;;
         *"Lock Screen")
-            xset s activate
+            gnome-screensaver-command -l
             ;;
         *)
             ;;
