@@ -106,5 +106,3 @@ if [[ "$HAS_FZF_COMPLETION" ]]; then
 fi
 
 
-[[ -f $HOME/.cache/wal/sequences ]] && (cat ~/.cache/wal/sequences &)
-

@@ -13,7 +13,7 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 export FZF_DEFAULT_COMMAND='fd -H -t f -t d -t l'
-export FZF_DEFAULT_OPTS='--ansi --preview="~/scripts/preview.sh {}" --bind ctrl-space:toggle-preview --height 60%'
+export FZF_DEFAULT_OPTS='--ansi --preview="~/scripts/preview.sh {}" --bind ctrl-space:toggle-preview --bind ctrl-space:toggle-preview --height 60%'
 export DEFAULT_TMUX_SESSION='home'
 export OS=$(uname -s)
 export DISTRO=$(cat /etc/os-release | head -n1 | grep NAME= | sed s/NAME=// | sed s/\"//g)
@@ -23,5 +23,4 @@ export SECONDARY_MONITOR='HDMI-2'
 export CM_LAUNCHER=rofi
 export CM_SELECTIONS=clipboard
 export CPY_PRG="xclip -i -sel clipboard"
-
-
+export YADM_ALT=$XDG_CONFIG_HOME/yadm/alt

@@ -121,8 +121,8 @@ endif
 nnoremap <leader>e :NERDTreeToggle %<CR>
 
 " Colors
-set background=light
-colo toast
+set background=dark
+colo sonokai
 
 
 "--- Plugins ----
