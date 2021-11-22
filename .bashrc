@@ -31,6 +31,9 @@ HISTCONTROL=ignoredups
 shopt -s histappend
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND" # share history between open terminals
 
+# --Bind-- #
+bind -m vi-command '"v": ""' # in vi mode, make it so 'v' in normal mode doesn't open prev cmd in editor
+
 # ---Functions--- #
 
 mkcd() {

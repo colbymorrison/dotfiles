@@ -24,6 +24,7 @@ alias open='xdg-open'
 alias qemuvm='qemu-system-x86_64 -enable-kvm -vga std -m 2048 -cpu host -smp 4 -net nic,model=virtio -net user,hostfwd=tcp::2222-:22'
 alias python='python3'
 alias below='below live --host $HOSTNAME'
+alias cpl="history | tail -2 | head -1 | cut -f 5 -d ' ' | tr -d '\n' |  $CPY_PRG"
 
 ## config files ##
 alias not="$EDITOR ~/Documents/notes.md"
