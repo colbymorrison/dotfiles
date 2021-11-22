@@ -9,19 +9,10 @@
 # will just return if the shell is not interactive).
 [[ -f ~/.bashrc ]] && source ~/.bashrc
 
+source ${HOME}/.config/.bash_profile_common
 export TERM=xterm
 export CLICOLOR=1
 export EDITOR=nvim
-export VISUAL=$EDITOR
-export DEFAULT_TMUX_SESSION='fbc'
-export DEFAULT_TMUX_DIR='~/fbcode'
-export IS_FB=$(echo $HOSTNAME | grep facebook.com > /dev/null; echo $?)
 export PATH="$HOME/bin:$PATH"
 export CPY_PRG="nc localhost 8377"
-export OS=$(uname -s)
-export DISTRO=$(cat /etc/os-release | head -n1 | grep NAME= | sed s/NAME=// | sed s/\"//g)
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_CACHE_HOME=$HOME/.cache
-export XDG_DATA_HOME=$HOME/.local/share
 export FZF_DEFAULT_COMMAND='fd -t f -t d -t l'
-export FZF_DEFAULT_OPTS='--preview="~/scripts/preview.sh {}" --preview-window hidden --bind ctrl-space:toggle-preview --height 40%'
