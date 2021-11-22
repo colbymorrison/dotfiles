@@ -25,10 +25,8 @@ Plug 'jsit/toast.vim'
 Plug 'vim-scripts/phd'
 call plug#end()
 
-let is_fb=substitute(system('echo $HOSTNAME | grep facebook.com > /dev/null; echo $?'),"\n","","")
-
 " ---Vanilla vim settings---
-if (is_fb == "0")
+if ($IS_FB== "0")
   let g:fb_default_opts = 0                  " use my settings below
   " read the top of this file for info about local admin scripts
   source $LOCAL_ADMIN_SCRIPTS/master.vimrc   " sets shiftwidth, tabstop, softtabstop, expandtab
@@ -63,7 +61,7 @@ set spellfile=$HOME/.vim/spell/en.utf-8.add
 set switchbuf+=usetab,newtab  " open quickfix in newtab unless already open
 
 
-if (is_fb == "0")
+if ($IS_FB == "0")
   set path+=**,~/fbcode,~/configerator,~/fbcode2        " goto fbcode files
 else
     " Indents
@@ -102,10 +100,11 @@ nmap <leader>tt :tabnew<cr>
 nmap <leader>td :tabc<cr>
 " Copy current path
 nmap <leader>py :let @" = expand("%");call system('nc localhost 8377', @0)<cr>
+nmap <silent> <leader>y :call system($CPY_PRG, @0)<CR>
 
 
 " Autocmds
-if (is_fb == "0")
+if ($IS_FB == "0")
   " go to nearest TARGETS
   nmap <leader>w :tabnew `~/scripts/tgt.sh %`<cr>
   nnoremap <silent> <leader>y :call system('nc localhost 8377', @0)<CR>
@@ -174,7 +173,7 @@ nmap <silent> <leader>z :History<cr>
 nmap <silent> <leader>b :Buffers<cr>
 nmap <C-p> :Files<CR>
 
-if (is_fb == "0")
+if ($IS_FB == "0")
   " Disable hh quickfix on save cuz we have lsp
   let g:hack#enable = 0
 
@@ -203,22 +202,13 @@ if (is_fb == "0")
   nmap <leader>d :Dispatch buck 
 
   "--- Local Admin Scripts ---
-  function! BigGrepFzf(query, fullscreen)
-    let command_fmt = 'fbgs --ignore-case --stripdir %s || true'
-    let initial_command = printf(command_fmt, shellescape(a:query))
-    let reload_command = printf(command_fmt, '{q}')
-    let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-    call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-  endfunction
-
-  command! -nargs=* -bang Fbgs call BigGrepFzf(<q-args>, <bang>0)
-
+  source $LOCAL_ADMIN_SCRIPTS/vim/biggrep.vim
   source $LOCAL_ADMIN_SCRIPTS/vim/pyre.vim
   source $LOCAL_ADMIN_SCRIPTS/vim/toggle_comment.vim
   autocmd BufReadPost *.cinc let b:comment_prefix = "#"
   autocmd BufReadPost *.cconf let b:comment_prefix = "#"
   autocmd BufReadPost *.mcconf let b:comment_prefix = "#"
-  source $LOCAL_ADMIN_SCRIPTS/vim/biggrep.vim
+  noremap <leader>m :call ToggleComment()<CR>
 endif
 
 

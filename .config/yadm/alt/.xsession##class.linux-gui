@@ -6,14 +6,7 @@
 setxkbmap -layout us -option ctrl:nocaps
 
 # Startup programs
-gnome-flashback &
-wal -R
-feh --bg-scale /home/cmorrison/backgrounds/mountains-2.png
-sxhkd & 
 numlockx &
-picom --xrender-sync-fence &
-nm-applet &
 xsetroot -cursor_name left_ptr
-xmodmap /home/cmorrison/.Xmodmap 
+xmodmap /home/cmorrison/.Xmodmap > /dev/null 2>&1
 unclutter &
-redshift &

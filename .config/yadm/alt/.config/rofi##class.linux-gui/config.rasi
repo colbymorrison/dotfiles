@@ -1,7 +1,7 @@
 configuration {
     lines: 10;
     fixed-num-lines: true;
-	font: "Noto Sans Bold 20";
+	font: "Noto Sans Bold 14";
 	bw: 0;
 	location: 0;
 	fixed-num-lines: true;
@@ -9,10 +9,10 @@ configuration {
 	terminal: "rofi-sensible-terminal";
 	drun-match-fields: "name,generic,exec,categories";
 	drun-display-format: "{name}";
-    theme: "~/.cache/wal/colors-rofi-dark.rasi";
+    theme: "~/.config/rofi/flat-remix.rasi";
 	separator-style: "dash";
 	hide-scrollbar: true;
-    icon-theme: "Papirus";
+    icon-theme: "Flat-Remix-Blue-Dark";
 /*	disable-history: false;*/
 /*	ignored-prefixes: "";*/
 /*	sort: false;*/
