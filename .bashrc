@@ -21,7 +21,7 @@ else
   VCS=""
 fi
 
-export PS1="\[\033[0;93m\]\u@\h\[\033[01;34m\] \W \[\033[00m\][\D{%T}]\[\033[32m\] $VCS\[\033[00m\]$ " 
+export PS1="\[\033[0;93m\]\u@\h\[\033[01;34m\] \W \[\033[00m\][\D{%T}]\[\033[32m\]$VCS\[\033[00m\]$ " 
 
 # ---Alias--- #
 if [ -f ~/.bash_aliases ]; then
@@ -36,7 +36,7 @@ shopt -s histappend
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND" # share history between open terminals
 
 # --Bind-- #
-bind -m vi-command '"v": ""' # in vi mode, make it so 'v' in normal mode doesn't open prev cmd in editor
+# bind -m vi-command '"v": ""' # in vi mode, make it so 'v' in normal mode doesn't open prev cmd in editor
 
 # ---Functions--- #
 
