@@ -6,7 +6,7 @@ alias g='grep'
 alias l='ls -lah'
 alias m='man'
 alias r='ranger'
-alias v='nvim'
+alias vi='nvim'
 alias ls='ls -A --color=auto'
 alias df='df -h'
 alias du='du -h'
@@ -24,6 +24,7 @@ alias open='xdg-open'
 alias qemuvm='qemu-system-x86_64 -enable-kvm -vga std -m 2048 -cpu host -smp 4 -net nic,model=virtio -net user,hostfwd=tcp::2222-:22'
 alias python='python3'
 alias below='below live --host $HOSTNAME'
+alias cpl="history | tail -2 | head -1 | cut -f 5 -d ' ' | tr -d '\n' |  $CPY_PRG"
 
 ## config files ##
 alias not="$EDITOR ~/Documents/notes.md"
@@ -119,6 +120,7 @@ fi
 if [[ $IS_FB == 0 ]]; then
     ## Jellyfish ###
     alias jfs='jf submit'
+    alias jfsr='jf submit -m rebase'
     alias jfd='jf submit --draft'
 
     ### Arc ###
@@ -137,6 +139,12 @@ if [[ $IS_FB == 0 ]]; then
     alias hpd='hphpd -h localhost'
     alias ccs='conf canary start'
     alias ccc='conf canary cancel'
+    
+    function rb(){
+      randbox $1 | sed s/\.facebook\.com//g
+    }
 fi
 
-alias below="podman run --privileged --cgroupns=host --pid=host -it --mount='type=bind,src=/var/log/below,dst=/var/log/below' -it below/below"
+if [[ $IS_FB == 1 ]]; then
+  alias below="podman run --privileged --cgroupns=host --pid=host -it --mount='type=bind,src=/var/log/below,dst=/var/log/below' -it below/below"
+fi

@@ -10,7 +10,7 @@
 [[ -f ~/.bashrc ]] && source ~/.bashrc
 
 source ${HOME}/.config/.bash_profile_common
-export TERM=xterm
+export TERM=xterm-256color
 export CLICOLOR=1
 export EDITOR=nvim
 export PATH="$HOME/bin:$PATH"

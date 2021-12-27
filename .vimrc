@@ -54,9 +54,10 @@ set viminfo='50,"50           " number of marks and registers saved
 set modelines=0               " no modelines
 set scrolloff=8               " show 8 lines below cursor
 set linebreak                 " break on words
+:set t_Co=256
 set autoindent
 set mouse=a
-set spelllang=en              
+set spelllang=frc             
 set spellfile=$HOME/.vim/spell/en.utf-8.add
 set switchbuf+=usetab,newtab  " open quickfix in newtab unless already open
 
@@ -118,6 +119,7 @@ if ($IS_FB == "0")
 endif
 
 " NERDTree
+let g:NERDTreeWinSize=50
 nnoremap <leader>e :NERDTreeToggle %<CR>
 
 " Colors
