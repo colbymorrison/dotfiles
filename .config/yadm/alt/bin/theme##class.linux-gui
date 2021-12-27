@@ -5,4 +5,4 @@
 theme=$(wal --theme | shuf | fzf --preview="~/scripts/preview-colorsheme.py {}" | cut -d ' ' -f 3)
 theme_basename=$(echo $theme | sed s/base16-//)
 echo $theme_basename > ~/.colorscheme
-~/.local/bin/wpg --theme $theme
+wal --theme $theme
