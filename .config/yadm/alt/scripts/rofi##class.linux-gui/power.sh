@@ -2,26 +2,23 @@
 
 # See man rofi-script
 if [[ "$#" -eq 0 ]]; then
-    LOG_OUT="\tLog Out"
+    LOG_OUT="\tLog Out"
     POWER_OFF="\tPower Off"
     REBOOT="\tReboot"
-    SUSPEND="\tSuspend"
+    SUSPEND=" \tSuspend"
     HIBERNATE="\tHibernate"
     LOCK="\tLock Screen"
-    echo "$POWER_OFF\n$REBOOT\n$LOG_OUT\n$SUSPEND\n$HIBERNATE\n$LOCK"
-fi
+    printf "$POWER_OFF\n$REBOOT\n$LOG_OUT\n$SUSPEND\n$HIBERNATE\n$LOCK"
 else
     case $1 in
         *"Power Off")
-            tmux-session save
-            poweroff
+            gnome-session-quit --power-off --no-prompt
             ;;
         *"Reboot")
-            tmux-session save
-            systemctl reboot
+            gnome-session-quit --reboot --no-prompt
             ;;
         *"Log Out")
-            bspc quit
+            gnome-session-quit --logout --no-prompt
             ;;
         *"Suspend")
             systemctl suspend 
@@ -30,7 +27,7 @@ else
             systemctl hibernate
             ;;
         *"Lock Screen")
-            xset s activate
+            gnome-screensaver-command -l
             ;;
         *)
             ;;

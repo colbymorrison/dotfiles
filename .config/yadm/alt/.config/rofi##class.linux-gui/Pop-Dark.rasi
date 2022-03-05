@@ -3,8 +3,8 @@
  */
 * {
     text-color:                  #f2f2f2;
-    background-color:            #4e4743;
-    lightbg:                     #534c48;
+    background-color:            rgba(100,100,100,0.85);
+    lightbg:                     rgba(100,100,100,0.85);
     red:                         #f15d22;
     orange:                      #faa41a; 
     blue:                        #48b9c7; 

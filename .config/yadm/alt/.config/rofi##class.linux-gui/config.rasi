@@ -1,8 +1,7 @@
 configuration {
-	width: 40;
-	lines: 12;
-	columns: 1;
-	font: "Noto Sans Bold 12";
+    lines: 10;
+    fixed-num-lines: true;
+	font: "Noto Sans Bold 14";
 	bw: 0;
 	location: 0;
 	fixed-num-lines: true;
@@ -10,6 +9,10 @@ configuration {
 	terminal: "rofi-sensible-terminal";
 	drun-match-fields: "name,generic,exec,categories";
 	drun-display-format: "{name}";
+    theme: "~/.config/rofi/flat-remix.rasi";
+	separator-style: "dash";
+	hide-scrollbar: true;
+    icon-theme: "Flat-Remix-Blue-Dark";
 /*	disable-history: false;*/
 /*	ignored-prefixes: "";*/
 /*	sort: false;*/
@@ -26,10 +29,8 @@ configuration {
 /*	tokenize: true;*/
 /*	m: "-5";*/
 /*	line-margin: 2;*/
-	/* line-padding: 90; */
+/* line-padding: 90; */
 /*	filter: ;*/
-	separator-style: "dash";
-	hide-scrollbar: true;
 /*	fullscreen: false;*/
 /*	fake-transparency: false;*/
 /*	dpi: -1;*/
@@ -40,7 +41,6 @@ configuration {
 /*	window-format: "{w}    {c}   {t}";*/
 /*	click-to-exit: true;*/
 /*	show-match: true;*/
-    theme: "~/.config/rofi/slate.rasi"; 
 /*	color-normal: ;*/
 /*	color-urgent: ;*/
 /*	color-active: ;*/
@@ -130,4 +130,3 @@ configuration {
 /*	me-accept-entry: "MouseDPrimary";*/
 /*	me-accept-custom: "Control+MouseDPrimary";*/
 }
-@import "/usr/share/rofi/themes/android_notification.rasi"

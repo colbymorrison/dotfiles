@@ -1,0 +1,11 @@
+export CLICOLOR=1
+export EDITOR=nvim
+export VISUAL=$EDITOR
+export IS_FB=$(echo $HOSTNAME | grep facebook.com > /dev/null; echo $?)
+export OS=$(uname -s)
+export DISTRO=$(cat /etc/os-release | head -n1 | grep NAME= | sed s/NAME=// | sed s/\"//g)
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+export FZF_DEFAULT_OPTS='--preview="~/scripts/preview.sh {}" --preview-window hidden --bind ctrl-space:toggle-preview --height 60%'
+export YADM_ALT=$XDG_CONFIG_HOME/yadm/alt

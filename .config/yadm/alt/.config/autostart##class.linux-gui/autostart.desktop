@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Exec=/home/cmorrison/.config/autostart-scripts/autostart-shell.sh
+Hidden=false
+X-GNOME-Autostart-enabled=true
+Name=Autostart
+Comment=Autostart shell programs

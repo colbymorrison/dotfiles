@@ -20,7 +20,7 @@ def main():
     if scheme_name is None:
         scheme_name = sys.argv[1]
 
-    fle=f"/usr/lib/python{sys.version_info[0]}.{sys.version_info[1]}/site-packages/pywal/colorschemes/dark/{scheme_name}.json"
+    fle=f"/home/cmorrison/.local/lib/python{sys.version_info[0]}.{sys.version_info[1]}/site-packages/pywal/colorschemes/dark/{scheme_name}.json"
     
     with open(fle) as f:
         contents = json.load(f)

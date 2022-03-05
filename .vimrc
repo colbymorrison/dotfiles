@@ -5,24 +5,28 @@ Plug 'vim-airline/vim-airline'
 Plug 'dense-analysis/ale'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-vinegar'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-"  Plug 'vim-latex/vim-latex'
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'sheerun/vim-polyglot'
 Plug 'mhinz/vim-signify'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'hhvm/vim-hack'
+Plug 'preservim/nerdtree'
 
 " Colorscheme
-Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'morhetz/gruvbox'
 Plug 'kaicataldo/material.vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'sickill/vim-monokai'
 Plug 'arcticicestudio/nord-vim'
 Plug 'sainnhe/sonokai'
 Plug 'jsit/toast.vim'
-
+Plug 'vim-scripts/phd'
 call plug#end()
 
 " ---Vanilla vim settings---
-if ($IS_FB == "0")
+if ($IS_FB== "0")
   let g:fb_default_opts = 0                  " use my settings below
   " read the top of this file for info about local admin scripts
   source $LOCAL_ADMIN_SCRIPTS/master.vimrc   " sets shiftwidth, tabstop, softtabstop, expandtab
@@ -50,10 +54,23 @@ set viminfo='50,"50           " number of marks and registers saved
 set modelines=0               " no modelines
 set scrolloff=8               " show 8 lines below cursor
 set linebreak                 " break on words
-set textwidth=80              " 80 chars per line
+:set t_Co=256
+set autoindent
 set mouse=a
-set spelllang=en              
+set spelllang=frc             
 set spellfile=$HOME/.vim/spell/en.utf-8.add
+set switchbuf+=usetab,newtab  " open quickfix in newtab unless already open
+
+
+if ($IS_FB == "0")
+  set path+=**,~/fbcode,~/configerator,~/fbcode2        " goto fbcode files
+else
+    " Indents
+    set tabstop=4
+    set shiftwidth=4
+    "replace all tabs with tabstop spaces
+    set expandtab 
+endif
 
 " Search
 set incsearch                 " search with typeahead
@@ -62,41 +79,35 @@ set hlsearch                  " hilight all searches
 " Scrolling
 set scrolljump=5              " scroll five lines at a time vertically when at bottom
 set sidescroll=10             " minumum columns to scroll horizontally
-
-if ($IS_FB == "0")
-  set path+=,~/fbcode,~/configerator,~/fbcode2        " goto fbcode files
-else
-    " Indents
-    set autoindent
-    set tabstop=4
-    set shiftwidth=4
-    "replace all tabs with tabstop spaces
-    set expandtab 
-endif
-
 " Mappings
 nmap <Enter> O<Esc>
 nmap <silent> <leader>c :noh<cr>
 nmap <C-x> :close<cr>
 nmap <leader>s :so ~/.vimrc<cr>
-nmap <leader>p :set invpaste<CR>
+nmap <leader>pa :set invpaste<CR>
 nmap <leader>r :set invrelativenumber<CR> 
+" Fbgs word under cursor
+nmap <leader>g :FBGS <C-R><C-W><CR>   
 imap <leader>f {<Esc>o}<Esc>O
-nmap <leader>y :call system('xclip -selection clipboard', @0)<CR>
 " Go no next/prev method name in python
 nmap [w [mw
 nmap ]w ]mw
+" arc lint current file
+nnoremap <leader>l :exec '!arc lint -a %'<cr>
 " Tabs
 nmap <leader>tj :tabp<cr>
 nmap <leader>tk :tabn<cr>
 nmap <leader>tt :tabnew<cr>
 nmap <leader>td :tabc<cr>
+" Copy current path
+nmap <leader>py :let @" = expand("%");call system('nc localhost 8377', @0)<cr>
+nmap <silent> <leader>y :call system($CPY_PRG, @0)<CR>
 
 
 " Autocmds
 if ($IS_FB == "0")
   " go to nearest TARGETS
-  nmap <leader>w :tabnew !~/bin/tgt.sh<cr>
+  nmap <leader>w :tabnew `~/scripts/tgt.sh %`<cr>
   nnoremap <silent> <leader>y :call system('nc localhost 8377', @0)<CR>
   " Arc lint current file on write 
   "autocmd BufWritePost *.py,*.cpp,*.rs,TARGETS,*.thrift silent! exec '!arc lint -a %' | :e 
@@ -107,11 +118,9 @@ if ($IS_FB == "0")
   autocmd BufNewFile,BufRead TARGETS setlocal includeexpr=substitute(v:fname,'//\\(.*\\)','\\1/TARGETS','g')
 endif
 
-" Netrw
-nnoremap <leader>e :Lexplore<cr>
-let g:netrw_liststyle = 3
-let g:netrw_banner = 0
-let g:netrw_winsize = 25
+" NERDTree
+let g:NERDTreeWinSize=50
+nnoremap <leader>e :NERDTreeToggle %<CR>
 
 " Colors
 set background=dark
@@ -128,6 +137,11 @@ let g:signify_sign_delete = '-'
 " Airline
 let g:airline#extensions#hunks#enabled=0
 
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+" Use <tab> to continue completion 
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
 " Vim-latex-suite
 set grepprg=grep\ -nH\ $* 
 let g:tex_flavor='latex'
@@ -139,26 +153,22 @@ nmap <C-g> <Plug>IMAP_JumpForward
 let g:Tex_PromptedEnvironments='equation,equation*,align,align*,enumerate,itemize,figure,table,theorem,lemma,tikzpicture'
 let g:Tex_GotoError=0 
 
-" Deoplete
-let g:deoplete#enable_at_startup = 1
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " ALE
-let g:ale_disable_lsp = 1
+" let g:ale_disable_lsp = 1
 "let g:ale_completion_enabled = 1
 let g:ale_lint_on_text_changed = 1
 let g:ale_set_balloons = 1
 
 nmap gd <Plug>(ale_go_to_definition)
+nmap gD <Plug>(ale_go_to_definition_in_tab)
 nmap gy <Plug>(ale_go_to_type_definition)
 nmap gr <Plug>(ale_find_references)
 
 nmap <leader>j <Plug>(ale_next_wrap)
 nmap <leader>k <Plug>(ale_previous_wrap)
 nmap <leader>v <Plug>(ale_detail)
-nmap <leader>f :ALEFix<cr>
-" doesn't really work?
-nmap <silent> <leader>n :ALERename<cr>
+nmap <leader>f :ALECodeAction<cr>
 
 " FZF
 nmap <silent> <leader>z :History<cr>
@@ -166,6 +176,9 @@ nmap <silent> <leader>b :Buffers<cr>
 nmap <C-p> :Files<CR>
 
 if ($IS_FB == "0")
+  " Disable hh quickfix on save cuz we have lsp
+  let g:hack#enable = 0
+
   " Deoplete
   let g:python3_host_prog = "/home/cmorrison/venv/bin/python3"
 
@@ -173,14 +186,17 @@ if ($IS_FB == "0")
   set rtp+=/usr/local/share/myc/vim
 
   " FZF or MYC depending on dir (stolen P75711758)
-  if getcwd() =~ '/fbsource[1-9]*/fbcode$'
-    nmap <leader>a :Fbgs<Space>
+  if getcwd() =~ '/fbsource[1-9]*/fbcode$' 
+    nmap <leader>a :FBGS<Space>
     nmap <C-p> :MYC<CR>
   elseif getcwd() =~ '/configerator'
     nmap <leader>a :CBGS<Space>
-    nmap <C-p> :Files<CR>
+    nmap <C-p> :MYC<CR>
+  elseif getcwd() =~ '/www'
+    nmap <leader>a :CBGS<Space>
+    nmap <C-p> :MYC<CR>
   else
-    nmap <Leader>a :Rg<CR>
+    nmap <leader>a :Rg<CR>
     nmap <C-p> :Files<CR>
   endif
 
@@ -188,24 +204,52 @@ if ($IS_FB == "0")
   nmap <leader>d :Dispatch buck 
 
   "--- Local Admin Scripts ---
-  function! BigGrepFzf(query, fullscreen)
-    let command_fmt = 'fbgs --ignore-case --stripdir %s || true'
-    let initial_command = printf(command_fmt, shellescape(a:query))
-    let reload_command = printf(command_fmt, '{q}')
-    let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-    call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-  endfunction
-
-  command! -nargs=* -bang Fbgs call BigGrepFzf(<q-args>, <bang>0)
-
+  source $LOCAL_ADMIN_SCRIPTS/vim/biggrep.vim
   source $LOCAL_ADMIN_SCRIPTS/vim/pyre.vim
   source $LOCAL_ADMIN_SCRIPTS/vim/toggle_comment.vim
   autocmd BufReadPost *.cinc let b:comment_prefix = "#"
   autocmd BufReadPost *.cconf let b:comment_prefix = "#"
   autocmd BufReadPost *.mcconf let b:comment_prefix = "#"
-  source $LOCAL_ADMIN_SCRIPTS/vim/biggrep.vim
   noremap <leader>m :call ToggleComment()<CR>
 endif
 
 
+function! Redir(cmd, rng, start, end)
+	for win in range(1, winnr('$'))
+		if getwinvar(win, 'scratch')
+			execute win . 'windo close'
+		endif
+	endfor
+	if a:cmd =~ '^!'
+		let cmd = a:cmd =~' %'
+			\ ? matchstr(substitute(a:cmd, ' %', ' ' . expand('%:p'), ''), '^!\zs.*')
+			\ : matchstr(a:cmd, '^!\zs.*')
+		if a:rng == 0
+			let output = systemlist(cmd)
+		else
+			let joined_lines = join(getline(a:start, a:end), '\n')
+			let cleaned_lines = substitute(shellescape(joined_lines), "'\\\\''", "\\\\'", 'g')
+			let output = systemlist(cmd . " <<< $" . cleaned_lines)
+		endif
+	else
+		redir => output
+		execute a:cmd
+		redir END
+		let output = split(output, "\n")
+	endif
+	vnew
+	let w:scratch = 1
+	setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile
+	call setline(1, output)
+endfunction
 
+command! -nargs=1 -complete=command -bar -range Redir silent call Redir(<q-args>, <range>, <line1>, <line2>)
+
+function! Hgblame()
+  execute "Redir !hgblame %"
+  execute "set nonumber"
+  execute "vertical resize 30"
+  execute "file hg blame"
+  execute "windo set cursorbind"
+endfunction
+nnoremap <leader>hb :call Hgblame()<cr>

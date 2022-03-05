@@ -6,12 +6,7 @@
 setxkbmap -layout us -option ctrl:nocaps
 
 # Startup programs
-wal -R
-feh --bg-scale ~/backgrounds/forest_trees_winter_132797_3840x2160.jpg 
-sxhkd & 
 numlockx &
+xsetroot -cursor_name left_ptr
+xmodmap /home/cmorrison/.Xmodmap > /dev/null 2>&1
 unclutter &
-redshift &
-picom --xrender-sync-fence &
-xss-lock -- betterlockscreen -l dim &
-nm-applet &

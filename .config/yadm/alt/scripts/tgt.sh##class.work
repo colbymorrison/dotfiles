@@ -1,10 +1,15 @@
 #! /bin/sh
 
 # Go to nearest TARGETS file
-tgt(){
-  x=$(pwd)
-  while [ "$x" != "/" ] ; do
-    x=$(dirname "$x")
-    find "$x" -maxdepth 1 -name TARGETS
-  done
+
+nearest() {
+  if [ -f "$1" ]; then
+    printf '%s\n' "${PWD%/}/$1"
+  elif [[ "$PWD" =~ $HOME\/fbcode\d*$ ]] || [ "$PWD" = / ]; then
+    false
+  else
+    (cd .. && nearest "$1")
+  fi
 }
+
+(cd $(dirname "$1") && nearest TARGETS)

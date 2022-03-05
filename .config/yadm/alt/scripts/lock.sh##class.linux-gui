@@ -1,0 +1,3 @@
+#! /bin/bash
+
+[[ $DISTRO -eq "Fedora" ]] && gnome-screensaver-command -l || betterlockscreen -l dim
