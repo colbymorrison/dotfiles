@@ -54,8 +54,8 @@ modules-right = wireless-network pulseaudio cpu memory
 ;scroll-up = bspwm-desknext
 ;scroll-down = bspwm-deskprev
 
-; tray-position = right 
-; tray-padding = 2 
+tray-position = right 
+tray-padding = 2 
 
 enable-ipc = true
 
