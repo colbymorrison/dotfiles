@@ -29,6 +29,46 @@ hints:
      binding:
        key: U
        mods: Control|Shift
+   - regex: "[D|T|P|S]\\d+"
+     command: /home/cmorrison/scripts/open-bunny.sh
+     post_processing: false
+     mouse:
+       enabled: true
+       mods: None
+     binding:
+       key: U
+       mods: Control|Shift
+   - regex: "tsp_[a-z]{3}/.+/.+[/\\d+]?"
+     command: /home/cmorrison/scripts/open-bunny-tw.sh
+     post_processing: false
+     mouse:
+       enabled: true
+       mods: None
+     binding:
+       key: U
+       mods: Control|Shift
+
+window:
+  decorations: none
+
+# Colors (Flat remix)
+colors:
+  # Default colors
+  primary:
+    background: "#1F2229"
+    foreground: "#E6E6E6"
+    #
+  # Normal colors
+  normal:
+    black: "#1F2229"
+    red: "#D41919"
+    green: "#5EBDAB"
+    yellow: "#FEA44C"
+    blue: "#367BF0"
+    magenta: "#BF25ED"
+    cyan: "#49AEE6"
+    white: "#E6E6E6"
+
 
 window:
   decorations: none
