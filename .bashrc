@@ -39,6 +39,11 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND" # share history between open termin
 # bind -m vi-command '"v": ""' # in vi mode, make it so 'v' in normal mode doesn't open prev cmd in editor
 
 # ---Functions--- #
+cdt(){
+    dir=$(mktemp -d)
+    echo $dir | xclip -sel c
+    cd $dir
+}
 
 mkcd() {
   mkdir -p "$1" && cd "$1"
@@ -88,8 +93,8 @@ fi
 [[ -f /usr/share/bash-completion/bash_completion ]] && \
   source /usr/share/bash-completion/bash_completion
 
-if [[ -d /usr/share/fzf/shell ]]; then
-    source /usr/share/fzf/shell/key-bindings.bash
+if [[ -d /usr/share/fzf ]]; then
+    source /usr/share/fzf/key-bindings.bash
     HAS_FZF_COMPLETION=1
 elif [[ -d $HOME/.fzf/ ]]; then 
     source $HOME/scripts/fzf/key-bindings.bash
@@ -109,3 +114,5 @@ if [[ "$HAS_FZF_COMPLETION" ]]; then
 fi
 
 [[ -f $HOME/.cache/wal/sequences ]] && (cat ~/.cache/wal/sequences &)
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

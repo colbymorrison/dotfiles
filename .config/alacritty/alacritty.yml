@@ -32,6 +32,7 @@ hints:
 
 window:
   decorations: none
+  opacity: 1
 
 # Colors (Flat remix)
 colors:
@@ -62,4 +63,3 @@ colors:
     cyan: "#05A1F7"
     white: "#FFFFFF"
   
-background_opacity: 1

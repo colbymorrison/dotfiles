@@ -10,7 +10,7 @@ export QT_STYLE_OVERRIDE=adwaita
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
-export FZF_DEFAULT_COMMAND='fd -H -t f -t d -t l'
+export FZF_DEFAULT_COMMAND='fd -t f -t d -t l'
 export FZF_DEFAULT_OPTS='--ansi --preview="~/scripts/preview.sh {}" --bind ctrl-space:toggle-preview --bind ctrl-space:toggle-preview --preview-window hidden --height 60%'
 export DEFAULT_TMUX_SESSION='home'
 export PRIMARY_MONITOR='eDP-1'
