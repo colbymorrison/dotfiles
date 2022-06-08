@@ -72,6 +72,7 @@ colors:
 
 window:
   decorations: none
+  opacity: 1
 
 # Colors (Flat remix)
 colors:
@@ -101,5 +102,3 @@ colors:
     magenta: "#D71655"
     cyan: "#05A1F7"
     white: "#FFFFFF"
-  
-background_opacity: 1

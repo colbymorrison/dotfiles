@@ -9,7 +9,6 @@ configuration {
 	terminal: "rofi-sensible-terminal";
 	drun-match-fields: "name,generic,exec,categories";
 	drun-display-format: "{name}";
-    theme: "~/.config/rofi/flat-remix.rasi";
 	separator-style: "dash";
 	hide-scrollbar: true;
     icon-theme: "Flat-Remix-Blue-Dark";
@@ -130,3 +129,4 @@ configuration {
 /*	me-accept-entry: "MouseDPrimary";*/
 /*	me-accept-custom: "Control+MouseDPrimary";*/
 }
+@theme "~/.config/rofi/Pop-Dark.rasi"
