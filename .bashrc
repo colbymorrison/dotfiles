@@ -93,10 +93,19 @@ fi
 [[ -f /usr/share/bash-completion/bash_completion ]] && \
   source /usr/share/bash-completion/bash_completion
 
+[[ -f ~/.config/bash/git-completion.bash ]] && \
+    source ~/.config/bash/git-completion.bash
+
+# Fzf completions can live in many directories
 if [[ -d /usr/share/fzf ]]; then
-    source /usr/share/fzf/key-bindings.bash
-    HAS_FZF_COMPLETION=1
-elif [[ -d $HOME/.fzf/ ]]; then 
+    if [[ -d /usr/share/fzf/shell ]]; then
+        source /usr/share/fzf/shell/key-bindings.bash
+        HAS_FZF_COMPLETION=1
+    else 
+        source /usr/share/fzf/key-bindings.bash
+        HAS_FZF_COMPLETION=1
+    fi
+elif [[ -d $HOME/scripts/fzf/ ]]; then 
     source $HOME/scripts/fzf/key-bindings.bash
     HAS_FZF_COMPLETION=1
 fi
