@@ -88,6 +88,9 @@ fi
 [[ -f /usr/share/bash-completion/bash_completion ]] && \
   source /usr/share/bash-completion/bash_completion
 
+[[ -f ~/.config/bash/git-completion.bash ]] && \
+    . ~/.config/bash/git-completion.bash
+
 if [[ -d /usr/share/fzf/shell ]]; then
     source /usr/share/fzf/shell/key-bindings.bash
     HAS_FZF_COMPLETION=1
