@@ -54,7 +54,8 @@ set viminfo='50,"50           " number of marks and registers saved
 set modelines=0               " no modelines
 set scrolloff=8               " show 8 lines below cursor
 set linebreak                 " break on words
-:set t_Co=256
+set nocursorbind              " don't scroll splits together
+set t_Co=256
 set autoindent
 set mouse=a
 set spelllang=frc             
