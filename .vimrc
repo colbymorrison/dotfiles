@@ -11,7 +11,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'mhinz/vim-signify'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'hhvm/vim-hack'
 Plug 'preservim/nerdtree'
 
 " Colorscheme
@@ -157,7 +156,7 @@ let g:Tex_GotoError=0
 
 " ALE
 " let g:ale_disable_lsp = 1
-"let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 1
 let g:ale_lint_on_text_changed = 1
 let g:ale_set_balloons = 1
 

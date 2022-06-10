@@ -11,7 +11,6 @@ alias ls='ls -A --color=auto'
 alias df='df -h'
 alias du='du -h'
 alias ka='killall'
-alias cdt='cd $(mktemp -d)'
 alias sbh='. ~/.bashrc'
 alias fbc='cd ~/fbcode'
 alias pbc='nc localhost 8377'
@@ -93,7 +92,7 @@ alias hgc='hg commit'
 # files changed by this commit
 alias hgsc='hg status --no-status --rev .^'
 
-if [[ $OS == "Linux" ]] ; then
+if [[ $OSTYPE == "linux-gnu" ]] ; then
     # ~/.config files #
     alias ebsp="$EDITOR ~/.config/bspwm/bspwmrc"
     alias esxh="$EDITOR ~/.config/sxhkd/sxhkdrc"
@@ -114,6 +113,12 @@ if [[ $OS == "Linux" ]] ; then
         alias pmrm='sudo pacman -Rns'
         alias spm='sudo pacman'
     fi
+fi
+
+if [[ $OSTYPE == "darwin"* ]] ; then
+    alias brewin='~/scripts/brew-wrapper.sh install'
+    alias brewup='~/scripts/brew-wrapper.sh upgrade'
+    alias brewrm='brew remove'
 fi
 
 if [[ $IS_FB == 0 ]]; then

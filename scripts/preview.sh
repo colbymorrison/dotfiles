@@ -14,6 +14,6 @@ else
     CAT_PRG="cat"
 fi
 
-file=$(echo $1 | sed s+~+/home/cmorrison+g)
+file=$(echo $1 | sed "s+~+/home/$USERNAME+g")
 
 [[ -f $file ]] && $CAT_PRG $1 || tree -L 1 $1

@@ -1,0 +1,382 @@
+{
+    "title": "Command / Control ",
+    "rules": [
+        {
+            "description": "swap left control and left command except for iTerm and VsCode",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "left_command"
+                    },
+                    "to": [
+                        {
+                            "key_code": "left_control"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_unless",
+                            "bundle_identifiers": [
+                                "^com.googlecode.iterm2",
+                                "^com.facebook.fbvscode"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "left_control"
+                    },
+                    "to": [
+                        {
+                            "key_code": "left_command"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_unless",
+                            "bundle_identifiers": [
+                                "^com.googlecode.iterm2",
+                                "^com.facebook.fbvscode"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "map option-q to command-q except for internal keyboard",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "q",
+                        "modifiers": {
+                            "mandatory": [
+                                "option"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "q",
+                            "modifiers": [
+                                "command"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "device_unless",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1452,
+                                    "product_id": 832,
+                                    "description": "Apple internal keyboard"
+                                } 
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "map control-q to command-q for internal keyboard",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "q",
+                        "modifiers": {
+                            "mandatory": [
+                                "control"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "q",
+                            "modifiers": [
+                                "command"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1452,
+                                    "product_id": 832,
+                                    "description": "Apple internal keyboard"
+                                } 
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "map option-w to command-w except for internal keyboard",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "w",
+                        "modifiers": {
+                            "mandatory": [
+                                "option"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "w",
+                            "modifiers": [
+                                "command"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "device_unless",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1452,
+                                    "product_id": 832,
+                                    "description": "Apple internal keyboard"
+                                } 
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }, {
+        "description": "map control-w to command-w for internal keyboard",
+        "manipulators": [
+            {
+                "type": "basic",
+                "from": {
+                    "key_code": "w",
+                    "modifiers": {
+                        "mandatory": [
+                            "control"
+                        ]
+                    }
+                },
+                "to": [
+                    {
+                        "key_code": "w",
+                        "modifiers": [
+                            "command"
+                        ]
+                    }
+                ],
+                "conditions": [
+                    {
+                        "type": "device_if",
+                        "identifiers": [
+                            {
+                                "vendor_id": 1452,
+                                "product_id": 832,
+                                "description": "Apple internal keyboard"
+                            } 
+                        ]
+                    }
+                ]
+            }
+        ]
+        },
+        {
+            "description": "map control-enter to option-enter for internal keyboard",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "return_or_enter",
+                        "modifiers": {
+                            "mandatory": [
+                                "control"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "return_or_enter",
+                            "modifiers": [
+                                "option"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1452,
+                                    "product_id": 832,
+                                    "description": "Apple internal keyboard"
+                                } 
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "map command-enter to option-enter for internal keyboardfor iTerm2 and VsCode",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "return_or_enter",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "return_or_enter",
+                            "modifiers": [
+                                "option"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1452,
+                                    "product_id": 832,
+                                    "description": "Apple internal keyboard"
+                                } 
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "swap command-arrow-keys and control-arrow-keys in iTerm and VsCode",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "left_arrow",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "left_arrow",
+                            "modifiers": [
+                                "control"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com.googlecode.iterm2",
+                                "^com.facebook.fbvscode"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "right_arrow",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "right_arrow",
+                            "modifiers": [
+                                "control"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com.googlecode.iterm2",
+                                "^com.facebook.fbvscode"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "up_arrow",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "up_arrow",
+                            "modifiers": [
+                                "control"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com.googlecode.iterm2",
+                                "^com.facebook.fbvscode"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "down_arrow",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "down_arrow",
+                            "modifiers": [
+                                "control"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com.googlecode.iterm2",
+                                "^com.facebook.fbvscode"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
