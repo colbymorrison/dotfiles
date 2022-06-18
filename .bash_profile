@@ -33,7 +33,7 @@ if [[ $OSTYPE == "linux-gnu" ]]; then
         export CPY_PRG="xclip -i -sel clipboard"
     fi
 
-    if [[$YADM_CLASS == "work" ]]; then
+    if [[ $YADM_CLASS == "work" ]]; then
         export TERM=xterm-256color
         export FZF_DEFAULT_COMMAND='fd -t f -t d -t l'
         export CPY_PRG="nc localhost 8377"

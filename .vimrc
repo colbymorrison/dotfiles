@@ -25,19 +25,13 @@ Plug 'vim-scripts/phd'
 call plug#end()
 
 " ---Vanilla vim settings---
-if ($IS_FB== "0")
-  let g:fb_default_opts = 0                  " use my settings below
-  " read the top of this file for info about local admin scripts
-  source $LOCAL_ADMIN_SCRIPTS/master.vimrc   " sets shiftwidth, tabstop, softtabstop, expandtab
-endif
-
-if !has("nvim") && filereadable("~/scripts/vim/nvim-defaults.vim")
-  source ~/scripts/vim/nvim-defaults.vim
-endif
+" if !has("nvim") && filereadable("~/scripts/vim/nvim-defaults.vim")
+"   source ~/scripts/vim/nvim-defaults.vim
+" endif
 
 " General settings
 set nocompatible              " be iMproved
-filetype off                  
+" filetype off                  
 filetype indent plugin on           
 syntax enable
 let mapleader=","
@@ -60,17 +54,6 @@ set mouse=a
 set spelllang=frc             
 set spellfile=$HOME/.vim/spell/en.utf-8.add
 set switchbuf+=usetab,newtab  " open quickfix in newtab unless already open
-
-
-if ($IS_FB == "0")
-  set path+=**,~/fbcode,~/configerator,~/fbcode2        " goto fbcode files
-else
-    " Indents
-    set tabstop=4
-    set shiftwidth=4
-    "replace all tabs with tabstop spaces
-    set expandtab 
-endif
 
 " Search
 set incsearch                 " search with typeahead
@@ -102,21 +85,6 @@ nmap <leader>td :tabc<cr>
 " Copy current path
 nmap <leader>py :let @" = expand("%");call system('nc localhost 8377', @0)<cr>
 nmap <silent> <leader>y :call system($CPY_PRG, @0)<CR>
-
-
-" Autocmds
-if ($IS_FB == "0")
-  " go to nearest TARGETS
-  nmap <leader>w :tabnew `~/scripts/tgt.sh %`<cr>
-  nnoremap <silent> <leader>y :call system('nc localhost 8377', @0)<CR>
-  " Arc lint current file on write 
-  "autocmd BufWritePost *.py,*.cpp,*.rs,TARGETS,*.thrift silent! exec '!arc lint -a %' | :e 
-  " Format TARGETS on save, stolen from P75711758, lots of good stuff here
-  autocmd BufWritePost TARGETS silent! exec
-        \ '!~/fbsource/tools/third-party/buildifier/run_buildifier.py -i %' | :e
-  " In TARGETS files, on go to file (gf), replace //PATH with PATH/TARGETS
-  autocmd BufNewFile,BufRead TARGETS setlocal includeexpr=substitute(v:fname,'//\\(.*\\)','\\1/TARGETS','g')
-endif
 
 " NERDTree
 let g:NERDTreeWinSize=50
@@ -174,82 +142,3 @@ nmap <leader>f :ALECodeAction<cr>
 nmap <silent> <leader>z :History<cr>
 nmap <silent> <leader>b :Buffers<cr>
 nmap <C-p> :Files<CR>
-
-if ($IS_FB == "0")
-  " Disable hh quickfix on save cuz we have lsp
-  let g:hack#enable = 0
-
-  " Deoplete
-  let g:python3_host_prog = "/home/cmorrison/venv/bin/python3"
-
-  " MYC
-  set rtp+=/usr/local/share/myc/vim
-
-  " FZF or MYC depending on dir (stolen P75711758)
-  if getcwd() =~ '/fbsource[1-9]*/fbcode$' 
-    nmap <leader>a :FBGS<Space>
-    nmap <C-p> :MYC<CR>
-  elseif getcwd() =~ '/configerator'
-    nmap <leader>a :CBGS<Space>
-    nmap <C-p> :MYC<CR>
-  elseif getcwd() =~ '/www'
-    nmap <leader>a :CBGS<Space>
-    nmap <C-p> :MYC<CR>
-  else
-    nmap <leader>a :Rg<CR>
-    nmap <C-p> :Files<CR>
-  endif
-
-  " Dispatch
-  nmap <leader>d :Dispatch buck 
-
-  "--- Local Admin Scripts ---
-  source $LOCAL_ADMIN_SCRIPTS/vim/biggrep.vim
-  source $LOCAL_ADMIN_SCRIPTS/vim/pyre.vim
-  source $LOCAL_ADMIN_SCRIPTS/vim/toggle_comment.vim
-  autocmd BufReadPost *.cinc let b:comment_prefix = "#"
-  autocmd BufReadPost *.cconf let b:comment_prefix = "#"
-  autocmd BufReadPost *.mcconf let b:comment_prefix = "#"
-  noremap <leader>m :call ToggleComment()<CR>
-endif
-
-
-function! Redir(cmd, rng, start, end)
-	for win in range(1, winnr('$'))
-		if getwinvar(win, 'scratch')
-			execute win . 'windo close'
-		endif
-	endfor
-	if a:cmd =~ '^!'
-		let cmd = a:cmd =~' %'
-			\ ? matchstr(substitute(a:cmd, ' %', ' ' . expand('%:p'), ''), '^!\zs.*')
-			\ : matchstr(a:cmd, '^!\zs.*')
-		if a:rng == 0
-			let output = systemlist(cmd)
-		else
-			let joined_lines = join(getline(a:start, a:end), '\n')
-			let cleaned_lines = substitute(shellescape(joined_lines), "'\\\\''", "\\\\'", 'g')
-			let output = systemlist(cmd . " <<< $" . cleaned_lines)
-		endif
-	else
-		redir => output
-		execute a:cmd
-		redir END
-		let output = split(output, "\n")
-	endif
-	vnew
-	let w:scratch = 1
-	setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile
-	call setline(1, output)
-endfunction
-
-command! -nargs=1 -complete=command -bar -range Redir silent call Redir(<q-args>, <range>, <line1>, <line2>)
-
-function! Hgblame()
-  execute "Redir !hgblame %"
-  execute "set nonumber"
-  execute "vertical resize 30"
-  execute "file hg blame"
-  execute "windo set cursorbind"
-endfunction
-nnoremap <leader>hb :call Hgblame()<cr>
