@@ -1,6 +1,6 @@
-let g:ale_python_pyls_executable = '/usr/bin/pylsp'
-let g:ale_python_flake8_executable = '/usr/bin/flake8'
-let g:ale_python_black_executable='/usr/bin/black'
+let g:ale_python_pyls_executable = '/home/cmorrison/.local/bin/pyls'
+let g:ale_python_flake8_executable = '/usr/local/bin/flake8'
+let g:ale_python_black_executable='/usr/local/bin/black'
 let b:ale_fixers = ['black']
 let b:ale_linters = ['flake8', 'pyls', 'pyre']
 
