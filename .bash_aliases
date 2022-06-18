@@ -22,11 +22,10 @@ alias pag='ps aux | grep'
 alias open='xdg-open'
 alias qemuvm='qemu-system-x86_64 -enable-kvm -vga std -m 2048 -cpu host -smp 4 -net nic,model=virtio -net user,hostfwd=tcp::2222-:22'
 alias python='python3'
-alias below='below live --host $HOSTNAME'
 alias cpl="history | tail -2 | head -1 | cut -f 5 -d ' ' | tr -d '\n' |  $CPY_PRG"
 
 ## config files ##
-alias not="$EDITOR ~/Documents/notes.md"
+alias not="$EDITOR ~/Misc/notes.md"
 alias evi="$EDITOR ~/.vimrc"
 alias ebh="$EDITOR ~/.bashrc"
 alias ebp="$EDITOR ~/.bash_profile"
@@ -136,8 +135,8 @@ if [[ $IS_FB == 0 ]]; then
 
     #### Fb tools ###
     alias hs='hostselect'
-    alias sm='smcc'
-    alias smt='smcc tree'
+    alias smct='smcc tree'
+    alias smlstw='smcc list-tupperware-jobs'
     alias eft="nvim ~/.config/fb_tools/config"
     alias ppc='echo get __mcrouter__.preprocessed_config | nc ::1 5000'
     alias cls='conf canary list'
