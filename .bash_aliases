@@ -120,35 +120,3 @@ if [[ $OSTYPE == "darwin"* ]] ; then
     alias brewup='~/scripts/brew-wrapper.sh upgrade'
     alias brewrm='brew remove'
 fi
-
-if [[ $IS_FB == 0 ]]; then
-    ## Jellyfish ###
-    alias jfs='jf submit'
-    alias jfsr='jf submit -m rebase'
-    alias jfd='jf submit --draft'
-
-    ### Arc ###
-    alias arcp='arc pull'
-    alias arcl='arc lint'
-    alias arcf='arc fix'
-    alias arcb='arc build'
-
-    #### Fb tools ###
-    alias hs='hostselect'
-    alias smct='smcc tree'
-    alias smlstw='smcc list-tupperware-jobs'
-    alias eft="nvim ~/.config/fb_tools/config"
-    alias ppc='echo get __mcrouter__.preprocessed_config | nc ::1 5000'
-    alias cls='conf canary list'
-    alias hpd='hphpd -h localhost'
-    alias ccs='conf canary start'
-    alias ccc='conf canary cancel'
-    
-    function rb(){
-      randbox $1 | sed s/\.facebook\.com//g
-    }
-fi
-
-if [[ $IS_FB == 1 ]]; then
-  alias below="podman run --privileged --cgroupns=host --pid=host -it --mount='type=bind,src=/var/log/below,dst=/var/log/below' -it below/below"
-fi
