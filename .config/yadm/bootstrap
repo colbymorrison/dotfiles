@@ -30,22 +30,6 @@ function install_if_missing() {
 	fi
 }
 
-# -- Yadm setup --
-yadm checkout "$HOME"
-
-if [[ $(yadm config local.class) == "" ]]; then
-	echo "Please choose a system type (yadm local.class)"
-	YADM_CLASS=$(fzf $YADM_CLASSES)
-	yadm config local.class $YADM_CLASS
-fi
-yadm alt
-
-# -- jq check --
-if ! cmd_exists jq; then
-	echo "Please install jq (https://stedolan.github.io/jq/download/) and try again"
-	exit 1
-fi
-
 # -- Detect package manager --
 MANAGER=""
 for key in $(jq 'keys[]' $MANAGERS); do
@@ -63,9 +47,32 @@ echo "Detected package manager as $MANAGER"
 INSTALL_CMD="sudo $MANAGER $(jq .$MANAGER.install $MANAGERS | sed s/\"//g)"
 UPDATE_CMD="sudo $MANAGER $(jq .$MANAGER.update $MANAGERS | sed s/\"//g)"
 
+# -- jq check --
+if ! cmd_exists jq; then
+	echo "Please install jq (https://stedolan.github.io/jq/download/) and try again"
+	exit 1
+fi
+
 # -- Update --
 echo "Performing system update"
 $UPDATE_CMD
+
+# -- Fzf --
+if ! install_if_missing fzf; then
+	echo "Please install fzf then try again. See https://github.com/junegunn/fzf#installation"
+	exit 1
+fi
+
+# -- Yadm setup --
+yadm checkout "$HOME"
+
+if [[ $(yadm config local.class) == "" ]]; then
+	echo "Please choose a system type (yadm local.class)"
+	YADM_CLASS=$(fzf $YADM_CLASSES)
+	yadm config local.class $YADM_CLASS
+fi
+yadm alt
+
 
 # -- Bash --
 if ! echo $SHELL | grep "bash" > /dev/null 2>&1; then
@@ -76,17 +83,11 @@ fi
 # -- Tmux --
 install_if_missing tmux
 
-# -- Fzf --
-if ! install_if_missing fzf; then
-	echo "Please install fzf then try again. See https://github.com/junegunn/fzf#installation"
-	exit 1
-fi
-
 # -- vim-plug -- 
 if [ ! -f ~/.vim/autoload/plug.vim ]; then
 	printf "\nInstalling vim-plug"
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	vim '+PlugInstall' 
+	vim '+PlugInstall' '+UpdateRemotePlugins' 
 fi
 
 # -- Neovim --

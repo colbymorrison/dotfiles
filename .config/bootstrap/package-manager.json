@@ -7,7 +7,7 @@
 		"install": "install",
 		"update": "upgrade"
 	},
-	"apt-get": {
+	"apt": {
 		"install": "install",
 		"update": "upgrade"
 	},
