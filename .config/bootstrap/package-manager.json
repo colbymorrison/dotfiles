@@ -1,0 +1,18 @@
+{
+	"pacman" : {
+		"install": "-S",
+		"update": "-Syu"
+	},
+	"dnf": {
+		"install": "install",
+		"update": "upgrade"
+	},
+	"apt-get": {
+		"install": "install",
+		"update": "upgrade"
+	},
+	"brew": {
+		"install": "install",
+		"update": "update"
+	}
+}
