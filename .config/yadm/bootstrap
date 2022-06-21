@@ -54,8 +54,8 @@ if ! cmd_exists jq; then
 fi
 
 # -- Update --
-echo "Performing system update"
-$UPDATE_CMD
+# echo "Performing system update"
+# $UPDATE_CMD
 
 # -- Fzf --
 if ! install_if_missing fzf; then
@@ -68,7 +68,7 @@ yadm checkout "$HOME"
 
 if [[ $(yadm config local.class) == "" ]]; then
 	echo "Please choose a system type (yadm local.class)"
-	YADM_CLASS=$(fzf $YADM_CLASSES)
+	YADM_CLASS=$(fzf < $YADM_CLASSES)
 	yadm config local.class $YADM_CLASS
 fi
 yadm alt
