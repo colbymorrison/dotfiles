@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# Go to nearest TARGETS file
+# Go to nearest file $1
 
 nearest() {
   if [ -f "$1" ]; then
@@ -12,4 +12,4 @@ nearest() {
   fi
 }
 
-(cd $(dirname "$1") && nearest TARGETS)
+(cd $(dirname "$1") && nearest $1)

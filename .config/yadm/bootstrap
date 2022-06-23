@@ -6,7 +6,7 @@ MANAGERS="$BASE/package-manager.json"
 MAC_COREUTILS="$BASE/macos-gnu-coreutils"
 
 function cmd_exists(){
-	command -v $1 >/dev/null 2>&1 
+	command -v "$1" >/dev/null 2>&1 
 }
 
 #
@@ -20,10 +20,10 @@ function install_if_missing() {
 	fi
 
 
-	if  ! cmd_exists $1; then
+	if  ! cmd_exists "$1"; then
 		echo "Installing $PKG"
-		$INSTALL_CMD $PKG
-		if ! cmd_exists $1; then
+		$INSTALL_CMD "$PKG"
+		if ! cmd_exists "$1"; then
 			echo "Failed to install $1"
 			return 1
 		fi
@@ -42,9 +42,9 @@ fi
 # -- Detect package manager --
 MANAGER=""
 if [[ $OSTYPE == "linux-gnu" ]]; then
-	for key in $(jq 'keys[]' $MANAGERS); do
-		key=$(echo $key | sed s/\"//g)
-		if cmd_exists $key; then
+	for key in $(jq 'keys[]' "$MANAGERS"); do
+		key=${key//\"/}
+		if cmd_exists "$key"; then
 			MANAGER=$key
 			break
 		fi
@@ -52,7 +52,7 @@ if [[ $OSTYPE == "linux-gnu" ]]; then
 elif [[ $OSTYPE == "darwin"* ]]; then
 	if ! cmd_exists "brew"; then
 		echo "Intalling homebrew"
-		$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)
+		eval "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	fi
 	MANAGER="brew"
 fi
@@ -64,15 +64,15 @@ fi
 
 echo "Detected package manager as $MANAGER"
 
-INSTALL_CMD="sudo $MANAGER $(jq .$MANAGER.install $MANAGERS | sed s/\"//g)"
-UPDATE_CMD="sudo $MANAGER $(jq .$MANAGER.update $MANAGERS | sed s/\"//g)"
+INSTALL_CMD="sudo $MANAGER $(jq .$MANAGER.install "$MANAGERS" | sed s/\"//g)"
+UPDATE_CMD="sudo $MANAGER $(jq .$MANAGER.update "$MANAGERS" | sed s/\"//g)"
 
 # -- Update --
 # echo "Performing system update"
 # $UPDATE_CMD
 
 # -- Bash --
-if ! echo $SHELL | grep "bash" > /dev/null 2>&1; then
+if ! echo "$SHELL" | grep "bash" > /dev/null 2>&1; then
 	echo "Chaging shell to bash"
 	chsh -s /bin/bash
 fi
@@ -80,7 +80,7 @@ fi
 # -- Gnu Utils for Mac --
 if [[ $OSTYPE == "darwin"* ]]; then
 	for pkg in $MAC_COREUTILS; do
-		install_if_missing $pkg
+		install_if_missing "$pkg"
 	done
 fi
 
@@ -93,8 +93,8 @@ fi
 # -- Yadm setup --
 if [[ $(yadm config local.class) == "" ]]; then
 	echo "Please choose a system type (yadm local.class)"
-	YADM_CLASS=$(fzf < $YADM_CLASSES)
-	yadm config local.class $YADM_CLASS
+	YADM_CLASS=$(fzf < "$YADM_CLASSES")
+	yadm config local.class "$YADM_CLASS"
 	yadm alt
 	yadm checkout "$HOME" > /dev/null 2>&1
 fi
@@ -116,4 +116,4 @@ install_if_missing nvim neovim
 install_if_missing wget
 
 
-printf "\nComplete!\n"
+printf "\nComplete! Please log out and log back in.\n"

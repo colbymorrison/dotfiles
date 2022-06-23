@@ -5,17 +5,8 @@
 # only source in interactive shell
 [[ $- != *i* ]] && return
 
-if [[ $IS_FB == 0 ]]; then
-  # Load CentOS stuff and Facebook stuff (don't remove these lines).
-  source /etc/bashrc
-  source /usr/facebook/ops/rc/master.bashrc
-fi
-
 # ---Env vars--- #
-if [[ $IS_FB == 0 ]]; then
-  source $LOCAL_ADMIN_SCRIPTS/scm-prompt
-  VCS="\$(_scm_prompt)"
-elif [ -f ~/scripts/parse_git_branch.sh ]; then
+if [ -f ~/scripts/parse_git_branch.sh ]; then
   VCS="\$(~/scripts/parse_git_branch.sh)"
 else
   VCS=""
@@ -122,6 +113,7 @@ if [[ "$HAS_FZF_COMPLETION" ]]; then
     fi
 fi
 
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 [[ -f $HOME/.cache/wal/sequences ]] && (cat ~/.cache/wal/sequences &)
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
