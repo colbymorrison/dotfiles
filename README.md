@@ -12,8 +12,6 @@ Files not in ~/.config/yadm/alt are installed across all sytems in their locatio
 ## Install
 Install [yadm](https://yadm.io/docs/install)
 
-Install [jq](https://stedolan.github.io/jq/download/) if not already isntalled
-
 `yadm clone git@github.com:colbymorrison/dotfiles.git`
 `yadm bootstrap`
 

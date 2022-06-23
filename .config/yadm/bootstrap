@@ -1,7 +1,9 @@
 #! /bin/bash
 
-YADM_CLASSES="$HOME/.config/bootstrap/yadm-classes"
-MANAGERS="$HOME/.config/bootstrap/package-manager.json"
+BASE="$HOME/.config/bootstrap"
+YADM_CLASSES="$BASE/yadm-classes"
+MANAGERS="$BASE/package-manager.json"
+MAC_COREUTILS="$BASE/macos-gnu-coreutils"
 
 function cmd_exists(){
 	command -v $1 >/dev/null 2>&1 
@@ -30,12 +32,30 @@ function install_if_missing() {
 	fi
 }
 
+# -- jq check --
+if ! cmd_exists jq; then
+	echo "Please install jq (https://stedolan.github.io/jq/download/) and try again"
+	exit 1
+fi
+
+
 # -- Detect package manager --
 MANAGER=""
-for key in $(jq 'keys[]' $MANAGERS); do
-	MANAGER=$(echo "$key" | sed s/\"//g)
-	cmd_exists $MANAGER && break; 
-done
+if [[ $OSTYPE == "linux-gnu" ]]; then
+	for key in $(jq 'keys[]' $MANAGERS); do
+		key=$(echo $key | sed s/\"//g)
+		if cmd_exists $key; then
+			MANAGER=$key
+			break
+		fi
+	done
+elif [[ $OSTYPE == "darwin"* ]]; then
+	if ! cmd_exists "brew"; then
+		echo "Intalling homebrew"
+		$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)
+	fi
+	MANAGER="brew"
+fi
 
 if [[ $MANAGER == "" ]]; then
 	echo "Couldn't find the pacakage manager for this system. Please add it to $MANAGERS"
@@ -47,15 +67,22 @@ echo "Detected package manager as $MANAGER"
 INSTALL_CMD="sudo $MANAGER $(jq .$MANAGER.install $MANAGERS | sed s/\"//g)"
 UPDATE_CMD="sudo $MANAGER $(jq .$MANAGER.update $MANAGERS | sed s/\"//g)"
 
-# -- jq check --
-if ! cmd_exists jq; then
-	echo "Please install jq (https://stedolan.github.io/jq/download/) and try again"
-	exit 1
-fi
-
 # -- Update --
 # echo "Performing system update"
 # $UPDATE_CMD
+
+# -- Bash --
+if ! echo $SHELL | grep "bash" > /dev/null 2>&1; then
+	echo "Chaging shell to bash"
+	chsh -s /bin/bash
+fi
+
+# -- Gnu Utils for Mac --
+if [[ $OSTYPE == "darwin"* ]]; then
+	for pkg in $MAC_COREUTILS; do
+		install_if_missing $pkg
+	done
+fi
 
 # -- Fzf --
 if ! install_if_missing fzf; then
@@ -64,20 +91,12 @@ if ! install_if_missing fzf; then
 fi
 
 # -- Yadm setup --
-yadm checkout "$HOME"
-
 if [[ $(yadm config local.class) == "" ]]; then
 	echo "Please choose a system type (yadm local.class)"
 	YADM_CLASS=$(fzf < $YADM_CLASSES)
 	yadm config local.class $YADM_CLASS
-fi
-yadm alt
-
-
-# -- Bash --
-if ! echo $SHELL | grep "bash" > /dev/null 2>&1; then
-	echo "Chaging shell to bash"
-	chsh -s /bin/bash
+	yadm alt
+	yadm checkout "$HOME" > /dev/null 2>&1
 fi
 
 # -- Tmux --
@@ -93,5 +112,8 @@ fi
 # -- Neovim --
 install_if_missing nvim neovim
 
+# -- wget --
+install_if_missing wget
 
-echo "Complete!"
+
+printf "\nComplete!\n"
