@@ -1,5 +1,7 @@
 #! /bin/bash
 
+RED='\033[0;31m'
+
 function cmd_exists(){
 	command -v "$1" >/dev/null 2>&1 
 }
@@ -47,15 +49,15 @@ function install_if_missing() {
 	[[ "$ALT" != "" ]] && INSTALL_CMD=${INSTALL_CMD/$MANAGER/$ALT}
 
 	if  ! cmd_exists "$CMD_NAME"; then
-		echo "Installing $PKG"
+		echo -e "${RED}Installing $PKG"
 
 		$INSTALL_CMD "$OPTS" "$PKG"
 
 		if ! cmd_exists "$PKG"; then
-			echo "Failed to install $PKG"
+			echo -e "${RED}Failed to install $PKG"
 			return 1
 		fi
 	else
-		echo "$PKG is already installed :)"
+		echo -e "${RED}$PKG is already installed :)"
 	fi
 }
