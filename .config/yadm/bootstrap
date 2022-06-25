@@ -103,27 +103,75 @@ install_if_missing wget
 install_if_missing alacritty --brew_opts --cask 
 
 if [[ $(yadm config local.class) == "linux-gui" ]]; then
+	# -- GNOME --
 	if [[ ! $XDG_CURRENT_DESKTOP =~ "GNOME" ]]; then
 		echo -e "${RED}Please install GNOME and try again"
 		exit 1
 	fi
 
+	# -- X11 --
+	session=$(loginctl | grep $USER | sed 's/ *//p' | cut -d ' ' -f 1 | head -n 1)
+	window_system=$(loginctl show-session $session -p Type | sed 's/Type=//g')
+
+	if [[ ! $window_system == "x11" ]]; then
+		echo -e "${RED} Using $window_system insead of X11. Please switch to X11 and try again"
+		exit 1
+	fi
+
+	# -- X Utils -- 
+	install_if_missing xsel
+	install_if_missing xprop
+	install_if_missing xmodmap
+
+
 	# -- Load dconf settings --
-	# TODO FIX to only include keyboard shortcuts?
-	# [[ -f "$HOME/.dconf-settings.ini" ]] && dconf load / < "$HOME/.dconf-settings.ini"
+	~/.dconf-settings/restore.sh
 
 	# -- Rofi --
 	install_if_missing rofi
 
 	# -- Pop! Shell -- 
-	# Note this one is pretty flaky
-	! (gnome-extensions list | grep pop-shell > /dev/null 2>&1) && install_if_missing gnome-shell-extension-pop-shell --pacman_alt yay
+	# Only in Fedora, Arch, Gentoo, and openSUSE. Add manual install 
+	if ! (gnome-extensions list | grep pop-shell > /dev/null 2>&1); then 
+		if ! install_if_missing gnome-shell-extension-pop-shell --pacman_alt yay; then
+			echo -e "${RED}Building POP! Shell manually"
+			if ! cmd_exists node; then
+				echo -e "${RED}Installing nvm and node"
+				# Install nvm
+				exec $(curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.3/install.sh) 
+				nvm install node
+			fi
+
+			if ! cmd_exists tsc; then
+				echo -e "${RED}Installing typescript"
+				sudo npm install -g typescript
+			fi
+
+			mkdir -p /tmp/pop-shell
+			pushd /tmp/pop-shell
+			git clone https://github.com/pop-os/shell
+
+			echo -e "${RED}Making Pop! Shell"
+			if make local-install; then
+				echo -e "${RED}Enabling Pop! Shell"
+				gnome-extensions enable pop-shell@system76.com
+			fi
+
+			popd
+			rm -r /tmp/pop-shell
+
+			echo -e "${RED}Removing typescript (leaving Node)"
+			sudo npm uninstall -g typescript
+		fi
+	fi
+
 
 	# -- Clipmenu --
 	# Probly flaky as well
-	install_if_missing clipmenu
-	systemctl --user start clipmenud
-	systemctl --user enable clipmenud
+	if install_if_missing clipmenu; then
+		systemctl --user start clipmenud
+		systemctl --user enable clipmenud
+	fi
 fi
 
 if [[ $OSTYPE == "Darwin*" ]]; then
