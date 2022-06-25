@@ -52,23 +52,25 @@ alias wils='nmcli d wifi list'
 alias wicon='nmcli d wifi connect'
 
 ## Git ##
-alias ga='git commit --amend'
-alias ya='yadm commit --amend'
+alias ga='git commit -C HEAD --amend'
 alias gau='git add -u'
-alias yau='yadm add -u'
 alias gaa='git add --all'
 alias gb='git branch'
 alias gbD='git branch -D'
 alias gcmsg='git commit -m'
-alias ycmsg='yadm commit -m'
 alias gco='git checkout'
+alias gcb='git checkout -b'
 alias gd='git diff'
 alias gf='git fetch'
+alias ggrep='git grep'
 alias gl='git pull'
 alias gp='git push'
 alias gst='git status'
+alias ya='yadm commit --amend'
+alias yd='yadm diff'
+alias yau='yadm add -u'
+alias ycmsg='yadm commit -m'
 alias yst="yadm status"
-alias ggrep='git grep'
 
 ## Hg ##
 # also see ~/.hgrc for more hg aliases

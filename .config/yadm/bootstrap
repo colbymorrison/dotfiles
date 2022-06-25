@@ -4,33 +4,7 @@ BASE="$HOME/.config/bootstrap"
 YADM_CLASSES="$BASE/yadm-classes"
 MANAGERS="$BASE/package-manager.json"
 MAC_COREUTILS="$BASE/macos-gnu-coreutils"
-
-function cmd_exists(){
-	command -v "$1" >/dev/null 2>&1 
-}
-
-#
-# Usage: install_if_missing [cmd] [pkg_name]
-#
-function install_if_missing() {
-	echo
-	PKG=$1
-	if [[ $# -ge 2 ]]; then
-		PKG=$2
-	fi
-
-
-	if  ! cmd_exists "$1"; then
-		echo "Installing $PKG"
-		$INSTALL_CMD "$PKG"
-		if ! cmd_exists "$1"; then
-			echo "Failed to install $1"
-			return 1
-		fi
-	else
-		echo "$1 is already installed :)"
-	fi
-}
+source "$HOME/.config/yadm/bootstrap-helpers/helpers.sh"
 
 # -- jq check --
 if ! cmd_exists jq; then
@@ -71,6 +45,8 @@ UPDATE_CMD="sudo $MANAGER $(jq .$MANAGER.update "$MANAGERS" | sed s/\"//g)"
 # echo "Performing system update"
 # $UPDATE_CMD
 
+#### CLI Setup #### 
+
 # -- Bash --
 if ! echo "$SHELL" | grep "bash" > /dev/null 2>&1; then
 	echo "Chaging shell to bash"
@@ -93,6 +69,7 @@ fi
 # -- Yadm setup --
 if [[ $(yadm config local.class) == "" ]]; then
 	echo "Please choose a system type (yadm local.class)"
+	sleep 2
 	YADM_CLASS=$(fzf < "$YADM_CLASSES")
 	yadm config local.class "$YADM_CLASS"
 	yadm alt
@@ -110,10 +87,33 @@ if [ ! -f ~/.vim/autoload/plug.vim ]; then
 fi
 
 # -- Neovim --
-install_if_missing nvim neovim
+install_if_missing nvim --pkg-name neovim
 
 # -- wget --
 install_if_missing wget
 
+#### GUI Setup ####
+[[ $(yadm config local.class) == "linux-server" ]] && exit 0
 
-printf "\nComplete! Please log out and log back in.\n"
+# -- Alacritty --
+install_if_missing alacritty --brew_opts --cask 
+
+if [[ $(yadm config local.class) == "linux-gui" ]]; then
+	if [[ ! $XDG_CURRENT_DESKTOP =~ "GNOME" ]]; then
+		echo "Please install GNOME and try again"
+		exit 1
+	fi
+
+	[[ -f "$HOME/.dconf-settings.ini" ]] && dconf load / < "$HOME/.dconf-settings.ini"
+
+	install_if_missing rofi
+
+	! (gnome-extensions list | grep pop-shell > /dev/null 2>&1) && install_if_missing gnome-shell-extension-pop-shell --pacman_alt yay
+fi
+
+if [[ $OSTYPE == "Darwin*" ]]; then
+	install_if_missing karabiner-elements --brew_opts --cask 
+fi
+
+
+printf "Complete! Please log out and log back in.\n"

@@ -7,4 +7,3 @@ if yadm diff | grep "$FLE"; then
 	yadm add "$FLE"
 	yadm commit -C HEAD --amend
 fi
-
