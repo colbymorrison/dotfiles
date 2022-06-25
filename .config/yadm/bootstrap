@@ -1,45 +1,57 @@
 #! /bin/bash
+#
+# Bootstrap script to be run just after `yadm clone https://github.com/colbymorrison/dotfiles`
+
+# The `yadm bootstrap` command will run this script
+#
+# Based on the OS type (linux server, linux gui, or mac), install relevant programs for my 
+# environment and config. Supports any package manager in ~/.config/bootstrap/package-manager.csv
+#
+# linux-gui will configure GNOME running on X11 with the Pop! OS Shell
+#
+# Not intened to be 100% perfect, but gets a good amount of the way there, which is stil
+# quite useful.
+#
+#
 
 BASE="$HOME/.config/bootstrap"
 YADM_CLASSES="$BASE/yadm-classes"
-MANAGERS="$BASE/package-manager.json"
+MANAGERS="$BASE/package-manager.csv"
 MAC_COREUTILS="$BASE/macos-gnu-coreutils"
 
 source "$HOME/.config/yadm/bootstrap-helpers/helpers.sh"
 
-# -- jq check --
-if ! cmd_exists jq; then
-	echo "Please install jq (https://stedolan.github.io/jq/download/) and try again"
-	exit 1
-fi
+function log(){
+	printf "${RED}$1\n\n"
+}
 
 # -- Detect package manager --
 MANAGER=""
 if [[ $OSTYPE == "linux-gnu" ]]; then
-	for key in $(jq 'keys[]' "$MANAGERS"); do
-		key=${key//\"/}
-		if cmd_exists "$key"; then
-			MANAGER=$key
+	for mgr in $(cut -d, -f 1 < "$MANAGERS" | tail -n +2); do
+		mgr=${mgr//\"/}
+		if cmd_exists "$mgr"; then
+			MANAGER=$mgr
 			break
 		fi
 	done
 elif [[ $OSTYPE == "darwin"* ]]; then
 	if ! cmd_exists "brew"; then
-		echo -e "${RED}Intalling homebrew"
+		log "Intalling homebrew"
 		eval "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	fi
 	MANAGER="brew"
 fi
 
 if [[ $MANAGER == "" ]]; then
-	echo -e "${RED}Couldn't find the pacakage manager for this system. Please add it to $MANAGERS"
+	log "Couldn't find the pacakage manager for this system. Please add it to $MANAGERS"
 	exit 1
 fi
 
-echo -e "${RED}Detected package manager as $MANAGER"
+log "Detected package manager as $MANAGER"
 
-INSTALL_CMD="sudo $MANAGER $(jq .$MANAGER.install "$MANAGERS" | sed s/\"//g)"
-UPDATE_CMD="sudo $MANAGER $(jq .$MANAGER.update "$MANAGERS" | sed s/\"//g)"
+INSTALL_CMD="sudo $MANAGER $(grep "$MANAGER" "$MANAGERS" | cut -d, -f 2)"
+UPDATE_CMD="sudo $MANAGER $(grep "$MANAGER" "$MANAGERS" | cut -d, -f 3)"
 
 # -- Update --
 # echo "Performing system update"
@@ -49,7 +61,7 @@ UPDATE_CMD="sudo $MANAGER $(jq .$MANAGER.update "$MANAGERS" | sed s/\"//g)"
 
 # -- Bash --
 if ! echo "$SHELL" | grep "bash" > /dev/null 2>&1; then
-	echo -e "${RED}Chaging shell to bash"
+	log "Chaging shell to bash"
 	chsh -s /bin/bash
 fi
 
@@ -65,14 +77,14 @@ fi
 
 # -- Fzf --
 if ! install_if_missing fzf; then
-	echo -e "${RED}Please install fzf then try again. See https://github.com/junegunn/fzf#installation"
+	log "Please install fzf then try again. See https://github.com/junegunn/fzf#installation"
 	exit 1
 fi
 
 # -- Yadm setup --
 if [[ $(yadm config local.class) == "" ]]; then
 	clear
-	echo -e "${RED}Please choose a system type (to be used as yadm local.class)"
+	log "Please choose a system type (to be used as yadm local.class)"
 	sleep 2
 	YADM_CLASS=$(fzf < "$YADM_CLASSES")
 	yadm config local.class "$YADM_CLASS"
@@ -105,7 +117,7 @@ install_if_missing alacritty --brew_opts --cask
 if [[ $(yadm config local.class) == "linux-gui" ]]; then
 	# -- GNOME --
 	if [[ ! $XDG_CURRENT_DESKTOP =~ "GNOME" ]]; then
-		echo -e "${RED}Please install GNOME and try again"
+		log "Please install GNOME and try again"
 		exit 1
 	fi
 
@@ -114,7 +126,7 @@ if [[ $(yadm config local.class) == "linux-gui" ]]; then
 	window_system=$(loginctl show-session $session -p Type | sed 's/Type=//g')
 
 	if [[ ! $window_system == "x11" ]]; then
-		echo -e "${RED} Using $window_system insead of X11. Please switch to X11 and try again"
+		log " Using $window_system insead of X11. Please switch to X11 and try again"
 		exit 1
 	fi
 
@@ -134,34 +146,7 @@ if [[ $(yadm config local.class) == "linux-gui" ]]; then
 	# Only in Fedora, Arch, Gentoo, and openSUSE. Add manual install 
 	if ! (gnome-extensions list | grep pop-shell > /dev/null 2>&1); then 
 		if ! install_if_missing gnome-shell-extension-pop-shell --pacman_alt yay; then
-			echo -e "${RED}Building POP! Shell manually"
-			if ! cmd_exists node; then
-				echo -e "${RED}Installing nvm and node"
-				# Install nvm
-				exec $(curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.3/install.sh) 
-				nvm install node
-			fi
-
-			if ! cmd_exists tsc; then
-				echo -e "${RED}Installing typescript"
-				sudo npm install -g typescript
-			fi
-
-			mkdir -p /tmp/pop-shell
-			pushd /tmp/pop-shell
-			git clone https://github.com/pop-os/shell
-
-			echo -e "${RED}Making Pop! Shell"
-			if make local-install; then
-				echo -e "${RED}Enabling Pop! Shell"
-				gnome-extensions enable pop-shell@system76.com
-			fi
-
-			popd
-			rm -r /tmp/pop-shell
-
-			echo -e "${RED}Removing typescript (leaving Node)"
-			sudo npm uninstall -g typescript
+			~/.config/yadm/bootstrap-helpers/pop-shell-manual.sh
 		fi
 	fi
 
