@@ -13,5 +13,5 @@ Files not in ~/.config/yadm/alt are installed across all sytems in their locatio
 Install [yadm](https://yadm.io/docs/install)
 
 `yadm clone git@github.com:colbymorrison/dotfiles.git`
-`yadm bootstrap`
 
+`yadm bootstrap`
