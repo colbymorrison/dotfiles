@@ -1,3 +1,3 @@
 #! /bin/bash
 
-~/.dconf-settings/resore.sh --yadm-check
+~/.dconf-settings/restore.sh --yadm-check
