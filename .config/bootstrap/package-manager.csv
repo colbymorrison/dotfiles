@@ -1,0 +1,5 @@
+package_manager,install_command,update_command
+pacman,S,Syu
+dnf,install,upgrade
+apt,install,upgdate
+brew,install,update
