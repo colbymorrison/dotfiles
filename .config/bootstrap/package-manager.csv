@@ -1,5 +1,6 @@
-package_manager,install_command,update_command
+package_manager,install_command,upgrade_command,refresh_command
 pacman,-S,-Syu
-dnf,install,upgrade
-apt,install,upgdate
-brew,install,update
+dnf,install,update
+apt,install,upgrade,update
+zypper,install,update,refresh
+brew,install,upgrade,update

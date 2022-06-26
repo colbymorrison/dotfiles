@@ -1,16 +1,16 @@
 #! /bin/bash
 #
 # Bootstrap script to be run just after `yadm clone https://github.com/colbymorrison/dotfiles`
-
+#
+# Usage bootstrap [--no-update]
+#
 # The `yadm bootstrap` command will run this script
 #
 # Based on the OS type (linux server, linux gui, or mac), install relevant programs for my 
 # environment and config. Supports any package manager in ~/.config/bootstrap/package-manager.csv
 #
-#
 # Not intened to be 100% perfect, but gets a good amount of the way there, which is stil
 # quite useful.
-#
 #
 
 BASE="$HOME/.config/bootstrap"
@@ -150,11 +150,13 @@ function detect_package_manager(){
 		log "Couldn't find the pacakage manager for this system. Please add it to $MANAGERS"
 		exit 1
 	fi
-	MANAGER="pacman"
 	log "Detected package manager as $MANAGER"
 
 	INSTALL_CMD="sudo $MANAGER $(grep "$MANAGER" "$MANAGERS" | cut -d, -f 2)"
-	UPDATE_CMD="sudo $MANAGER $(grep "$MANAGER" "$MANAGERS" | cut -d, -f 3)"
+	UPGRADE_CMD="sudo $MANAGER $(grep "$MANAGER" "$MANAGERS" | cut -d, -f 3)"
+
+	refresh_opt=$(grep "$MANAGER" "$MANAGERS" | cut -d, -f 4)
+	[[ $refresh_opt == "" ]]  && REFRESH_CMD="" || REFRESH_CMD="sudo $MANAGER $refresh_opt"
 }
 
 # Install programs for CLI setup
@@ -275,7 +277,19 @@ function gui_setup(){
 	fi
 }
 
+function system_update(){
+	log "Perform system update? (y/n)"
+	read -r prompt
+	[[ $prompt != "y" ]] && return 0
+
+	refresh_opt=$(grep "$MANAGER" "$MANAGERS" | cut -d, -f 4)
+	[[ $refresh_opt != "" ]]  && sudo "$MANAGER" "$refresh_opt"
+
+	sudo $MANAGER "$(grep "$MANAGER" "$MANAGERS" | cut -d, -f 3)"
+}
+
 detect_package_manager || exit 1
+system_update || exit 1
 cli_setup || exit 1
 if [[ $(yadm config local.class) != "linux-server" ]]; then
 	 gui_setup || exit 1
