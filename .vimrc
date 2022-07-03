@@ -25,9 +25,9 @@ Plug 'vim-scripts/phd'
 call plug#end()
 
 " ---Vanilla vim settings---
-" if !has("nvim") && filereadable("~/scripts/vim/nvim-defaults.vim")
-"   source ~/scripts/vim/nvim-defaults.vim
-" endif
+if !has("nvim") && filereadable("~/scripts/vim/nvim-defaults.vim")
+   source ~/scripts/vim/nvim-defaults.vim
+endif
 
 " General settings
 set nocompatible              " be iMproved
@@ -83,7 +83,7 @@ nmap <leader>tk :tabn<cr>
 nmap <leader>tt :tabnew<cr>
 nmap <leader>td :tabc<cr>
 " Copy current path
-nmap <leader>py :let @" = expand("%");call system('nc localhost 8377', @0)<cr>
+nmap <leader>py :let @" = expand("%");call system($CPY_PRG, @0)<cr>
 nmap <silent> <leader>y :call system($CPY_PRG, @0)<CR>
 
 " NERDTree

@@ -36,7 +36,7 @@ function cmd_exists(){
 # Arguments:
 #   command 
 #   [--pkg-name pkg-name] if the package name differs from the command name
-#   [--pkg_manager_name-options options] extra options (like -v) to pass to the install command
+#   [--pkg_manager_name-opts options] extra options (like -v) to pass to the install command
 #   [--pkg_manager_name-alt new_mgr]  by default $MANAGER is taken to be the name of the pkg manager.
 #				      Override that name to "new_mgr" if $MANGER is equal to pkg_manager_name.
 #   pkg_manager_name can be the name of any manager configured in ~/.config/bootstrap/package-manager.csv
@@ -215,6 +215,10 @@ function cli_setup() {
 
 	# -- wget --
 	install_if_missing wget
+
+	# -- clipper --
+	install_if_missing clipper --pacman-alt yay
+
 }
 
 
@@ -225,7 +229,7 @@ function cli_setup() {
 #   1 if linux and either X11 or GNOME is missing (TODO automate this?)
 function gui_setup(){
 	# -- Alacritty --
-	install_if_missing alacritty --brew_opts --cask 
+	install_if_missing alacritty --brew-opts --cask 
 
 	if [[ $(yadm config local.class) == "linux-gui" ]]; then
 		# -- GNOME --
@@ -257,7 +261,7 @@ function gui_setup(){
 
 		# -- Pop! Shell -- 
 		if ! (gnome-extensions list | grep pop-shell > /dev/null 2>&1); then 
-			if ! install_if_missing gnome-shell-extension-pop-shell --pacman_alt yay; then
+			if ! install_if_missing gnome-shell-extension-pop-shell --pacman-alt yay; then
 				build_pop_shell
 			fi
 		fi
@@ -273,7 +277,7 @@ function gui_setup(){
 
 	if [[ $OSTYPE == "Darwin*" ]]; then
 		# -- Karabiner Elements --
-		install_if_missing karabiner-elements --brew_opts --cask 
+		install_if_missing karabiner-elements --brew-opts --cask 
 	fi
 }
 
