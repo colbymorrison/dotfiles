@@ -81,15 +81,15 @@ fi
 
 
 # --Completion-- #
-if [[ -f /usr/share/bash-completion/bash_completion ]]; then 
+[[ -f /usr/share/bash-completion/bash_completion ]]&&\
   source /usr/share/bash-completion/bash_completion
-  __git_complete gco _git_checkout
-  __git_complete gb _git_branch
-  __git_complete ga _git_add
-fi
 
-[[ -f /usr/share/bash-completion/completions/git ]] && \
+if [[ -f /usr/share/bash-completion/completions/git ]]; then 
     source /usr/share/bash-completion/completions/git
+    __git_complete gco _git_checkout
+    __git_complete gb _git_branch
+    __git_complete ga _git_add
+fi
 
 # Fzf completions can live in many directories
 if [[ -d /usr/share/fzf ]]; then
