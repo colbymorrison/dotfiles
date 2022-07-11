@@ -28,8 +28,8 @@ if [[ $OSTYPE == "linux-gnu" ]]; then
 
     if [[ $YADM_CLASS == "linux-server" ]]; then
         export TERM=xterm-256color
-        export FZF_DEFAULT_COMMAND='fd -t f -t d -t l'
-        export CPY_PRG="nc localhost 8377"
+        # export FZF_DEFAULT_COMMAND='fd -t f -t d -t l'
+        export CPY_PRG="nc -N localhost 8377"
     fi
 fi
 

@@ -67,6 +67,7 @@ autocmd BufReadPost *.h      let b:comment_prefix = "//"
 autocmd BufReadPost *.hs     let b:comment_prefix = "--"
 autocmd BufReadPost *.hsc    let b:comment_prefix = "--"
 autocmd BufReadPost *.vim    let b:comment_prefix = "\""
+autocmd BufReadPost *.sql    let b:comment_prefix = "--"
 autocmd BufReadPost .vimrc   let b:comment_prefix = "\""
 
 noremap C :call ToggleComment()<CR>

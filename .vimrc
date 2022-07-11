@@ -4,24 +4,21 @@ Plug 'vim-scripts/a.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'dense-analysis/ale'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'mhinz/vim-signify'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'preservim/nerdtree'
+Plug 'lifepillar/pgsql.vim'
 
 " Colorscheme
 Plug 'morhetz/gruvbox'
 Plug 'kaicataldo/material.vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'sickill/vim-monokai'
 Plug 'arcticicestudio/nord-vim'
 Plug 'sainnhe/sonokai'
-Plug 'jsit/toast.vim'
-Plug 'vim-scripts/phd'
 call plug#end()
 
 " ---Vanilla vim settings---
@@ -48,6 +45,7 @@ set modelines=0               " no modelines
 set scrolloff=8               " show 8 lines below cursor
 set linebreak                 " break on words
 set nocursorbind              " don't scroll splits together
+set inccommand=nosplit        " highlight substitute commands
 set t_Co=256
 set autoindent
 set mouse=a
@@ -142,3 +140,8 @@ nmap <leader>f :ALECodeAction<cr>
 nmap <silent> <leader>z :History<cr>
 nmap <silent> <leader>b :Buffers<cr>
 nmap <C-p> :Files<CR>
+
+" Pgsql
+let g:sql_type_default = 'pgsql'
+
+source ~/.vim/autoload/comment.vim
