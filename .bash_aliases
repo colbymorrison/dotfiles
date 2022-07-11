@@ -1,6 +1,6 @@
 ## Common Commands ## 
 alias c='clear'
-alias d='et -r 8377:8377 dev:8080'
+alias d='et -r 8377:8377 ubuntu@54.215.224.126'
 alias e='exit'
 alias g='grep'
 alias l='ls -lah'
@@ -23,7 +23,7 @@ alias python='python3'
 alias cpl="history | tail -2 | head -1 | cut -f 5 -d ' ' | tr -d '\n' |  $CPY_PRG"
 
 ## config files ##
-alias not="$EDITOR ~/Misc/notes.md"
+alias not="$EDITOR ~/Documents/notes.md"
 alias evi="$EDITOR ~/.vimrc"
 alias ebh="$EDITOR ~/.bashrc"
 alias ebp="$EDITOR ~/.bash_profile"

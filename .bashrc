@@ -6,8 +6,8 @@
 [[ $- != *i* ]] && return
 
 # ---Env vars--- #
-if [ -f ~/scripts/parse_git_branch.sh ]; then
-  VCS="\$(~/scripts/parse_git_branch.sh)"
+if [ -f /home/colby/scripts/parse_git_branch.sh ]; then
+  VCS="\$(/home/colby/scripts/parse_git_branch.sh)"
 else
   VCS=""
 fi
