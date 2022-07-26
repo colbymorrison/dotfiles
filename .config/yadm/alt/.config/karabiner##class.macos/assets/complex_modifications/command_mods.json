@@ -1,25 +1,33 @@
 {
     "title": "Command / Control ",
     "rules": [
-        {
-            "description": "swap left control and left command except for iTerm and VsCode",
+	{
+            "description": "swap ctrl and command for terminal keystrokes",
             "manipulators": [
-                {
+		{
                     "type": "basic",
                     "from": {
-                        "key_code": "left_command"
+                        "key_code": "a",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ]
+                        }
                     },
                     "to": [
-                        {
-                            "key_code": "left_control"
-                        }
+			    {
+				"key_code": "a",
+				"modifiers": [
+					"control"
+				]
+			    }
                     ],
                     "conditions": [
                         {
-                            "type": "frontmost_application_unless",
+                            "type": "frontmost_application_if",
                             "bundle_identifiers": [
-                                "^com.googlecode.iterm2",
-                                "^com.facebook.fbvscode"
+                                "^com.jetbrains.intellij",
+			        "^io.alacritty"
                             ]
                         }
                     ]
@@ -27,19 +35,421 @@
                 {
                     "type": "basic",
                     "from": {
-                        "key_code": "left_control"
+                        "key_code": "c",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ]
+                        }
                     },
                     "to": [
-                        {
-                            "key_code": "left_command"
-                        }
+			    {
+				"key_code": "c",
+				"modifiers": [
+					"control"
+				]
+			    }
                     ],
                     "conditions": [
                         {
-                            "type": "frontmost_application_unless",
+                            "type": "frontmost_application_if",
                             "bundle_identifiers": [
-                                "^com.googlecode.iterm2",
-                                "^com.facebook.fbvscode"
+                                "^com.jetbrains.intellij",
+			        "^io.alacritty"
+                            ]
+                        }
+                    ]
+                },
+		{
+                    "type": "basic",
+                    "from": {
+                        "key_code": "d",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ]
+                        }
+                    },
+                    "to": [
+			    {
+				"key_code": "d",
+				"modifiers": [
+					"control"
+				]
+			    }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com.jetbrains.intellij",
+			        "^io.alacritty"
+                            ]
+                        }
+                    ]
+                },
+		{
+                    "type": "basic",
+                    "from": {
+                        "key_code": "h",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ]
+                        }
+                    },
+                    "to": [
+			    {
+				"key_code": "h",
+				"modifiers": [
+					"control"
+				]
+			    }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com.jetbrains.intellij",
+			        "^io.alacritty"
+                            ]
+                        }
+                    ]
+                },
+		{
+                    "type": "basic",
+                    "from": {
+                        "key_code": "i",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ]
+                        }
+                    },
+                    "to": [
+			    {
+				"key_code": "i",
+				"modifiers": [
+					"control"
+				]
+			    }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com.jetbrains.intellij",
+			        "^io.alacritty"
+                            ]
+                        }
+                    ]
+                }, 
+		{
+                    "type": "basic",
+                    "from": {
+                        "key_code": "l",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ]
+                        }
+                    },
+                    "to": [
+			    {
+				"key_code": "l",
+				"modifiers": [
+					"control"
+				]
+			    }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com.jetbrains.intellij",
+			        "^io.alacritty"
+                            ]
+                        }
+                    ]
+                },
+		{
+                    "type": "basic",
+                    "from": {
+                        "key_code": "o",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ]
+                        }
+                    },
+                    "to": [
+			    {
+				"key_code": "o",
+				"modifiers": [
+					"control"
+				]
+			    }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com.jetbrains.intellij",
+			        "^io.alacritty"
+                            ]
+                        }
+                    ]
+                },
+		{
+                    "type": "basic",
+                    "from": {
+                        "key_code": "n",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ]
+                        }
+                    },
+                    "to": [
+			    {
+				"key_code": "n",
+				"modifiers": [
+					"control"
+				]
+			    }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com.jetbrains.intellij",
+			        "^io.alacritty"
+                            ]
+                        }
+                    ]
+                },
+		{
+                    "type": "basic",
+                    "from": {
+                        "key_code": "u",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ]
+                        }
+                    },
+                    "to": [
+			    {
+				"key_code": "u",
+				"modifiers": [
+					"control"
+				]
+			    }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com.jetbrains.intellij",
+			        "^io.alacritty"
+                            ]
+                        }
+                    ]
+                }, 
+		{
+                    "type": "basic",
+                    "from": {
+                        "key_code": "p",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ]
+                        }
+                    },
+                    "to": [
+			    {
+				"key_code": "p",
+				"modifiers": [
+					"control"
+				]
+			    }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com.jetbrains.intellij",
+			        "^io.alacritty"
+                            ]
+                        }
+                    ]
+                }, 
+		{
+                    "type": "basic",
+                    "from": {
+                        "key_code": "r",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ]
+                        }
+                    },
+                    "to": [
+			    {
+				"key_code": "r",
+				"modifiers": [
+					"control"
+				]
+			    }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com.jetbrains.intellij",
+			        "^io.alacritty"
+                            ]
+                        }
+                    ]
+                }, 
+		{
+                    "type": "basic",
+                    "from": {
+                        "key_code": "t",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ]
+                        }
+                    },
+                    "to": [
+			    {
+				"key_code": "t",
+				"modifiers": [
+					"control"
+				]
+			    }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com.jetbrains.intellij",
+			        "^io.alacritty"
+                            ]
+                        }
+                    ]
+                },
+		{
+                    "type": "basic",
+                    "from": {
+                        "key_code": "u",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ]
+                        }
+                    },
+                    "to": [
+			    {
+				"key_code": "u",
+				"modifiers": [
+					"control"
+				]
+			    }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com.jetbrains.intellij",
+			        "^io.alacritty"
+                            ]
+                        }
+                    ]
+                },
+		{
+                    "type": "basic",
+                    "from": {
+                        "key_code": "v",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ]
+                        }
+                    },
+                    "to": [
+			    {
+				"key_code": "v",
+				"modifiers": [
+					"control"
+				]
+			    }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com.jetbrains.intellij",
+			        "^io.alacritty"
+                            ]
+                        }
+                    ]
+                },
+		{
+                    "type": "basic",
+                    "from": {
+                        "key_code": "v",
+                        "modifiers": {
+                            "mandatory": [
+                                "command",
+				"shift"
+                            ]
+                        }
+                    },
+                    "to": [
+			    {
+				"key_code": "v",
+				"modifiers": [
+					"control",
+					"shift"
+				]
+			    }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com.jetbrains.intellij",
+			        "^io.alacritty"
+                            ]
+                        }
+                    ]
+                },
+		{
+                    "type": "basic",
+                    "from": {
+                        "key_code": "w",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ]
+                        }
+                    },
+                    "to": [
+			    {
+				"key_code": "w",
+				"modifiers": [
+					"control"
+				]
+			    }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com.jetbrains.intellij",
+			        "^io.alacritty"
                             ]
                         }
                     ]
@@ -47,7 +457,7 @@
             ]
         },
         {
-            "description": "map option-q to command-q except for internal keyboard",
+            "description": "mapping except for internal keyboard",
             "manipulators": [
                 {
                     "type": "basic",
@@ -73,8 +483,8 @@
                             "identifiers": [
                                 {
                                     "vendor_id": 1452,
-                                    "product_id": 832,
-                                    "description": "Apple internal keyboard"
+                                    "product_id": 835,
+                                    "description": "Apple Internal Keyboard / Trackpad"
                                 } 
                             ]
                         }
@@ -109,8 +519,8 @@
                             "identifiers": [
                                 {
                                     "vendor_id": 1452,
-                                    "product_id": 832,
-                                    "description": "Apple internal keyboard"
+                                    "product_id": 835,
+                                    "description": "Apple Internal Keyboard / Trackpad"
                                 } 
                             ]
                         }
@@ -145,15 +555,16 @@
                             "identifiers": [
                                 {
                                     "vendor_id": 1452,
-                                    "product_id": 832,
-                                    "description": "Apple internal keyboard"
+                                    "product_id": 835,
+                                    "description": "Apple Internal Keyboard / Trackpad"
                                 } 
                             ]
                         }
                     ]
                 }
             ]
-        }, {
+        },
+	{
         "description": "map control-w to command-w for internal keyboard",
         "manipulators": [
             {
@@ -180,8 +591,7 @@
                         "identifiers": [
                             {
                                 "vendor_id": 1452,
-                                "product_id": 832,
-                                "description": "Apple internal keyboard"
+                                "product_id": 835
                             } 
                         ]
                     }
@@ -216,8 +626,8 @@
                             "identifiers": [
                                 {
                                     "vendor_id": 1452,
-                                    "product_id": 832,
-                                    "description": "Apple internal keyboard"
+                                    "product_id": 835,
+                                    "description": "Apple Internal Keyboard / Trackpad"
                                 } 
                             ]
                         }
@@ -226,7 +636,7 @@
             ]
         },
         {
-            "description": "map command-enter to option-enter for internal keyboardfor iTerm2 and VsCode",
+            "description": "map command-enter to option-enter for internal keyboard",
             "manipulators": [
                 {
                     "type": "basic",
@@ -252,126 +662,9 @@
                             "identifiers": [
                                 {
                                     "vendor_id": 1452,
-                                    "product_id": 832,
-                                    "description": "Apple internal keyboard"
+                                    "product_id": 835,
+                                    "description": "Apple Internal Keyboard / Trackpad"
                                 } 
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "description": "swap command-arrow-keys and control-arrow-keys in iTerm and VsCode",
-            "manipulators": [
-                {
-                    "type": "basic",
-                    "from": {
-                        "key_code": "left_arrow",
-                        "modifiers": {
-                            "mandatory": [
-                                "command"
-                            ]
-                        }
-                    },
-                    "to": [
-                        {
-                            "key_code": "left_arrow",
-                            "modifiers": [
-                                "control"
-                            ]
-                        }
-                    ],
-                    "conditions": [
-                        {
-                            "type": "frontmost_application_if",
-                            "bundle_identifiers": [
-                                "^com.googlecode.iterm2",
-                                "^com.facebook.fbvscode"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "basic",
-                    "from": {
-                        "key_code": "right_arrow",
-                        "modifiers": {
-                            "mandatory": [
-                                "command"
-                            ]
-                        }
-                    },
-                    "to": [
-                        {
-                            "key_code": "right_arrow",
-                            "modifiers": [
-                                "control"
-                            ]
-                        }
-                    ],
-                    "conditions": [
-                        {
-                            "type": "frontmost_application_if",
-                            "bundle_identifiers": [
-                                "^com.googlecode.iterm2",
-                                "^com.facebook.fbvscode"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "basic",
-                    "from": {
-                        "key_code": "up_arrow",
-                        "modifiers": {
-                            "mandatory": [
-                                "command"
-                            ]
-                        }
-                    },
-                    "to": [
-                        {
-                            "key_code": "up_arrow",
-                            "modifiers": [
-                                "control"
-                            ]
-                        }
-                    ],
-                    "conditions": [
-                        {
-                            "type": "frontmost_application_if",
-                            "bundle_identifiers": [
-                                "^com.googlecode.iterm2",
-                                "^com.facebook.fbvscode"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "basic",
-                    "from": {
-                        "key_code": "down_arrow",
-                        "modifiers": {
-                            "mandatory": [
-                                "command"
-                            ]
-                        }
-                    },
-                    "to": [
-                        {
-                            "key_code": "down_arrow",
-                            "modifiers": [
-                                "control"
-                            ]
-                        }
-                    ],
-                    "conditions": [
-                        {
-                            "type": "frontmost_application_if",
-                            "bundle_identifiers": [
-                                "^com.googlecode.iterm2",
-                                "^com.facebook.fbvscode"
                             ]
                         }
                     ]

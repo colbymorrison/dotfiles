@@ -1,25 +1,27 @@
-let g:polyglot_disabled = ['autoindent', 'sensible']
-call plug#begin('~/.vim/plugged')
-Plug 'vim-scripts/a.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'dense-analysis/ale'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'tpope/vim-fugitive'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'sheerun/vim-polyglot'
-Plug 'mhinz/vim-signify'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'preservim/nerdtree'
-Plug 'lifepillar/pgsql.vim'
+if !has('ide') 
+	let g:polyglot_disabled = ['autoindent', 'sensible']
+	call plug#begin('~/.vim/plugged')
+	Plug 'vim-scripts/a.vim'
+	Plug 'vim-airline/vim-airline'
+	Plug 'dense-analysis/ale'
+	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+	Plug 'tpope/vim-fugitive'
+	Plug 'junegunn/fzf' 
+	Plug 'junegunn/fzf.vim' 
+	Plug 'preservim/nerdtree'
+	Plug 'lifepillar/pgsql.vim'
+	Plug 'sheerun/vim-polyglot'
+	Plug 'mhinz/vim-signify'
+	Plug 'christoomey/vim-tmux-navigator'
 
-" Colorscheme
-Plug 'morhetz/gruvbox'
-Plug 'kaicataldo/material.vim'
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'arcticicestudio/nord-vim'
-Plug 'sainnhe/sonokai'
-call plug#end()
+	" Colorscheme
+	Plug 'morhetz/gruvbox'
+	Plug 'kaicataldo/material.vim'
+	Plug 'dracula/vim', { 'as': 'dracula' }
+	Plug 'arcticicestudio/nord-vim'
+	Plug 'sainnhe/sonokai'
+	call plug#end()
+endif
 
 " ---Vanilla vim settings---
 if !has("nvim") && filereadable("~/scripts/vim/nvim-defaults.vim")
@@ -84,8 +86,6 @@ nmap <leader>td :tabc<cr>
 nmap <leader>py :let @" = expand("%");call system($CPY_PRG, @0)<cr>
 nmap <silent> <leader>y :call system($CPY_PRG, @0)<CR>
 
-" NERDTree
-let g:NERDTreeWinSize=50
 nnoremap <leader>e :NERDTreeToggle %<CR>
 
 " Colors
@@ -94,54 +94,64 @@ colo sonokai
 
 
 "--- Plugins ----
-" Signify
-set updatetime=100
-nmap <leader>hu :SignifyHunkUndo<cr>
-nmap <leader>hp :SignifyHunkDiff<cr>
-let g:signify_sign_delete = '-'
+if !has('ide')
+	" NERDTree
+	let g:NERDTreeWinSize=50
 
-" Airline
-let g:airline#extensions#hunks#enabled=0
+	" Signify
+	set updatetime=100
+	nmap <leader>hu :SignifyHunkUndo<cr>
+	nmap <leader>hp :SignifyHunkDiff<cr>
+	let g:signify_sign_delete = '-'
 
-" Deoplete
-let g:deoplete#enable_at_startup = 1
-" Use <tab> to continue completion 
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+	" Airline
+	let g:airline#extensions#hunks#enabled=0
 
-" Vim-latex-suite
-set grepprg=grep\ -nH\ $* 
-let g:tex_flavor='latex'
-let g:tex_no_error=1
-let g:Tex_DefaultTargetFormat='pdf'
-let g:Tex_ViewRule_pdf = 'zathura'
-imap <C-g> <Plug>IMAP_JumpForward
-nmap <C-g> <Plug>IMAP_JumpForward
-let g:Tex_PromptedEnvironments='equation,equation*,align,align*,enumerate,itemize,figure,table,theorem,lemma,tikzpicture'
-let g:Tex_GotoError=0 
+	" Deoplete
+	let g:deoplete#enable_at_startup = 1
+	" Use <tab> to continue completion 
+	inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+	let g:python3_host_prog='/usr/bin/python3'
+
+	" Vim-latex-suite
+	set grepprg=grep\ -nH\ $* 
+	let g:tex_flavor='latex'
+	let g:tex_no_error=1
+	let g:Tex_DefaultTargetFormat='pdf'
+	let g:Tex_ViewRule_pdf = 'zathura'
+	imap <C-g> <Plug>IMAP_JumpForward
+	nmap <C-g> <Plug>IMAP_JumpForward
+	let g:Tex_PromptedEnvironments='equation,equation*,align,align*,enumerate,itemize,figure,table,theorem,lemma,tikzpicture'
+	let g:Tex_GotoError=0 
 
 
-" ALE
-" let g:ale_disable_lsp = 1
-let g:ale_completion_enabled = 1
-let g:ale_lint_on_text_changed = 1
-let g:ale_set_balloons = 1
+	" ALE
+	" let g:ale_disable_lsp = 1
+	let g:ale_completion_enabled = 1
+	let g:ale_lint_on_text_changed = 1
+	let g:ale_set_balloons = 1
 
-nmap gd <Plug>(ale_go_to_definition)
-nmap gD <Plug>(ale_go_to_definition_in_tab)
-nmap gy <Plug>(ale_go_to_type_definition)
-nmap gr <Plug>(ale_find_references)
+	nmap gd <Plug>(ale_go_to_definition)
+	nmap gD <Plug>(ale_go_to_definition_in_tab)
+	nmap gy <Plug>(ale_go_to_type_definition)
+	nmap gr <Plug>(ale_find_references)
 
-nmap <leader>j <Plug>(ale_next_wrap)
-nmap <leader>k <Plug>(ale_previous_wrap)
-nmap <leader>v <Plug>(ale_detail)
-nmap <leader>f :ALECodeAction<cr>
+	nmap <leader>j <Plug>(ale_next_wrap)
+	nmap <leader>k <Plug>(ale_previous_wrap)
+	nmap <leader>v <Plug>(ale_detail)
+	nmap <leader>f :ALECodeAction<cr>
 
-" FZF
-nmap <silent> <leader>z :History<cr>
-nmap <silent> <leader>b :Buffers<cr>
-nmap <C-p> :Files<CR>
+	" FZF
+	nmap <silent> <leader>z :History<cr>
+	nmap <silent> <leader>b :Buffers<cr>
+	nmap <C-p> :Files<CR>
 
-" Pgsql
-let g:sql_type_default = 'pgsql'
+	" Pgsql
+	let g:sql_type_default = 'pgsql'
 
-source ~/.vim/autoload/comment.vim
+	source ~/.vim/autoload/comment.vim
+endif
+
+if has('ide')
+	nmap gr <Action>(FindUsages)
+endif

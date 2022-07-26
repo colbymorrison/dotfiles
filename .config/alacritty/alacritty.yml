@@ -1,21 +1,21 @@
 font:
   # The normal (roman) font face to use.
   normal:
-    family: Source Code Pro
+    family: Menlo
     style: Regular
 
   # The bold font face
   bold:
-    family: Source Code Pro
+    family: Menlo
     style: Bold
 
   # The italic font face
   italic:
-    family: Source Code Pro
+    family: Menlo
     style: Italic
 
   # Point size of the font
-  size: 13.0
+  size: 20.0
 
 hints:
   enabled:
@@ -47,6 +47,9 @@ hints:
      binding:
        key: U
        mods: Control|Shift
+
+key_bindings:
+  - { key: V, mods: Control|Shift, action: Paste }
 
 window:
   decorations: none

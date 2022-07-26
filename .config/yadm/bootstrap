@@ -218,7 +218,6 @@ function cli_setup() {
 
 	# -- clipper --
 	install_if_missing clipper --pacman-alt yay
-
 }
 
 
@@ -278,6 +277,21 @@ function gui_setup(){
 	if [[ $OSTYPE == "Darwin*" ]]; then
 		# -- Karabiner Elements --
 		install_if_missing karabiner-elements --brew-opts --cask 
+
+		# -- Yabai --
+		install_if_missing koekeishiya/formulae/yabai
+	        install_if_missing koekeishiya/formulae/skhd
+		echo "---------------------------"
+		echo "Disable SIP to complete yabai install https://github.com/koekeishiya/yabai/wiki/Disabling-System-Integrity-Protection"
+		echo "---------------------------"
+
+		# -- Casks --
+		install_if_missing alacritty --brew-opts --cask
+		install_if_missing alfred --brew-opts --cask
+		install_if_missing google-chrome --brew-opts --cask
+		install_if_missing karabiner-elements --brew-opts --cask
+		install_if_missing scroll-reverser --brew-opts --cask
+		install_if_missing spotify --brew-opts --cask
 	fi
 }
 

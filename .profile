@@ -11,9 +11,10 @@ YADM_CLASS=$(yadm config local.class)
 if [[ $OSTYPE == "linux-gnu" ]]; then
     export DISTRO=$(cat /etc/os-release | head -n1 | grep NAME= | sed s/NAME=// | sed s/\"//g)
     export PATH="$PATH:$HOME/bin"
+    export TMUX_TERM=tmux-256color
 
     if [[ $YADM_CLASS == "linux-gui" ]] ; then
-        export TERMINAL=alacritty
+        export TERM=alacritty
         export PATH="$PATH:$HOME/.local/bin:/snap/bin"
         export QT_STYLE_OVERRIDE=adwaita
         export FZF_DEFAULT_COMMAND='fd -H -t f -t d -t l'
@@ -34,8 +35,13 @@ if [[ $OSTYPE == "linux-gnu" ]]; then
 fi
 
 if [[ $OSTYPE == "darwin"* ]]; then
-    export TERMINAL=iTerm
     export BASH_SILENCE_DEPRECATION_WARNING=1
     export CPY_PRG="pbcopy"
-fi;
+    export PATH="$PATH:$HOME/bin"
+    export TERM=alacritty
+    export TMUX_TERM=$TERM
 
+    if sysctl -a | grep brand | grep M1 > /dev/null 2>&1; then
+	eval "$(/opt/homebrew/bin/brew shellenv)"
+    fi
+fi;

@@ -1,6 +1,6 @@
 ## Common Commands ## 
 alias c='clear'
-alias d='et -r 8377:8377 ubuntu@54.215.224.126'
+alias d='et -r 8377:8377 dev'
 alias e='exit'
 alias g='grep'
 alias l='ls -lah'
@@ -17,7 +17,6 @@ alias tree='tree -a'
 alias free='free -h'
 alias grep='grep  --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,node_modules}'
 alias pag='ps aux | grep'
-alias open='xdg-open'
 alias qemuvm='qemu-system-x86_64 -enable-kvm -vga std -m 2048 -cpu host -smp 4 -net nic,model=virtio -net user,hostfwd=tcp::2222-:22'
 alias python='python3'
 alias cpl="history | tail -2 | head -1 | cut -f 5 -d ' ' | tr -d '\n' |  $CPY_PRG"
@@ -96,6 +95,7 @@ alias hgc='hg commit'
 alias hgsc='hg status --no-status --rev .^'
 
 if [[ $OSTYPE == "linux-gnu" ]] ; then
+    alias open="xdg-open"
     # ~/.config files #
     alias ebsp="$EDITOR ~/.config/bspwm/bspwmrc"
     alias esxh="$EDITOR ~/.config/sxhkd/sxhkdrc"
@@ -122,4 +122,5 @@ if [[ $OSTYPE == "darwin"* ]] ; then
     alias brewin='~/scripts/brew-wrapper.sh install'
     alias brewup='~/scripts/brew-wrapper.sh upgrade'
     alias brewrm='brew remove'
+    alias esxh="$EDITOR ~/.config/skhd/skhdrc"
 fi
