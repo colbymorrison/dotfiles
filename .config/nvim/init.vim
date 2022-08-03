@@ -39,3 +39,5 @@ else
 	let &packpath = &runtimepath
 	source ~/.vimrc
 endif
+
+lua require('config')

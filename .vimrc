@@ -3,7 +3,6 @@ if !has('ide')
 	call plug#begin('~/.vim/plugged')
 	Plug 'vim-scripts/a.vim'
 	Plug 'vim-airline/vim-airline'
-	Plug 'dense-analysis/ale'
 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 	Plug 'tpope/vim-fugitive'
 	Plug 'junegunn/fzf' 
@@ -13,6 +12,8 @@ if !has('ide')
 	Plug 'sheerun/vim-polyglot'
 	Plug 'mhinz/vim-signify'
 	Plug 'christoomey/vim-tmux-navigator'
+	Plug 'mfussenegger/nvim-jdtls'
+	Plug 'neovim/nvim-lspconfig'
 
 	" Colorscheme
 	Plug 'morhetz/gruvbox'
@@ -124,23 +125,6 @@ if !has('ide')
 	let g:Tex_PromptedEnvironments='equation,equation*,align,align*,enumerate,itemize,figure,table,theorem,lemma,tikzpicture'
 	let g:Tex_GotoError=0 
 
-
-	" ALE
-	" let g:ale_disable_lsp = 1
-	let g:ale_completion_enabled = 1
-	let g:ale_lint_on_text_changed = 1
-	let g:ale_set_balloons = 1
-
-	nmap gd <Plug>(ale_go_to_definition)
-	nmap gD <Plug>(ale_go_to_definition_in_tab)
-	nmap gy <Plug>(ale_go_to_type_definition)
-	nmap gr <Plug>(ale_find_references)
-
-	nmap <leader>j <Plug>(ale_next_wrap)
-	nmap <leader>k <Plug>(ale_previous_wrap)
-	nmap <leader>v <Plug>(ale_detail)
-	nmap <leader>f :ALECodeAction<cr>
-
 	" FZF
 	nmap <silent> <leader>z :History<cr>
 	nmap <silent> <leader>b :Buffers<cr>
@@ -154,4 +138,12 @@ endif
 
 if has('ide')
 	nmap gr <Action>(FindUsages)
+	nmap <C-p> <Action>(GotoFile)
+	nmap <C-t> <Action>(GotoAction)
+	nmap <leader>j <Action>(GotoNextError)
+	nmap <leader>k <Action>(GotoPreviousError)
+	nmap <C-h> <Action>(PrevSplitter)
+	nmap <C-l> <Action>(NextSplitter)
+	nmap ]c <Action>(VcsShowNextChangeMarker)
+	nmap [c <Action>(VcsShowPrevChangeMarker)
 endif

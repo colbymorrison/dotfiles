@@ -16,14 +16,16 @@ alias yada='cd ~/.config/yadm/alt'
 alias tree='tree -a'
 alias free='free -h'
 alias grep='grep  --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,node_modules}'
-alias pag='ps aux | grep'
+alias pag='ps aux | grep -v grep | grep'
 alias qemuvm='qemu-system-x86_64 -enable-kvm -vga std -m 2048 -cpu host -smp 4 -net nic,model=virtio -net user,hostfwd=tcp::2222-:22'
 alias python='python3'
 alias cpl="history | tail -2 | head -1 | cut -f 5 -d ' ' | tr -d '\n' |  $CPY_PRG"
+alias pip='pip3'
 
 ## config files ##
 alias not="$EDITOR ~/Documents/notes.md"
 alias evi="$EDITOR ~/.vimrc"
+alias envi="$EDITOR ~/.config/nvim/lua/config.lua"
 alias ebh="$EDITOR ~/.bashrc"
 alias ebp="$EDITOR ~/.bash_profile"
 alias etm="$EDITOR ~/.tmux.conf"
@@ -119,8 +121,8 @@ if [[ $OSTYPE == "linux-gnu" ]] ; then
 fi
 
 if [[ $OSTYPE == "darwin"* ]] ; then
-    alias brewin='~/scripts/brew-wrapper.sh install'
-    alias brewup='~/scripts/brew-wrapper.sh upgrade'
+    alias brewin='brew install'
+    alias brewup='brew upgrade'
     alias brewrm='brew remove'
     alias esxh="$EDITOR ~/.config/skhd/skhdrc"
 fi

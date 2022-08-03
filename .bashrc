@@ -6,13 +6,13 @@
 [[ $- != *i* ]] && return
 
 # ---Env vars--- #
-if [ -f /home/colby/scripts/parse_git_branch.sh ]; then
-  VCS="\$(/home/colby/scripts/parse_git_branch.sh)"
+if [ -f $HOME/scripts/parse_git_branch.sh ]; then
+  VCS="\$($HOME/scripts/parse_git_branch.sh)"
 else
   VCS=""
 fi
 
-export PS1="\[\033[0;93m\]\u@\h\[\033[01;34m\] \W \[\033[00m\][\D{%T}]\[\033[32m\]$VCS\[\033[00m\]$ " 
+export PS1="\[\033[0;93m\]\u@\h\[\033[01;34m\] \W \[\033[00m\][\D{%T}]\[\033[32m\] $VCS\[\033[00m\]$ " 
 
 # ---Alias--- #
 if [ -f ~/.bash_aliases ]; then
@@ -60,6 +60,10 @@ checkout_fzf() {
   [ "$#" -eq 1 ] && git checkout $1 || git checkout $(git branch | fzf --height="10")
 }
 
+gaf() {
+    git add $(git status --porcelain  | grep "^ M" | cut -d ' ' -f 3 | fzf)
+}
+
 if [[ $IS_FB == 0 ]]; then
   source /usr/local/share/fb_tools/fb.shell
 
@@ -83,6 +87,9 @@ fi
 # --Completion-- #
 [[ -f /usr/share/bash-completion/bash_completion ]]&&\
   source /usr/share/bash-completion/bash_completion
+
+[[ -f /opt/homebrew/etc/bash_completion ]]&&\
+  source /opt/homebrew/etc/bash_completion
 
 if [[ -f /usr/share/bash-completion/completions/git ]]; then 
     source /usr/share/bash-completion/completions/git

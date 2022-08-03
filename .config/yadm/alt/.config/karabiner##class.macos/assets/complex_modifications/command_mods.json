@@ -143,6 +143,62 @@
                             ]
                         }
                     ]
+                },
+		{
+                    "type": "basic",
+                    "from": {
+                        "key_code": "j",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ]
+                        }
+                    },
+                    "to": [
+			    {
+				"key_code": "j",
+				"modifiers": [
+					"control"
+				]
+			    }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com.jetbrains.intellij",
+			        "^io.alacritty"
+                            ]
+                        }
+                    ]
+                },
+		{
+                    "type": "basic",
+                    "from": {
+                        "key_code": "k",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ]
+                        }
+                    },
+                    "to": [
+			    {
+				"key_code": "k",
+				"modifiers": [
+					"control"
+				]
+			    }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com.jetbrains.intellij",
+			        "^io.alacritty"
+                            ]
+                        }
+                    ]
                 }, 
 		{
                     "type": "basic",
@@ -493,7 +549,7 @@
             ]
         },
         {
-            "description": "map control-q to command-q for internal keyboard",
+            "description": "map option-q to command-q for internal keyboard",
             "manipulators": [
                 {
                     "type": "basic",
@@ -501,7 +557,7 @@
                         "key_code": "q",
                         "modifiers": {
                             "mandatory": [
-                                "control"
+                                "option"
                             ]
                         }
                     },

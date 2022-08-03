@@ -274,7 +274,8 @@ function gui_setup(){
 		fi
 	fi
 
-	if [[ $OSTYPE == "Darwin*" ]]; then
+	if [[ $OSTYPE == "darwin*" ]]; then
+		install_if_missing bash-completion
 		# -- Karabiner Elements --
 		install_if_missing karabiner-elements --brew-opts --cask 
 
