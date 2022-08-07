@@ -14,6 +14,7 @@ if !has('ide')
 	Plug 'christoomey/vim-tmux-navigator'
 	Plug 'mfussenegger/nvim-jdtls'
 	Plug 'neovim/nvim-lspconfig'
+	Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 	" Colorscheme
 	Plug 'morhetz/gruvbox'
@@ -55,6 +56,7 @@ set mouse=a
 set spelllang=frc             
 set spellfile=$HOME/.vim/spell/en.utf-8.add
 set switchbuf+=usetab,newtab  " open quickfix in newtab unless already open
+set termguicolors
 
 " Search
 set incsearch                 " search with typeahead
@@ -132,6 +134,8 @@ if !has('ide')
 
 	" Pgsql
 	let g:sql_type_default = 'pgsql'
+
+	let g:Hexokinase_highlighters = ['backgroundfull']
 
 	source ~/.vim/autoload/comment.vim
 endif

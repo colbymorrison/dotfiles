@@ -10,12 +10,11 @@ export YADM_ALT=$XDG_CONFIG_HOME/yadm/alt
 YADM_CLASS=$(yadm config local.class)
 if [[ $OSTYPE == "linux-gnu" ]]; then
     export DISTRO=$(cat /etc/os-release | head -n1 | grep NAME= | sed s/NAME=// | sed s/\"//g)
-    export PATH="$PATH:$HOME/bin"
+    export PATH="$PATH:$HOME/bin:$HOME/.local/bin"
     export TMUX_TERM=tmux-256color
 
     if [[ $YADM_CLASS == "linux-gui" ]] ; then
         export TERM=alacritty
-        export PATH="$PATH:$HOME/.local/bin:/snap/bin"
         export QT_STYLE_OVERRIDE=adwaita
         export FZF_DEFAULT_COMMAND='fd -H -t f -t d -t l'
 	export FZF_DEFAULT_OPTS='--preview="~/scripts/preview.sh {}" --preview-window hidden --bind ctrl-space:toggle-preview --height 60%'
