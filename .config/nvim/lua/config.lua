@@ -1,4 +1,4 @@
--- ** Nvim lsp client **
+-- ** Nvim LSP Config **
 --
 -- disable virtual_text (inline) diagnostics and use floating window
 -- format the message such that it shows source, message and
@@ -13,7 +13,7 @@ vim.diagnostic.config({
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
 
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '<leader>o', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '<leader>j', function() vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR}) end, opts)
 vim.keymap.set('n', '<leader>k', function() vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR}) end, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
@@ -42,5 +42,8 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
 end
 
+-- Language servers
+-- (Java in ~/.config/nvim/ftplugin/java.lua)
 require'lspconfig'.tsserver.setup{}
 require'lspconfig'.pylsp.setup{}
+require'lspconfig'.sqlls.setup{}
