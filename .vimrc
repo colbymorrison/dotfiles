@@ -22,6 +22,7 @@ if !has('ide')
 	Plug 'dracula/vim', { 'as': 'dracula' }
 	Plug 'arcticicestudio/nord-vim'
 	Plug 'sainnhe/sonokai'
+	Plug 'liuchengxu/space-vim-dark'
 	call plug#end()
 endif
 
@@ -56,7 +57,6 @@ set mouse=a
 set spelllang=frc             
 set spellfile=$HOME/.vim/spell/en.utf-8.add
 set switchbuf+=usetab,newtab  " open quickfix in newtab unless already open
-set termguicolors
 
 " Search
 set incsearch                 " search with typeahead
@@ -93,7 +93,7 @@ nnoremap <leader>e :NERDTreeToggle %<CR>
 
 " Colors
 set background=dark
-colo sonokai
+color sonokai
 
 
 "--- Plugins ----
@@ -141,9 +141,11 @@ if !has('ide')
 endif
 
 if has('ide')
+	set clipboard+=unnamed
 	nmap gr <Action>(FindUsages)
+	nmap <leader>z <Action>(RecentFiles)
 	nmap <C-p> <Action>(GotoFile)
-	nmap <C-t> <Action>(GotoAction)
+	nmap <C-t> <Action>(SearchEverywhere)
 	nmap <leader>j <Action>(GotoNextError)
 	nmap <leader>k <Action>(GotoPreviousError)
 	nmap <C-h> <Action>(PrevSplitter)

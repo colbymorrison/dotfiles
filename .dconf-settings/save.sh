@@ -3,6 +3,8 @@
 # Usage ./save.sh [--yadm-commit]
 # If --yadm-commit, amend any modifications to the previous commit
 
+command -v dconf || exit 0 2>&1
+
 cd "$HOME/.dconf-settings"
 n=0
 while read -r p; do

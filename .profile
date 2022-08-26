@@ -36,9 +36,10 @@ fi
 if [[ $OSTYPE == "darwin"* ]]; then
     export BASH_SILENCE_DEPRECATION_WARNING=1
     export CPY_PRG="pbcopy"
-    export PATH="$PATH:$HOME/bin"
+    export PATH="$PATH:$HOME/bin:/opt/homebrew/Cellar/mysql@5.7/5.7.38/bin/"
     export TERM=alacritty
     export TMUX_TERM=$TERM
+    export ANDROID_SDK_ROOT="/Users/cmorrison/Library/Android/sdk"
 
     if sysctl -a | grep brand | grep M1 > /dev/null 2>&1; then
 	eval "$(/opt/homebrew/bin/brew shellenv)"
