@@ -7,6 +7,12 @@ export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 export YADM_ALT=$XDG_CONFIG_HOME/yadm/alt
 
+if [[ -d "/opt/homebrew/bin" ]]; then
+	if sysctl -a | grep brand | grep M1 > /dev/null 2>&1; then
+		eval "$(/opt/homebrew/bin/brew shellenv)"
+	fi
+fi
+
 YADM_CLASS=$(yadm config local.class)
 if [[ $OSTYPE == "linux-gnu" ]]; then
     export DISTRO=$(cat /etc/os-release | head -n1 | grep NAME= | sed s/NAME=// | sed s/\"//g)
@@ -36,12 +42,9 @@ fi
 if [[ $OSTYPE == "darwin"* ]]; then
     export BASH_SILENCE_DEPRECATION_WARNING=1
     export CPY_PRG="pbcopy"
-    export PATH="$PATH:$HOME/bin:/opt/homebrew/Cellar/mysql@5.7/5.7.38/bin/"
+    export PATH="$PATH:$HOME/bin:/opt/homebrew/opt/mysql@5.7/bin:/opt/homebrew/opt/sqlite/bin"
     export TERM=alacritty
     export TMUX_TERM=$TERM
     export ANDROID_SDK_ROOT="/Users/cmorrison/Library/Android/sdk"
-
-    if sysctl -a | grep brand | grep M1 > /dev/null 2>&1; then
-	eval "$(/opt/homebrew/bin/brew shellenv)"
-    fi
+    export TOMCAT_HOME="/opt/homebrew/Cellar/tomcat@8/8.5.81/"
 fi;

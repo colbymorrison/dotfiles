@@ -96,6 +96,11 @@ if [[ -f /usr/share/bash-completion/completions/git ]]; then
     __git_complete gco _git_checkout
     __git_complete gb _git_branch
     __git_complete ga _git_add
+elif [[ -f /opt/homebrew/etc/bash_completion.d/git-completion.bash ]]; then
+    source /opt/homebrew/etc/bash_completion.d/git-completion.bash
+    __git_complete gco _git_checkout
+    __git_complete gb _git_branch
+    __git_complete ga _git_add
 fi
 
 # Fzf completions can live in many directories

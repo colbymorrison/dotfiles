@@ -57,6 +57,7 @@ set mouse=a
 set spelllang=frc             
 set spellfile=$HOME/.vim/spell/en.utf-8.add
 set switchbuf+=usetab,newtab  " open quickfix in newtab unless already open
+set visualbell		      " no beeps
 
 " Search
 set incsearch                 " search with typeahead

@@ -167,7 +167,7 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^io.alacritty"
+                                            "^org.alacritty"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -195,7 +195,7 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^io.alacritty"
+                                            "^org.alacritty"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -223,7 +223,7 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^io.alacritty"
+                                            "^org.alacritty"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -251,7 +251,7 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^io.alacritty"
+                                            "^org.alacritty"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -279,7 +279,7 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^io.alacritty"
+                                            "^org.alacritty"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -307,7 +307,7 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^io.alacritty"
+                                            "^org.alacritty"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -335,7 +335,7 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^io.alacritty"
+                                            "^org.alacritty"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -363,7 +363,7 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^io.alacritty"
+                                            "^org.alacritty"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -391,7 +391,7 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^io.alacritty"
+                                            "^org.alacritty"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -419,7 +419,7 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^io.alacritty"
+                                            "^org.alacritty"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -447,7 +447,7 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^io.alacritty"
+                                            "^org.alacritty"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -475,7 +475,7 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^io.alacritty"
+                                            "^org.alacritty"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -503,7 +503,7 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^io.alacritty"
+                                            "^org.alacritty"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -531,7 +531,7 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^io.alacritty"
+                                            "^org.alacritty"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -559,7 +559,7 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^io.alacritty"
+                                            "^org.alacritty"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -587,7 +587,7 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^io.alacritty"
+                                            "^org.alacritty"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -615,7 +615,7 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^io.alacritty"
+                                            "^org.alacritty"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -645,7 +645,7 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^io.alacritty"
+                                            "^org.alacritty"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -669,7 +669,38 @@
                                 "type": "basic"
                             }
                         ]
-                    }
+                    },
+		    {
+                        "description": "gd Xcode",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+					    "^com.apple.dt.Xcode"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+				    "simultaneous": [
+					    {"key_code": "g"},
+					    {"key_code": "d"}
+				    ]
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "j",
+                                        "modifiers": [
+                                            "command",
+					    "control"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+			]
+		    }
                 ]
             },
             "devices": [
