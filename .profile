@@ -46,5 +46,5 @@ if [[ $OSTYPE == "darwin"* ]]; then
     export TERM=alacritty
     export TMUX_TERM=$TERM
     export ANDROID_SDK_ROOT="/Users/cmorrison/Library/Android/sdk"
-    export TOMCAT_HOME="/opt/homebrew/Cellar/tomcat@8/8.5.81/"
+    export TOMCAT_HOME="/opt/homebrew/Cellar/tomcat@8/8.5.84/"
 fi;
