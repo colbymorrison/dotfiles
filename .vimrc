@@ -3,8 +3,6 @@ if !has('ide')
 	call plug#begin('~/.vim/plugged')
 	Plug 'vim-scripts/a.vim'
 	Plug 'vim-airline/vim-airline'
-	" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-	Plug 'tpope/vim-fugitive'
 	Plug 'junegunn/fzf' 
 	Plug 'junegunn/fzf.vim' 
 	Plug 'preservim/nerdtree'
@@ -13,9 +11,8 @@ if !has('ide')
 	Plug 'mhinz/vim-signify'
 	Plug 'sainnhe/sonokai'
 	Plug 'christoomey/vim-tmux-navigator'
-	Plug 'mfussenegger/nvim-jdtls'
 	Plug 'neovim/nvim-lspconfig'
-	Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+	Plug 'L3MON4D3/LuaSnip', {'tag': 'v1.*'}
 
 	" Completion
 	Plug 'hrsh7th/cmp-nvim-lsp'
@@ -32,6 +29,7 @@ endif
 if !has("nvim") && filereadable("~/scripts/vim/nvim-defaults.vim")
    source ~/scripts/vim/nvim-defaults.vim
 endif
+
 
 " General settings
 set nocompatible              " be iMproved
@@ -60,6 +58,7 @@ set spelllang=frc
 set spellfile=$HOME/.vim/spell/en.utf-8.add
 set switchbuf+=usetab,newtab  " open quickfix in newtab unless already open
 set visualbell		      " no beeps
+set completeopt=menu,menuone,noselect
 
 " Search
 set incsearch                 " search with typeahead
@@ -68,6 +67,7 @@ set hlsearch                  " hilight all searches
 " Scrolling
 set scrolljump=5              " scroll five lines at a time vertically when at bottom
 set sidescroll=10             " minumum columns to scroll horizontally
+
 " Mappings
 nmap <Enter> O<Esc>
 nmap <silent> <leader>c :noh<cr>
@@ -75,14 +75,10 @@ nmap <C-x> :close<cr>
 nmap <leader>s :so ~/.vimrc<cr>
 nmap <leader>pa :set invpaste<CR>
 nmap <leader>r :set invrelativenumber<CR> 
-" Fbgs word under cursor
-nmap <leader>g :FBGS <C-R><C-W><CR>   
 imap <leader>f {<Esc>o}<Esc>O
 " Go no next/prev method name in python
 nmap [w [mw
 nmap ]w ]mw
-" arc lint current file
-nnoremap <leader>l :exec '!arc lint -a %'<cr>
 " Tabs
 nmap <leader>tj :tabp<cr>
 nmap <leader>tk :tabn<cr>
@@ -98,50 +94,56 @@ nnoremap <leader>e :NERDTreeToggle %<CR>
 set background=dark
 color sonokai
 
+" Intellij
+if has('ide')
+	set clipboard+=unnamed
+	nmap gr <Action>(FindUsages)
+	nmap <leader>z <Action>(RecentFiles)
+	nmap <C-p> <Action>(GotoFile)
+	nmap <C-t> <Action>(SearchEverywhere)
+	nmap <leader>j <Action>(GotoNextError)
+	nmap <leader>k <Action>(GotoPreviousError)
+	nmap <C-h> <Action>(PrevSplitter)
+	nmap <C-l> <Action>(NextSplitter)
+	nmap ]c <Action>(VcsShowNextChangeMarker)
+	nmap [c <Action>(VcsShowPrevChangeMarker)
+	finish
+endif
 
 "--- Plugins ----
-if !has('ide')
-	" NERDTree
-	let g:NERDTreeWinSize=50
+"
+" NERDTree
+let g:NERDTreeWinSize=50
 
-	" Signify
-	set updatetime=100
-	nmap <leader>hu :SignifyHunkUndo<cr>
-	nmap <leader>hp :SignifyHunkDiff<cr>
-	let g:signify_sign_delete = '-'
+" Signify
+set updatetime=100
+let g:signify_sign_delete = '-'
+nmap <leader>hu :SignifyHunkUndo<cr>
+nmap <leader>hp :SignifyHunkDiff<cr>
 
-	" Airline
-	let g:airline#extensions#hunks#enabled=0
+" Airline
+let g:airline#extensions#hunks#enabled=0
 
-	" Deoplete
-	"let g:deoplete#enable_at_startup = 1
-	"" Use <tab> to continue completion 
-	"inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-	"let g:python3_host_prog='/usr/bin/python3'
+" Vim-latex-suite
+set grepprg=grep\ -nH\ $* 
+let g:tex_flavor='latex'
+let g:tex_no_error=1
+let g:Tex_DefaultTargetFormat='pdf'
+let g:Tex_ViewRule_pdf = 'zathura'
+let g:Tex_PromptedEnvironments='equation,equation*,align,align*,enumerate,itemize,figure,table,theorem,lemma,tikzpicture'
+let g:Tex_GotoError=0 
+imap <C-g> <Plug>IMAP_JumpForward
+nmap <C-g> <Plug>IMAP_JumpForward
 
-	" Vim-latex-suite
-	set grepprg=grep\ -nH\ $* 
-	let g:tex_flavor='latex'
-	let g:tex_no_error=1
-	let g:Tex_DefaultTargetFormat='pdf'
-	let g:Tex_ViewRule_pdf = 'zathura'
-	imap <C-g> <Plug>IMAP_JumpForward
-	nmap <C-g> <Plug>IMAP_JumpForward
-	let g:Tex_PromptedEnvironments='equation,equation*,align,align*,enumerate,itemize,figure,table,theorem,lemma,tikzpicture'
-	let g:Tex_GotoError=0 
+" FZF
+nmap <silent> <leader>z :History<cr>
+nmap <silent> <leader>b :Buffers<cr>
+nmap <C-p> :Files<CR>
 
-	" FZF
-	nmap <silent> <leader>z :History<cr>
-	nmap <silent> <leader>b :Buffers<cr>
-	nmap <C-p> :Files<CR>
+" Pgsql
+let g:sql_type_default = 'pgsql'
+source ~/.vim/autoload/comment.vim
 
-	" Pgsql
-	let g:sql_type_default = 'pgsql'
-
-	let g:Hexokinase_highlighters = ['backgroundfull']
-
-	source ~/.vim/autoload/comment.vim
-	set completeopt=menu,menuone,noselect
 	lua <<EOF
   -- Set up nvim-cmp.
   local cmp = require'cmp'
@@ -236,18 +238,4 @@ if !has('ide')
     capabilities = capabilities
   }
 EOF
-endif
 
-if has('ide')
-	set clipboard+=unnamed
-	nmap gr <Action>(FindUsages)
-	nmap <leader>z <Action>(RecentFiles)
-	nmap <C-p> <Action>(GotoFile)
-	nmap <C-t> <Action>(SearchEverywhere)
-	nmap <leader>j <Action>(GotoNextError)
-	nmap <leader>k <Action>(GotoPreviousError)
-	nmap <C-h> <Action>(PrevSplitter)
-	nmap <C-l> <Action>(NextSplitter)
-	nmap ]c <Action>(VcsShowNextChangeMarker)
-	nmap [c <Action>(VcsShowPrevChangeMarker)
-endif
