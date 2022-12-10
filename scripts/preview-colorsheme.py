@@ -1,6 +1,6 @@
 #! /bin/python
 
-import sys 
+import sys
 import json
 
 def hex_to_rbg(hex):
