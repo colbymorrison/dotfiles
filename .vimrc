@@ -18,6 +18,7 @@ if !has('ide')
 	Plug 'christoomey/vim-tmux-navigator'
 	Plug 'neovim/nvim-lspconfig'
 	Plug 'L3MON4D3/LuaSnip', {'tag': 'v1.*'}
+	Plug 'norcalli/nvim-colorizer.lua'
 
 	" Completion
 	Plug 'hrsh7th/cmp-nvim-lsp'
@@ -28,10 +29,6 @@ if !has('ide')
 	Plug 'hrsh7th/cmp-vsnip'
 	Plug 'hrsh7th/vim-vsnip'
 
-	"Xbase
-	Plug 'nvim-lua/plenary.nvim'
-	Plug 'nvim-telescope/telescope.nvim'
-	Plug 'xbase-lab/xbase', { 'do': 'make install' }
 	call plug#end()
 endif
 
@@ -76,10 +73,10 @@ set sidescroll=10             			" minumum columns to scroll horizontally
 " -- Mappings --
 nmap <Enter> O<Esc>
 nmap <silent> <leader>c :noh<cr>
-nmap <C-x> :close<cr>
 nmap <leader>s :so ~/.vimrc<cr>
 nmap <leader>pa :set invpaste<CR>
 nmap <leader>r :set invrelativenumber<CR> 
+nmap <C-f> :Rg<cr>
 imap <leader>f {<Esc>o}<Esc>O
 " Go no next/prev method name in python
 nmap [w [mw
@@ -91,7 +88,7 @@ nmap <leader>tt :tabnew<cr>
 nmap <leader>td :tabc<cr>
 " Copy current path
 nmap <leader>py :let @" = expand("%");call system($CPY_PRG, @0)<cr>
-nmap <silent> <leader>y :call system($CPY_PRG, @0)<CR>
+nmap <silent> <leader>y :call system($CPY_PRG, @0)<cr>
 
 
 " -- Color --

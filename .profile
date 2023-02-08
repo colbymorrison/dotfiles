@@ -5,7 +5,11 @@ export CLICOLOR=1
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
+
 export YADM_ALT=$XDG_CONFIG_HOME/yadm/alt
+export GARMIN_EMAIL="colbyamorrison@gmail.com"
+
+source $HOME/.profile_secret
 
 if [[ -d "/opt/homebrew/bin" ]]; then
 	if sysctl -a | grep brand | grep M1 > /dev/null 2>&1; then
@@ -47,4 +51,6 @@ if [[ $OSTYPE == "darwin"* ]]; then
     export TMUX_TERM=$TERM
     export ANDROID_SDK_ROOT="/Users/cmorrison/Library/Android/sdk"
     export TOMCAT_HOME="/opt/homebrew/Cellar/tomcat@8/8.5.84/"
+    export FZF_DEFAULT_COMMAND='fd -H -t f -t d -t l'
+    export FZF_DEFAULT_OPTS='--preview="~/scripts/preview.sh {}" --preview-window hidden --bind ctrl-space:toggle-preview --height 60%'
 fi;

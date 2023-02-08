@@ -46,11 +46,9 @@ require'lspconfig'.tsserver.setup{}
 require'lspconfig'.pylsp.setup{}
 require'lspconfig'.sqlls.setup{}
 require'lspconfig'.sourcekit.setup{}
+require'lspconfig'.jsonls.setup{}
 
--- ** xbase **
-require'xbase'.setup()
-
--- ** nvim-cmp **
+-- *** nvim-cmp ***
 local cmp = require'cmp'
 local luasnip = require 'luasnip'
 
@@ -115,7 +113,7 @@ cmp.setup.cmdline({ '/', '?' }, {
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
+cmp.setup.cmdline(':', {  
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
     { name = 'path' }
@@ -138,4 +136,20 @@ require('lspconfig')['sqlls'].setup {
 require('lspconfig')['sourcekit'].setup {
   capabilities = capabilities
 }
+require('lspconfig')['jsonls'].setup {
+  capabilities = capabilities
+}
 
+-- *** colorizer ***
+-- require'colorizer'.setup(
+--   {'*';},
+--   {
+--     RGB      = true;         -- #RGB hex codes
+-- 	  RRGGBB   = true;         -- #RRGGBB hex codes
+-- 	  names    = true;         -- "Name" codes like Blue
+-- 	  RRGGBBAA = true;         -- #RRGGBBAA hex codes
+-- 	  rgb_fn   = true;         -- CSS rgb() and rgba() functions
+-- 	  hsl_fn   = true;         -- CSS hsl() and hsla() functions
+-- 	  css      = true;         -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+-- 	  css_fn   = true;         -- Enable all CSS *functions*: rgb_fn, hsl_fn
+--   })
