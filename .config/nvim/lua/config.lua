@@ -18,6 +18,7 @@ local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '<leader>o', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '<leader>j', function() vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR}) end, opts)
 vim.keymap.set('n', '<leader>k', function() vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR}) end, opts)
+vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
 vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
@@ -86,7 +87,6 @@ cmp.setup({
     i = cmp.mapping.abort(),
     c = cmp.mapping.close(),
   }),
-  ['<CR>'] = cmp.mapping.confirm({ select = true }),
   },
   sources = cmp.config.sources({
     { name = 'luasnip' }, 

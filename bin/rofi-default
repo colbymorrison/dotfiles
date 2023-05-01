@@ -1,3 +1,1 @@
-#! /bin/bash
-	rofi -show combi -combi-modi window,drun,files:~/scripts/rofi/search.sh,power:~/scripts/rofi/power.sh -drun-match-fields name,exec -no-sort -theme-str "element-icon { size: 2.5ch;}" 
-
+/Users/cmorrison/scripts/rofi-default
