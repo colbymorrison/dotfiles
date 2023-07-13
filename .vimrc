@@ -111,6 +111,76 @@ if has('ide')
 	finish
 endif
 
+" -- Xcode (via https://github.com/mickael-menu/ShadowVim) --
+if exists('g:shadowvim')
+ 	" Naviagtion
+ 	map gd <Cmd>SVPress <LT>C-D-j><CR>
+ 	map gr <Cmd>SVPress <LT>C-S-D-f><CR>
+ 	map <C-o> <Cmd>SVPress <LT>C-D-Left><CR>
+ 	map <C-i> <Cmd>SVPress <LT>C-D-Right><CR>
+	
+	" Search
+	map <C-p> <Cmd>SVPress <LT>C-p><CR>
+	map <C-q> <Cmd>SVPress <LT>C-D-j><CR>
+	map <C-w> <Cmd>SVPress <LT>C-D-j><CR>
+ 
+ 	" Window management
+ 	map <C-w>v <Cmd>SVPress <LT>C-D-t><CR>
+ 	map <C-w>s <Cmd>SVPress <LT>C-M-D-t><CR>
+ 	map <C-w>h <Cmd>SVPress <LT>D-j><CR><Cmd>SVPress h<CR><Cmd>SVPress <LT>CR><CR>
+ 	map <C-w>j <Cmd>SVPress <LT>D-j><CR><Cmd>SVPress j<CR><Cmd>SVPress <LT>CR><CR>
+ 	map <C-w>k <Cmd>SVPress <LT>D-j><CR><Cmd>SVPress k<CR><Cmd>SVPress <LT>CR><CR>
+ 	map <C-w>l <Cmd>SVPress <LT>D-j><CR><Cmd>SVPress l<CR><Cmd>SVPress <LT>CR><CR>
+ 	map <C-w>w <Cmd>SVPress <LT>C-`><CR>
+ 
+ 	" ZZ
+ 	map zz <Cmd>SVPress <LT>C-M-S-D-l><CR>
+ 
+ 	" Folding
+ 	map zc <Cmd>SVPress <LT>M-D-Left><CR>
+ 	map zo <Cmd>SVPress <LT>M-D-Right><CR>
+ 	map zM <Cmd>SVPress <LT>M-S-D-Left><CR>
+ 	map zR <Cmd>SVPress <LT>M-S-D-Right><CR>
+endif
+
+if exists('g:vscode')
+    let mapleader=","
+	" vscode-neovim mappings to get as close to terminal nvim with my plugins
+	" as possible
+	nmap <silent> <leader>c :noh<cr>
+	nmap <C-x> :close<cr>
+	nmap <leader>s :so ~/.vimrc<cr>
+	nmap <Enter> O<Esc>
+	nmap <silent> <leader>c :noh<cr>
+	" Go no next/prev method name in python
+	nmap [w [mw
+	nmap ]w ]mw
+	nmap <leader>tj :tabp<cr>
+	nmap <leader>tk :tabn<cr>
+	nmap <leader>tt :tabnew<cr>
+	nmap <leader>td :tabc<cr>
+    	nmap <leader>y :call system('xclip -selection clipboard', @0)<CR>
+
+	nmap gr :call VSCodeNotify("editor.action.goToReferences")<cr>
+	nmap <leader>j :call VSCodeNotify("editor.action.marker.next")<cr>
+	nmap <leader>k :call VSCodeNotify("editor.action.marker.prev")<cr>
+	nmap <leader>d :close<cr>
+	nmap <leader>f :call VSCodeNotify("editor.action.formatDocument")<cr>
+	nmap <leader>n :call VSCodeNotify("editor.action.rename")<cr>
+	nmap <leader>w :call VSCodeNotify("buck.lsp.open_nearest_buck_file")<cr>
+	nmap [c :call VSCodeNotify("workbench.action.editor.nextChange")<cr>
+	nmap ]c :call VSCodeNotify("workbench.action.editor.previousChange")<cr>
+	nmap <leader>hu :call VSCodeNotify("fb-hg.revertHunk")<cr>
+	nmap <leader>hp :call VSCodeNotify("editor.action.dirtydiff.next")<cr>
+	nmap <C-w>v :call VSCodeNotify("workbench.action.splitEditorRight")<cr>
+	nmap <C-w>s :call VSCodeNotify("workbench.action.splitEditorDown")<cr>
+	nmap <C-k> :call VSCodeNotify("workbench.action.focusAboveGroup")<cr>
+	nmap <C-j> :call VSCodeNotify("workbench.action.focusBelowGroup")<cr>
+	nmap <C-h> :call VSCodeNotify("workbench.action.focusLeftGroup")<cr>
+	nmap <C-l> :call VSCodeNotify("workbench.action.focusLeftGroup")<cr>
+	command A call VSCodeNotify("cpp:switch-header-source")<cr>
+endif
+
 "--- Plugin Configs ----
 " NERDTree
 let g:NERDTreeWinSize=50
@@ -137,9 +207,11 @@ imap <C-g> <Plug>IMAP_JumpForward
 nmap <C-g> <Plug>IMAP_JumpForward
 
 " FZF
-nmap <silent> <leader>z :History<cr>
-nmap <silent> <leader>b :Buffers<cr>
-nmap <C-p> :Files<CR>
+if !exists("g:shadowvim")
+	nmap <silent> <leader>z :History<cr>
+	nmap <silent> <leader>b :Buffers<cr>
+	nmap <C-p> :Files<CR>
+endif
 
 " Pgsql
 let g:sql_type_default = 'pgsql'

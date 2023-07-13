@@ -22,6 +22,7 @@ alias qemuvm='qemu-system-x86_64 -enable-kvm -vga std -m 2048 -cpu host -smp 4 -
 alias python='python3'
 alias cpl="history | tail -2 | head -1 | cut -f 5 -d ' ' | tr -d '\n' |  $CPY_PRG"
 alias pip='pip3'
+alias rgf='rg --files | rg'
 
 ## config files ##
 alias not="$EDITOR ~/Documents/notes.md"

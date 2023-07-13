@@ -169,7 +169,8 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^org.alacritty"
+                                            "^org.alacritty",
+                                            "^com.apple.dt.Xcode"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -197,7 +198,8 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^org.alacritty"
+                                            "^org.alacritty",
+                                            "^com.apple.dt.Xcode"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -225,7 +227,8 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^org.alacritty"
+                                            "^org.alacritty",
+                                            "^com.apple.dt.Xcode"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -253,7 +256,8 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^org.alacritty"
+                                            "^org.alacritty",
+                                            "^com.apple.dt.Xcode"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -281,7 +285,8 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^org.alacritty"
+                                            "^org.alacritty",
+                                            "^com.apple.dt.Xcode"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -309,7 +314,8 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^org.alacritty"
+                                            "^org.alacritty",
+                                            "^com.apple.dt.Xcode"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -337,7 +343,8 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^org.alacritty"
+                                            "^org.alacritty",
+                                            "^com.apple.dt.Xcode"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -365,7 +372,8 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^org.alacritty"
+                                            "^org.alacritty",
+                                            "^com.apple.dt.Xcode"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -393,7 +401,8 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^org.alacritty"
+                                            "^org.alacritty",
+                                            "^com.apple.dt.Xcode"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -421,7 +430,8 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^org.alacritty"
+                                            "^org.alacritty",
+                                            "^com.apple.dt.Xcode"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -449,7 +459,8 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^org.alacritty"
+                                            "^org.alacritty",
+                                            "^com.apple.dt.Xcode"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -477,7 +488,8 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^org.alacritty"
+                                            "^org.alacritty",
+                                            "^com.apple.dt.Xcode"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -505,7 +517,8 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^org.alacritty"
+                                            "^org.alacritty",
+                                            "^com.apple.dt.Xcode"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -533,7 +546,8 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^org.alacritty"
+                                            "^org.alacritty",
+                                            "^com.apple.dt.Xcode"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -561,7 +575,8 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^org.alacritty"
+                                            "^org.alacritty",
+                                            "^com.apple.dt.Xcode"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -589,7 +604,8 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^org.alacritty"
+                                            "^org.alacritty",
+                                            "^com.apple.dt.Xcode"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -617,7 +633,8 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^org.alacritty"
+                                            "^org.alacritty",
+                                            "^com.apple.dt.Xcode"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -647,7 +664,8 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^org.alacritty"
+                                            "^org.alacritty",
+                                            "^com.apple.dt.Xcode"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -675,7 +693,8 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com.jetbrains.intellij",
-                                            "^org.alacritty"
+                                            "^org.alacritty",
+                                            "^com.apple.dt.Xcode"
                                         ],
                                         "type": "frontmost_application_if"
                                     }

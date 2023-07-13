@@ -12,13 +12,13 @@ vim.diagnostic.config({
     }
 )
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
+local opts = { silent=true }
 
 -- Mappings
 vim.keymap.set('n', '<leader>o', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '<leader>j', function() vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR}) end, opts)
 vim.keymap.set('n', '<leader>k', function() vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR}) end, opts)
-vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, opts)
+-- vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
 vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
