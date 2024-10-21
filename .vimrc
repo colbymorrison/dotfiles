@@ -19,6 +19,7 @@ if !has('ide')
 	Plug 'neovim/nvim-lspconfig'
 	Plug 'L3MON4D3/LuaSnip', {'tag': 'v1.*'}
 	Plug 'norcalli/nvim-colorizer.lua'
+	Plug 'psf/black', { 'branch': 'stable' }
 
 	" Completion
 	Plug 'hrsh7th/cmp-nvim-lsp'
@@ -89,6 +90,7 @@ nmap <leader>td :tabc<cr>
 " Copy current path
 nmap <leader>py :let @" = expand("%");call system($CPY_PRG, @0)<cr>
 nmap <silent> <leader>y :call system($CPY_PRG, @0)<cr>
+nnoremap <F9> :!Black %<cr>
 
 
 " -- Color --
@@ -102,6 +104,7 @@ if has('ide')
 	nmap <leader>z <Action>(RecentFiles)
 	nmap <C-p> <Action>(GotoFile)
 	nmap <C-t> <Action>(FindInPath)
+	nmap <C-a> <Action>(GotoAction)
 	nmap <leader>j <Action>(GotoNextError)
 	nmap <leader>k <Action>(GotoPreviousError)
 	nmap <C-h> <Action>(PrevSplitter)

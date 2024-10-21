@@ -23,6 +23,7 @@ alias python='python3'
 alias cpl="history | tail -2 | head -1 | cut -f 5 -d ' ' | tr -d '\n' |  $CPY_PRG"
 alias pip='pip3'
 alias rgf='rg --files | rg'
+alias sed='gsed'
 
 ## config files ##
 alias not="$EDITOR ~/Documents/notes.md"
@@ -72,6 +73,7 @@ alias gr='git rebase'
 alias grc='git rebase --continue'
 alias gst='git status'
 alias gsw='git show --ext-diff'
+alias gcf='git checkout $(git branch | fzf)'
 alias ya='yadm commit --amend'
 alias yd='yadm diff'
 alias yau='yadm add -u'
