@@ -104,10 +104,10 @@ alt-k = 'focus up'
 alt-l = 'focus right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
-alt-cmd-h = 'move left'
-alt-cmd-j = 'move down'
-alt-cmd-k = 'move up'
-alt-cmd-l = 'move right'
+alt-ctrl-h = 'move left'
+alt-ctrl-j = 'move down'
+alt-ctrl-k = 'move up'
+alt-ctrl-l = 'move right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
 alt-shift-minus = 'resize smart -50'
@@ -171,6 +171,22 @@ alt-m = 'fullscreen'
 alt-y = 'macos-native-minimize'
 alt-t = 'layout floating tiling'
 
+# https://nikitabobko.github.io/AeroSpace/commands#join-with
+alt-cmd-h = 'join-with left'
+alt-cmd-j = 'join-with down'
+alt-cmd-k = 'join-with up'
+alt-cmd-l = 'join-with right'
+
+[workspace-to-monitor-force-assignment]
+1 = 'main'
+2 = 'main'
+3 = 'main'
+4 = 'main'
+5 = 'secondary'
+6 = 'secondary'
+7 = 'secondary'
+8 = 'secondary'
+
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
@@ -181,8 +197,3 @@ backspace = ['close-all-windows-but-current', 'mode main']
 
 # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
 #s = ['layout sticky tiling', 'mode main']
-
-alt-shift-h = ['join-with left', 'mode main']
-alt-shift-j = ['join-with down', 'mode main']
-alt-shift-k = ['join-with up', 'mode main']
-alt-shift-l = ['join-with right', 'mode main']
