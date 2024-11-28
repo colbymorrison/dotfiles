@@ -85,49 +85,49 @@ fi
 
 
 # --Completion-- #
-[[ -f /usr/share/bash-completion/bash_completion ]]&&\
-  source /usr/share/bash-completion/bash_completion
-
-[[ -f /opt/homebrew/etc/bash_completion ]]&&\
-  source /opt/homebrew/etc/bash_completion
-
-if [[ -f /usr/share/bash-completion/completions/git ]]; then 
-    source /usr/share/bash-completion/completions/git
-    __git_complete gco _git_checkout
-    __git_complete gb _git_branch
-    __git_complete ga _git_add
-elif [[ -f /opt/homebrew/etc/bash_completion.d/git-completion.bash ]]; then
-    source /opt/homebrew/etc/bash_completion.d/git-completion.bash
-    __git_complete gco _git_checkout
-    __git_complete gb _git_branch
-    __git_complete ga _git_add
-fi
-
-# Fzf completions can live in many directories
-if [[ -d /usr/share/fzf ]]; then
-    if [[ -d /usr/share/fzf/shell ]]; then
-        source /usr/share/fzf/shell/key-bindings.bash
-        HAS_FZF_COMPLETION=1
-    else 
-        source /usr/share/fzf/key-bindings.bash
-        HAS_FZF_COMPLETION=1
-    fi
-elif [[ -d $HOME/scripts/fzf/ ]]; then 
-    source $HOME/scripts/fzf/key-bindings.bash
-    HAS_FZF_COMPLETION=1
-fi
-
-if [[ "$HAS_FZF_COMPLETION" ]]; then
-    # Override fzf completions
-    # Alt+T : Open or cd files in current dir
-    # Ctrl+T: Open or cd all files under ~
-    bind -x '"\et": open_if_exists $(__fzf_select__)'
-    if [[ $IS_FB == 0 ]]; then
-        bind -x '"\C-t": open_if_exists $(fd . -t f -t d -t l -H -E "fbsource*" -E"configerator*" $HOME | fzf)'
-    else
-        bind -x '"\C-t": open_if_exists $(fd -H -t f -t d -t l . $HOME | fzf | sed s+~+/home/cmorrison+g)'
-    fi
-fi
+# [[ -f /usr/share/bash-completion/bash_completion ]]&&\
+#   source /usr/share/bash-completion/bash_completion
+# 
+# [[ -f /opt/homebrew/etc/bash_completion ]]&&\
+#   source /opt/homebrew/etc/bash_completion
+# 
+# if [[ -f /usr/share/bash-completion/completions/git ]]; then 
+#     source /usr/share/bash-completion/completions/git
+#     __git_complete gco _git_checkout
+#     __git_complete gb _git_branch
+#     __git_complete ga _git_add
+# elif [[ -f /opt/homebrew/etc/bash_completion.d/git-completion.bash ]]; then
+#     source /opt/homebrew/etc/bash_completion.d/git-completion.bash
+#     __git_complete gco _git_checkout
+#     __git_complete gb _git_branch
+#     __git_complete ga _git_add
+# fi
+# 
+# # Fzf completions can live in many directories
+# if [[ -d /usr/share/fzf ]]; then
+#     if [[ -d /usr/share/fzf/shell ]]; then
+#         source /usr/share/fzf/shell/key-bindings.bash
+#         HAS_FZF_COMPLETION=1
+#     else 
+#         source /usr/share/fzf/key-bindings.bash
+#         HAS_FZF_COMPLETION=1
+#     fi
+# elif [[ -d $HOME/scripts/fzf/ ]]; then 
+#     source $HOME/scripts/fzf/key-bindings.bash
+#     HAS_FZF_COMPLETION=1
+# fi
+# 
+# if [[ "$HAS_FZF_COMPLETION" ]]; then
+#     # Override fzf completions
+#     # Alt+T : Open or cd files in current dir
+#     # Ctrl+T: Open or cd all files under ~
+#     bind -x '"\et": open_if_exists $(__fzf_select__)'
+#     if [[ $IS_FB == 0 ]]; then
+#         bind -x '"\C-t": open_if_exists $(fd . -t f -t d -t l -H -E "fbsource*" -E"configerator*" $HOME | fzf)'
+#     else
+#         bind -x '"\C-t": open_if_exists $(fd -H -t f -t d -t l . $HOME | fzf | sed s+~+/home/cmorrison+g)'
+#     fi
+# fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
