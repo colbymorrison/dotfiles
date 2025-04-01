@@ -43,7 +43,7 @@ local on_attach = function(client, bufnr)
 end
 
 -- !! Configure Language servers !!
-require'lspconfig'.tsserver.setup{}
+-- require'lspconfig'.tsserver.setup{}
 require'lspconfig'.pylsp.setup{}
 require'lspconfig'.sqlls.setup{}
 require'lspconfig'.sourcekit.setup{}
@@ -124,9 +124,9 @@ cmp.setup.cmdline(':', {
 
 -- Set up completion with lspconfig
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-require('lspconfig')['tsserver'].setup {
-  capabilities = capabilities
-}
+-- require('lspconfig')['tsserver'].setup {
+--   capabilities = capabilities
+-- }
 require('lspconfig')['pylsp'].setup {
   capabilities = capabilities
 }

@@ -7,7 +7,7 @@ if !has('ide')
 	let g:polyglot_disabled = ['autoindent', 'sensible']
 	call plug#begin('~/.vim/plugged')
 	Plug 'vim-scripts/a.vim'
-	Plug 'vim-airline/vim-airline'
+	" Plug 'vim-airline/vim-airline'
 	Plug 'junegunn/fzf' 
 	Plug 'junegunn/fzf.vim' 
 	Plug 'preservim/nerdtree'
@@ -70,6 +70,7 @@ set incsearch                 			" search with typeahead
 set hlsearch                  			" hilight all searches 
 set scrolljump=5              			" scroll five lines at a time vertically when at bottom
 set sidescroll=10             			" minumum columns to scroll horizontally
+set notermguicolors				" Neovim was making colors look wierd without this
 
 " -- Mappings --
 nmap <Enter> O<Esc>

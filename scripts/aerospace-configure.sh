@@ -18,7 +18,7 @@ function get_workspace_id(){
 
 function open_app(){
 	if [[ $1 == $chrome ]]; then
-		/opt/homebrew/Caskroom/google-chrome/116.0.5845.140/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --profile-directory="Profile 1" &
+		/opt/homebrew/Caskroom/google-chrome/116.0.5845.140/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --profile-directory="Profile 1" & > /dev/null
 	else
 		open -a "$1"
 	fi
@@ -37,7 +37,7 @@ for app in "$alacritty" "$intellij" "$chrome"; do
 	window_id=$(get_window_id "$app")
 
 	if [ -z $window_id ]; then
-		open_app "$app"
+		open_app "$app" > /dev/null
 		sleep 2
 		window_id=$(get_window_id "$app")
 	fi
@@ -45,7 +45,7 @@ for app in "$alacritty" "$intellij" "$chrome"; do
 	if [ -z $window_id ]; then
 		echo "Error opening $app"
 	else
-		aerospace move-node-to-workspace --window-id $window_id $(get_workspace_id "$app")
+		aerospace move-node-to-workspace --window-id $window_id $(get_workspace_id "$app") > /dev/null
 	fi
 
 done

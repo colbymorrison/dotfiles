@@ -54,5 +54,6 @@ if [[ $OSTYPE == "darwin"* ]]; then
     export FZF_DEFAULT_COMMAND='fd -H -t f -t d -t l'
     export FZF_DEFAULT_OPTS='--preview="~/scripts/preview.sh {}" --preview-window hidden --bind ctrl-space:toggle-preview --height 60%'
     export STATSD="172.30.0.196"
-    export DEV="172.30.1.93"
+    export OSM="172.30.1.18"
+    export LIDAR="172.30.1.134"
 fi;
